@@ -1,0 +1,59 @@
+<script>
+//importar el modulo de eventos globales 
+import { emitter } from '@/eventBus';
+ 
+export default {
+
+    props:['idProveedor'],
+
+
+   methods:{
+        abrir_eliminar_proveedor(){
+            //emitir un evento para eliminar clientes
+            emitter.emit('abrir_modal_eliminar_proveedor',this.idProveedor)
+        },
+        abrir_editar_proveedor(){
+            emitter.emit('abrir_editar_proveedor',this.idProveedor)
+        },
+        abrir_abono_deuda_proveedor(){
+            emitter.emit('abrir_abono_deuda_proveedor',this.idProveedor)
+        },
+        abrir_historial_abonos_proveedor(){
+            emitter.emit('abrir_historial_deuda_proveedor',this.idProveedor)
+        }
+   }
+}
+</script>
+
+
+<template>
+           <div class=" optiones_ventas  overflow-hidden  w-[140px] z-0 h-[160px] bg-[#f7f8ff] flex-none absolute rounded shadow-md shadow-[#00000031] -ml-[8%] mt-[40px]">
+            <ul>
+                <li @click="abrir_abono_deuda_proveedor"   class=" p-2 cursor-pointer border-b-[#DFDFDF]  border-b-[2px] ">
+                    <button >
+                        <span class="text-[1rem]">Abonar deuda</span>
+                    </button>
+                    
+                </li>
+
+                <li @click="abrir_historial_abonos_proveedor"   class=" p-2 cursor-pointer border-b-[#DFDFDF]  border-b-[2px] ">
+                    <button >
+                        <span class="text-[1rem]">Historial abonos</span>
+                    </button>
+                    
+                </li>
+
+                <li  @click="abrir_editar_proveedor"  class="border-b-[#DFDFDF]  border-b-[2px] p-2 cursor-pointer">
+                    <button>
+                        <span class="text-[1rem]">Editar</span>
+                    </button>
+                </li>
+
+                <li @click="abrir_eliminar_proveedor" class=" p-2 cursor-pointer">
+                 <button >
+                    <span class="text-[1rem]">Eliminar</span>
+                 </button>
+                </li>
+            </ul>
+          </div>
+</template>

@@ -1,0 +1,1 @@
+const s="/assets/embutidos-45d6a558.png",a="/assets/carne-9405f040.png",t="/assets/picar-5733b8e6.png",o="/assets/cortar-1b8c7ae1.png",c="/assets/carniceria-26376453.png";export{s as _,a,t as b,o as c,c as d};

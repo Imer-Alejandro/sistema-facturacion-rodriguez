@@ -123,7 +123,7 @@ methods:{
             `
 
         // Realiza la solicitud POST al servidor
-        axios.post('https://lrpsrl6t-3000.inc1.devtunnels.ms/generar-pdf', { html: facturaHtml }, { responseType: 'blob' })
+        axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/generar-pdf', { html: facturaHtml }, { responseType: 'blob' })
         .then(response => {
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const a = document.createElement('a');

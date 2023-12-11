@@ -82,7 +82,7 @@ export const useGlobalCarritoVenta = defineStore('carrito', {
       editar_cantidad_producto(id,nueva_cantidad){
         let nuevoCarrito=[]
         this.carrito_compras.detalles_productos.forEach((item)=>{
-            if (item.id_producto === id) {
+            if (item.id_producto === id) { 
                 //actualizar cantidad y el total 
                 item.cantidad_venta=nueva_cantidad
                 item.total_producto= item.cantidad_venta * item.precio_venta
@@ -100,7 +100,11 @@ export const useGlobalCarritoVenta = defineStore('carrito', {
 
       asignar_cliente(id,nombre,deuda){
           this.carrito_compras.id_cliente=id
-          this.carrito_compras.nombre_cliente=nombre
+          if (nombre == 'ninguno...') {
+            this.carrito_compras.nombre_cliente=''
+          }else{
+            this.carrito_compras.nombre_cliente=nombre
+          }
           this.carrito_compras.antigua_deuda_cliente=deuda
       }
   },

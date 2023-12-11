@@ -72,7 +72,7 @@ export default {
             this.cliente=carritoStore.carrito_compras.nombre_cliente
             this.visibilidad_modal_asignar_cliente=false
         })
-
+ 
         //abrir modal eliminar producto del carrito
         emitter.on('abrir_modal_eliminar_prod_carrito',(data)=>{
             this.idProductoOperacion= data;
@@ -153,7 +153,7 @@ export default {
 
                 axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/registro-ventas',carritoStore.carrito_compras)
                     .then((response)=>{
-                        console.log(response.data)
+                        console.log(response.data) 
 
 
                         //abirir ventana de finalizar proceso de ventas

@@ -8,14 +8,9 @@ import 'vue3-toastify/dist/index.css';
 
 
 export default { 
-    mounted(){
-        this.optener_clientes()
-    },
+        props:['DatosCliente'],
         data(){
             return{
-                
-                listadoCliente:[],
-
                 cliente:{
                     nombre:'',
                     direccion: '',
@@ -28,31 +23,16 @@ export default {
         },  
         methods:{
             cerrar_modal_registrar_cliente(){
-                emitter.emit('cerrar_modal_registrar_cliente')
+                emitter.emit('cerrar_modal_registrar_cliente_ventas')
             },
-            optener_clientes() {
-                emitter.emit('abrir_loader_carga_vista_cliente')
-
-                axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-clientes')
-                .then((response) => {
-                    this.listadoCliente = response.data;
-                    console.log('se obtubieron los clientes')
-                })
-                .catch((error) => {
-                    console.error('Error al obtener la lista de clientes', error);
-                })
-                .finally(() => {
-                    // Desactiva el spinner una vez que la solicitud se completa (éxito o error)
-                    emitter.emit('cerrar_modal_registrar_cliente')
-                    });
-            },
+           
             registrar_cliente(){
                 //validar que no existan clientes con el mismo nombre
-                let listadoDuplicados = this.listadoCliente.filter(item=> item.nombre_cliente == this.cliente.nombre)
+                let listadoDuplicados = this.DatosCliente.filter(item=> item.nombre_cliente == this.cliente.nombre)
                 if (listadoDuplicados.length >0) {
                     toast.warn('error de registro, existe un cliente con este nombre!')
                 }else{
-                    emitter.emit('abrir_loader_carga_vista_cliente')
+                    emitter.emit('abrir_carga_loader_ventas')
                  // Enviar datos al servidor utilizando Axios
                      axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/registrar-cliente', this.cliente)
                         .then(response => {
@@ -60,15 +40,6 @@ export default {
                         console.log(response.data);
 
                         toast.success("se registro el cliente!");
-                            //cerrar el formulario de registro
-                            emitter.emit('cerrar_modal_registrar_cliente')
-
-                            //cerrar la carga luego de crear el cliente
-                            emitter.emit('cerrar_loader_carga_vista_cliente')
-
-                            //actualizar el objeto de los cliente
-
-                            emitter.emit('actualizar_objetos_cliente_vista_cliente')
 
                             //limpiar datos del estado
                             this.cliente.nombre= '',
@@ -78,15 +49,15 @@ export default {
                             this.cliente.direccion=''
                             this.cliente.tipo_cliente=''
 
-                        })
+                        }) 
                         .catch(error => {
                         // Manejar errores
                             console.error(error);
                             toast.error("ocurrio un error al registrar el cliente !");  
                         })
                         .finally(()=>{
-                            emitter.emit('cerrar_modal_registrar_cliente')
-
+                            emitter.emit('cerrar_carga_loader_ventas');
+                            this.cerrar_modal_registrar_cliente()
                         })
                 }
                 
@@ -95,7 +66,7 @@ export default {
         }
 }
 </script>
-
+ 
 <template>
         <section  class="  w-full h-[100vh] bg-white fixed  z-50 ">
 

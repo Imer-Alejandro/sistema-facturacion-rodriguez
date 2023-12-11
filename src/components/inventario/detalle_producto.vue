@@ -25,7 +25,7 @@ export default {
         buscar_producto(){
             emitter.emit('abrir_ventana_carga_inventario')
             
-            axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/https://lrpsrl6t-3000.inc1.devtunnels.ms/buscar-producto/${this.id_producto_indicado}`)
+            axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/buscar-producto-id/${this.id_producto_indicado}`)
             .then(response =>{
                 this.DatosProductos=response.data;
 

@@ -9,11 +9,12 @@ import axios from 'axios';
 
 export default {
 
-
-    
-
+    mounted(){
+        this.obtener_proveedores()
+    },
     data(){
         return{
+            DatosProveedores:[],
             proveedor:{
                     nombre:'',
                     direccion: '',
@@ -28,8 +29,27 @@ export default {
         cerrar_form_registro_proveedor(){
             emitter.emit('cerrar_form_registro_proveedor')
         },
-        registrar_proveedor(){
+        obtener_proveedores(){
             emitter.emit('abrir_loader_carga_vista_proveedor')
+            axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-proveedores')
+                .then((response) => {
+                    this.DatosProveedores =response.data
+                })
+                .catch((error) => {
+                    console.error('Error al obtener la lista de proveedores', error);
+                })
+                .finally(() => {
+                      //cerrar la carga luego de crear el cliente
+                      emitter.emit('cerrar_loader_carga_vista_proveedor')
+                    });
+        },
+        registrar_proveedor(){
+            //validar que no existan proveedores con el mismo nombre 
+            let listadoDuplicados = this.DatosProveedores.filter(iten => iten.nombre_proveedor == this.proveedor.nombre)
+            if (listadoDuplicados.length >0) {
+                toast.warn('error de registro, existe un proveedor con este nombre!')
+            }else{
+                emitter.emit('abrir_loader_carga_vista_proveedor')
                  // Enviar datos al servidor utilizando Axios
                      axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/registrar-proveedor', this.proveedor)
                         .then(response => {
@@ -37,12 +57,7 @@ export default {
                         console.log(response.data);
 
                            
-                            toast("Se registro el proveedor !", {
-                                autoClose: 3000,
-                                backgroundColor:'#90E671',
-                                color: '#ffffff',
-                                close: false,
-                                }); 
+                            toast("Se registro el proveedor !"); 
                             
 
                             //limpiar datos del estado
@@ -58,13 +73,7 @@ export default {
                         // Manejar errores
                             console.error(error);
 
-                            toast("error al registras Proveedor  !", {
-                                autoClose: 3000,
-                                backgroundColor:'#CC0B09',
-                                close: false,
-                                color: '#ffffff',
-
-                                }); 
+                            toast("error al registras Proveedor  !"); 
 
                         })
                         .finally(()=>{
@@ -79,6 +88,8 @@ export default {
 
                             
                         })
+            }
+            
         }
     }
 }

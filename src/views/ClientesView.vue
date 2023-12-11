@@ -246,7 +246,7 @@ export default {
  
 <template>
     <transition name="fade">
-        <section class="w-full h-[100%] bg-[#FEFEE5]">
+        <section class="w-full h-[100%] mb-[200px] bg-[#FEFEE5]">
         <menu-footer/>
 
         <carga-loader :id_cliente_operacione="id_cliente_operacione" v-if="estado_activacion_loader_Carga"/>

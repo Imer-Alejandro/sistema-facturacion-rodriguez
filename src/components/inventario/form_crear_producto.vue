@@ -19,6 +19,9 @@ export default {
         //buscar los proveedores de la categoria
         this.buscar_proveedores()
 
+        //buscar los productos
+        this.buscar_producto()
+
         //ecuchar el evento al selecionar un icono
         emitter.on('icono_producto_asignado',(url_icono)=>{
             this.datosNewProduct.icono=url_icono
@@ -28,12 +31,7 @@ export default {
         emitter.on('cerrar_modal_icono_producto',()=>{
             this.estado_ventana_icono_producto=false
 
-            toast.success("icono selecionado !", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
+            toast.success("icono selecionado !");
         })
     },
 
@@ -41,6 +39,7 @@ export default {
         return{
             estado_ventana_icono_producto:false,
             listadoProveedores:[],
+            listadoProductos:[],
             datosNewProduct:{
                 nombre:'',
                 precio_venta:'',
@@ -86,6 +85,22 @@ export default {
                 })
         },
 
+        buscar_producto(){
+            emitter.emit('abrir_ventana_carga_inventario')
+
+            axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/productos')
+                .then((response)=>{
+                    this.listadoProductos=response.data
+                    console.log('se obtubo el registro de los productos')
+                })
+                .catch((error)=>{
+                    console.log(error)
+                })
+                .finally(()=>{
+                    emitter.emit('cerrar_ventana_carga_inventario')
+                })
+        },
+
         //registrar producto
         registerProduct(){
 
@@ -93,62 +108,58 @@ export default {
  
             if (this.datosNewProduct.icono != '') {
 
-                emitter.emit('abrir_ventana_carga_inventario')
 
+                //validar que no existan productos con el mismo nombre o icono
+                let listadoDuplicados = this.listadoProductos.filter(item => item.nombre_producto == this.datosNewProduct.nombre )
 
-                axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/registro-producto', this.datosNewProduct)
-                .then(response => {
-                console.log(response.data.message); // Mensaje exitoso del servidor
-                // Puedes manejar la respuesta del servidor según tus necesidades
-                toast.success("se registro el producto!", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
-                    //dejar el formulario limpio para otro registro
-                    this.datosNewProduct.nombre='',
-                    this.datosNewProduct.precio_venta='',
-                    this.datosNewProduct.precio_compra='',
-                    this.datosNewProduct.codigo='',
-                    this.datosNewProduct.categoria='',
-                    this.datosNewProduct.proveedor='',
-                    this.datosNewProduct.description='',
-                    this.datosNewProduct.vender_por='',
-                    this.datosNewProduct.stock='',
-                    this.datosNewProduct.icono=''
+                    if (listadoDuplicados.length > 0) {
+                        toast.warn('error de registro, existe un producto con este nombre!')
+                    }else{
+                        emitter.emit('abrir_ventana_carga_inventario')
 
-                })
-                .catch(error => {
-                console.error('Error al registrar el producto:', error.response.data.error);
-                // Puedes manejar el error según tus necesidades
-                toast.success("error al registrar producto!", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
-                })
-                .finally(()=>{
-                    //cerrar ventana 
-                    this.close_form() 
-                    //cerrar ventana carga
-                    emitter.emit('cerrar_ventana_carga_inventario')
-                    
-                    //actualizar la vista inventario
-                    emitter.emit('actualizar_inventario')
-                })
-            }
+                        axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/registro-producto', this.datosNewProduct)
+                            .then(response => {
+                            console.log(response.data.message); // Mensaje exitoso del servidor
+                            // Puedes manejar la respuesta del servidor según tus necesidades
+                            toast.success("se registro el producto!");
+                                //dejar el formulario limpio para otro registro
+                                this.datosNewProduct.nombre='',
+                                this.datosNewProduct.precio_venta='',
+                                this.datosNewProduct.precio_compra='',
+                                this.datosNewProduct.codigo='',
+                                this.datosNewProduct.categoria='',
+                                this.datosNewProduct.proveedor='',
+                                this.datosNewProduct.description='',
+                                this.datosNewProduct.vender_por='',
+                                this.datosNewProduct.stock='',
+                                this.datosNewProduct.icono=''
+
+                            })
+                            .catch(error => {
+                                    console.error('Error al registrar el producto:', error.response.data.error);
+                                    // Puedes manejar el error según tus necesidades
+                                    toast.success("error al registrar producto!");
+                               
+
+                            })
+                            .finally(()=>{
+                                //cerrar ventana 
+                                this.close_form() 
+                                //cerrar ventana carga
+                                emitter.emit('cerrar_ventana_carga_inventario')
+                                
+                                //actualizar la vista inventario
+                                emitter.emit('actualizar_inventario')
+                            })
+                    }
+                       
+                       
+                    }
             else{
 
                 alert('debe selecionar un icono para el producto!')
 
-                toast.warn("Debe selecionar un icono para el producto!", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
+                toast.warn("Debe selecionar un icono para el producto!");
             }
 
           

@@ -35,7 +35,7 @@ export default {
             mostrar_detalle: false,
             mostrar_optiones:false,
 
-            horaVenta:this.ventas.fecha.substring(13)
+            horaVenta:this.ventas.fecha.substring(0,11)
         }
     },
     methods:{
@@ -64,10 +64,7 @@ export default {
    
         <div  class=" z-[1] bg-white w-[95%] ml-[2.5%]  pr-0 p-3 inline-flex rounded 
          mb-[20px] shadow-md shadow-[#00000031]">
-          
-            <figure class="h-[95%] p-2 rounded bg-[#E55226] mr-[5px]">
-                <img class="w-[40px]" src="/icons/productos/donacion-de-alimentos.png">
-            </figure>
+        
            
             <div v-if="ventas.tipo_venta != 'credito'">
                 <div class="h-[95%] flex items-center mt-[2px] p-2 rounded bg-[#A6F988] pt-[5px] mr-1">
@@ -83,10 +80,10 @@ export default {
            
             <h3 class="font-bold mt-[18px] mr-[8px] ">Total: <span class="font-medium">{{ventas.total_venta}}</span></h3>
            
-            <div class="border-l-[1.5px] pt-[17px]  pl-[4px] border-l-[#DFDFDF]">
+            <div class="border-l-[1.5px] pt-[17px]  pl-[12px] border-l-[#DFDFDF]">
                 <span class="mt-[15px] ">{{horaVenta}}</span>
             </div>
-            <img @click="activar_Optiones_Ventas" class=" w-[40px] cursor-pointer h-[40px] ml-[10px] mt-[10px] block " src="/src/assets/iconos/interfaz/navegacion.png">
+            <img @click="activar_Optiones_Ventas" class=" w-[40px] cursor-pointer h-[40px] ml-[20px] mt-[10px] block " src="/src/assets/iconos/interfaz/navegacion.png">
             <!---->
             <menu-options v-show="mostrar_optiones" :ventas="this.ventas"  ref="menu" />
        

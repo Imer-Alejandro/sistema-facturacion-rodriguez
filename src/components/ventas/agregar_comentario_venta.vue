@@ -36,12 +36,7 @@ export default {
                     
 
             }else{
-                toast.warn("debe ingresar un comentario!", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
+                toast.warn("debe ingresar un comentario!");
             }
             
         }

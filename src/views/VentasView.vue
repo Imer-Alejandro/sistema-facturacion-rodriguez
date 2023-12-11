@@ -183,12 +183,7 @@ computed:{
         },
         buscar_producto_por_nombre(){
             if(!this.dato_busqueda) {
-                toast.warn("ingrese un dato a buscar !", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
+                toast.warn("ingrese un dato a buscar !");
             }else{
                 this.visibilidad_result_busqueda_producto=true
             }
@@ -212,7 +207,7 @@ computed:{
 </script>
  
 <template>
-    <section class="w-full h-[100%] bg-[#FEFEE5]">
+    <section class="w-full h-[100%] bg-[#FCF0D7]">
 
         <resultado-busqueda :dato_busqueda="dato_busqueda"  v-if="visibilidad_result_busqueda_producto"/>
 

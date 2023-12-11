@@ -58,7 +58,7 @@ export default {
                 <br><br>
                 <h3 class="text-[1.3rem] mb-[10px]">Comentario</h3>
                 <p class="text-[#9F9F9F]">
-                    {{datosRegistroAbono.Comentario}}
+                    {{datosRegistroAbono.comentario}}
                 </p>
                
             </div>

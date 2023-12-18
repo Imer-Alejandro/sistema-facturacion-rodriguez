@@ -3,20 +3,20 @@ import { emitter } from '@/eventBus';
 
 export default {
 
-    props:['id_producto'],
+    props:['producto'],
     
     methods:{
         detail_product(){
-            emitter.emit('abrir_detalle_productos', this.id_producto);
+            emitter.emit('abrir_detalle_productos', this.producto);
         },
         edit_product(){
-            emitter.emit('abrir_editar_productos', this.id_producto);
+            emitter.emit('abrir_editar_productos', this.producto);
         },
         delete_product(){
-            emitter.emit('abrir_eliminar-producto_inventario', this.id_producto);
+            emitter.emit('abrir_eliminar-producto_inventario', this.producto.id);
 
         }
-    }
+    } 
 }
 </script>
 

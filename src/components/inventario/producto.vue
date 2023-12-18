@@ -94,6 +94,6 @@ export default {
         src="/src/assets/iconos/interfaz/navegacion.png">
 
  
-        <opciones-producto v-show="open_and_close_optiones" :id_producto=" producto && producto.id"  ref="menuProducto" />
+        <opciones-producto v-show="open_and_close_optiones" :producto=" producto &&  producto "  ref="menuProducto" />
     </div>
 </template>

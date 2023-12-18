@@ -56,7 +56,7 @@ export default {
         //evento para abrir detalle 
         emitter.on('abrir_detalle_productos', (data) => {
             //realizar una peticion de los datos del producto con el id indicado en el parametro data
-                this.id_producto_indicado= data
+                this.producto_indicado= data
         // Realizar acciones en respuesta al evento
             this.data.open_and_close_detalle_producto=true
          });
@@ -97,7 +97,7 @@ export default {
          });
 
          emitter.on('abrir_editar_productos',(data)=>{
-            this.id_producto_indicado= data
+            this.producto_indicado= data
             this.data.open_and_close_editar_producto=true
 
          })
@@ -137,6 +137,7 @@ export default {
         return {
 
             title: "Inventario",
+            producto_indicado:'',
             id_producto_indicado:0,
             DatosProductos:[],
             dato_categoria:'',
@@ -244,7 +245,7 @@ export default {
 
         <menu-header :nameSession="title"/>
 
-        
+         
         
         <!-- componente para mostrar los resultados de busqueda -->
         <resultado-busqueda   :dato_busqueda="dato_busqueda"  v-if="data.open_and_close_busqueda_producto"/> 
@@ -254,11 +255,11 @@ export default {
        v-if="data.open_and_close_eliminar_producto"/>
 
          <!-- componente editar producto -->
-        <editar-producto :id_producto_indicado="id_producto_indicado"
+        <editar-producto :producto_indicado="producto_indicado"
         v-if="data.open_and_close_editar_producto"  />
 
          <!-- componente para ver los datos del  producto -->
-        <detalles-productos :id_producto_indicado="id_producto_indicado"
+        <detalles-productos :producto_indicado="producto_indicado"
          v-if="data.open_and_close_detalle_producto"/>
 
         <!-- componente para crear productos -->
@@ -295,7 +296,7 @@ export default {
         </article>
 
         <div class="w-full p-3 pb-[220px]">
-           
+            
             <div v-if="DatosProductos.length > 0">
                 <div v-for="producto in DatosProductos" :key="producto.id">
                 <!-- Renderizar componentes de productos pasando datos -->

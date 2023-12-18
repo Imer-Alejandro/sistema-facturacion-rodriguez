@@ -57,9 +57,7 @@ export default {
                     <img class="w-[20px] absolute ml-[70%] -mt-[23px]" src="../assets/iconos/interfaz/comprobante_venta.png" >
                  </button>
                 </li>
-
-
-               
             </ul>
-          </div>
+
+    </div>
 </template>

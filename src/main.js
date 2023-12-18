@@ -4,7 +4,7 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-
+import Vue3Toasity from 'vue3-toastify';
 
 import io from 'socket.io-client';
 
@@ -15,7 +15,9 @@ import router from './router'
 
 const app = createApp(App)
 
+//limitar el numero de notificaciones en pantalla
 
+app.use(Vue3Toasity,{limit: 2,})
 
 const socket = io('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/');
 

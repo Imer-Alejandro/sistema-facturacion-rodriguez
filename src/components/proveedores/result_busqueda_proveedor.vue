@@ -24,9 +24,9 @@ export default {
     }
 }
 </script>
-
+ 
 <template>
-    <section  class="  w-full h-[100vh] bg-[#444d639c] fixed  z-50 ">
+    <section  class="  w-full h-[100vh] bg-[#444d639c] fixed  z-40 ">
         <div class="w-full h-[610px] bg-white mt-[45%]">
             <header class="w-full p-3 inline-flex border-b-[1.5px] border-b-[#DFDFDF]">
                 <img  @click="cerrar_busquedad_proveedores"  class="w-[35px] mr-[25px]  order-1 cursor-pointer" src="/src/assets/iconos/interfaz/regresar.png" >

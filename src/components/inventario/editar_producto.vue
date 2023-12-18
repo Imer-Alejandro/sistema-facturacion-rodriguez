@@ -11,10 +11,10 @@ import 'vue3-toastify/dist/index.css';
 import axios from 'axios'; 
 
 export default {
-    props:['id_producto_indicado'],
+    props:['producto_indicado'],
 
     mounted(){
-        this.bucar_producto()
+        
 
         this.buscar_proveedores()
 
@@ -28,14 +28,14 @@ export default {
             this.estado_ventana_icono_producto=false
         })
 
-        this.icono = this.DatosProductos.icono;
+        this.icono = this.producto_indicado.icono;
     },
 
     data(){
         return{
             icono:'',
             listadoProveedores:[],
-            DatosProductos:[],
+        
             estado_ventana_icono_producto:false,
             
         }
@@ -59,7 +59,7 @@ export default {
             axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-proveedores')
                 .then((response)=>{
                     this.listadoProveedores=response.data
-                    console.log('se obtubo el registro de los proveedores')
+                    console.log('se obtubo el registro de los proveedores',this.listadoProveedores)
                 })
                 .catch((error)=>{
                     console.log(error)
@@ -70,24 +70,7 @@ export default {
         },
 
 
-        bucar_producto(){
-                
-                    emitter.emit('abrir_ventana_carga_inventario')
-            
-                    axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/buscar-producto/${this.id_producto_indicado}`)
-                    .then(response =>{
-                        this.DatosProductos=response.data;
-
-                    })
-                    .catch(error=>{
-                        console.log("Error", error);
-                    })
-                    .finally(()=>[
-                        emitter.emit('cerrar_ventana_carga_inventario')
-                    ]);
-                
-
-        },
+        
         guardar_producto_editado(){
 
                 if (this.icono) {
@@ -95,15 +78,15 @@ export default {
 
                      axios.put(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/editar-producto/${this.id_producto_indicado}`,{
                            
-                           nombre: this.DatosProductos.nombre_producto,
-                           precio_venta: this.DatosProductos.precio_venta,
-                           costo: this.DatosProductos.costo,
-                           codigo:  this.DatosProductos.codigo,
-                           categoria: this.DatosProductos.categoria,
-                           proveedor:  this.DatosProductos.proveedor,
-                           description: this.DatosProductos.description,
-                           vender_por: this.DatosProductos.vender_por, 
-                           cantidad:  this.DatosProductos.cantidad_existente, 
+                           nombre: this.producto_indicado.nombre_producto,
+                           precio_venta: this.producto_indicado.precio_venta,
+                           costo: this.producto_indicado.costo,
+                           codigo:  this.producto_indicado.codigo,
+                           categoria: this.producto_indicado.categoria,
+                           proveedor:  this.producto_indicado.proveedor,
+                           description: this.producto_indicado.description,
+                           vender_por: this.producto_indicado.vender_por, 
+                           cantidad:  this.producto_indicado.cantidad_existente, 
                            icono: this.icono
 
                            })
@@ -154,7 +137,7 @@ export default {
 <template>
     <section  class="  w-full h-[100vh] bg-white fixed -mt-[80px] z-40 ">
 
-        <selecionar-icono  :url_icono_producto="DatosProductos.icono" v-show="estado_ventana_icono_producto"/>
+        <selecionar-icono  :url_icono_producto="producto_indicado.icono" v-show="estado_ventana_icono_producto"/>
 
 
         <header class="w-full p-3 inline-flex border-b-[1.5px] border-b-[#DFDFDF]">
@@ -166,7 +149,7 @@ export default {
 
             <label for="">
                         <span class="text-[#9F9F9F] ml-[10px]">Nombre</span>
-                    <input v-model="DatosProductos.nombre_producto" maxlength="42" class="w-[95%] focus:border-[#FFB984] focus:border-[1.5px] h-[40px] border-[1px] outline-none pl-[5px] 
+                    <input v-model="producto_indicado.nombre_producto" maxlength="42" class="w-[95%] focus:border-[#FFB984] focus:border-[1.5px] h-[40px] border-[1px] outline-none pl-[5px] 
                     box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
                     placeholder="Nombre del producto">
                 </label>
@@ -174,14 +157,14 @@ export default {
             <div class="inline-flex">
                 <label for="">
                         <span class="text-[#9F9F9F] -mt-[10px] flex-none absolute ml-[10px]">Precio venta</span>
-                    <input v-model="DatosProductos.precio_venta" class="w-[80%] order-1 focus:border-[#FFB984] focus:border-[1.5px] h-[40px] border-[1px] outline-none pl-[5px] 
+                    <input v-model="producto_indicado.precio_venta" class="w-[80%] order-1 focus:border-[#FFB984] focus:border-[1.5px] h-[40px] border-[1px] outline-none pl-[5px] 
                 box-border rounded-md mb-[10px] mt-[15px] border-[#9F9F9F]  ml-[2.6%] mr-2" type="number" 
                 placeholder="Precio de venta">
                 </label>
 
                 <label for="">
                         <span class="text-[#9F9F9F] -mt-[10px] absolute ml-[10px]">Costo</span>
-                <input v-model="DatosProductos.costo" class="w-[90%] order-2 focus:border-[#FFB984] focus:border-[1.5px] h-[40px] border-[1px] outline-none pl-[5px] 
+                <input v-model="producto_indicado.costo" class="w-[90%] order-2 focus:border-[#FFB984] focus:border-[1.5px] h-[40px] border-[1px] outline-none pl-[5px] 
                 box-border rounded-md mt-[15px] mb-[10px] border-[#9F9F9F]  ml-[2.5%]" type="number" 
                 placeholder="Costo">
                 </label>
@@ -189,7 +172,7 @@ export default {
 
                  <label for="">
                         <span class="text-[#9F9F9F] ml-[10px]">Codigo</span>
-                 <input v-model="DatosProductos.codigo" class="w-[95%] h-[40px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
+                 <input v-model="producto_indicado.codigo" class="w-[95%] h-[40px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
                     box-border rounded-md mb-[10px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
                     placeholder="Codigo">
                 </label>
@@ -197,7 +180,7 @@ export default {
            
                     <label for="">
                             <span class="text-[#9F9F9F] ml-[10px]">Categoria </span>
-                            <select v-model="DatosProductos.categoria" class="w-[95%] focus:border-[#FFB984] focus:border-[1.5px] h-[40px] border-[1px] bg-transparent outline-none pl-[5px] 
+                            <select v-model="producto_indicado.categoria" class="w-[95%] focus:border-[#FFB984] focus:border-[1.5px] h-[40px] border-[1px] bg-transparent outline-none pl-[5px] 
                         box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" name="" id="">
                         <option value=""></option>
                             <option value="embutidos">Embutidos</option>
@@ -211,7 +194,7 @@ export default {
                     <!-- indicar los proveedores de forma dinamica -->
                     <label for="">
                             <span class="text-[#9F9F9F] ml-[10px]">Proveedor</span>
-                            <select v-model="DatosProductos.proveedor" class="w-[95%] focus:border-[#FFB984] focus:border-[1.5px] h-[45px] border-[1px] bg-transparent outline-none pl-[5px] 
+                            <select v-model="producto_indicado.proveedor" class="w-[95%] focus:border-[#FFB984] focus:border-[1.5px] h-[45px] border-[1px] bg-transparent outline-none pl-[5px] 
                         box-border rounded-md mb-[10px] border-[#9F9F9F]  ml-[2.5%]" name="" id="">
                         <option value=""></option>
                         <option v-for="proveedor in listadoProveedores" :key="proveedor.id_proveedores" 
@@ -223,7 +206,7 @@ export default {
 
                     <label for="">
                         <span class="text-[#9F9F9F] ml-[10px]">Description</span>
-                    <input v-model="DatosProductos.description" maxlength="80"  class="w-[95%] h-[50px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
+                    <input v-model="producto_indicado.description" maxlength="80"  class="w-[95%] h-[50px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
                     box-border rounded-md mb-[10px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
                     placeholder="Description">
                         </label>
@@ -231,7 +214,7 @@ export default {
                     <div class="inline-flex">
                             <label for="" class=" -mt-[26px]" >
                                 <span class="order-1 text-[#9F9F9F]  -mt-[20px]  ml-[10px]">Vender por:</span>
-                                <select v-model="DatosProductos.vender_por" class="w-[80%] focus:border-[#FFB984] bg-transparent focus:border-[1.5px] h-[45px] border-[1px] outline-none pl-[5px] 
+                                <select v-model="producto_indicado.vender_por" class="w-[80%] focus:border-[#FFB984] bg-transparent focus:border-[1.5px] h-[45px] border-[1px] outline-none pl-[5px] 
                             box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" name="" id="">
                                 <option value="unidad">por unidades</option>
                                 <option value="libras">por libras</option>
@@ -240,7 +223,7 @@ export default {
                         
                         <label for="">
                         <span class="text-[#9F9F9F] absolute -mt-[25px] ml-[10px]">Cantidad</span>
-                        <input v-model="DatosProductos.cantidad_existente" class="w-[90%] focus:border-[#FFB984] focus:border-[1.5px] order h-[45px] border-[1px] outline-none pl-[5px] 
+                        <input v-model="producto_indicado.cantidad_existente" class="w-[90%] focus:border-[#FFB984] focus:border-[1.5px] order h-[45px] border-[1px] outline-none pl-[5px] 
                         box-border rounded-md mb-[15px] border-[#9F9F9F]  mr-[2.5%]" type="text" 
                         placeholder="Cantidad en unidades">
                         </label>

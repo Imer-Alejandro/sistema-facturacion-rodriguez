@@ -76,7 +76,7 @@ export default {
                 if (this.icono) {
                     emitter.emit('abrir_ventana_carga_inventario')
 
-                     axios.put(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/editar-producto/${this.id_producto_indicado}`,{
+                     axios.put(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/editar-producto/${this.producto_indicado.id}`,{
                            
                            nombre: this.producto_indicado.nombre_producto,
                            precio_venta: this.producto_indicado.precio_venta,

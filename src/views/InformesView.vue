@@ -35,7 +35,7 @@ export default {
             this.estados.visibilidad_comprobante_venta=true
         })
         //cerrar ventana comprobante
-        emitter.on('cerrer_comprobante_venta_inicio',()=>{
+        emitter.on('cerrer_comprobante_venta_inf_inicio',()=>{
             this.estados.visibilidad_comprobante_venta=false
         })
         //cargar registro de venta al iniciar el componente

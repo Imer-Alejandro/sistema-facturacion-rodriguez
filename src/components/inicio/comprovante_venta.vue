@@ -33,7 +33,7 @@ export default {
 methods:{
   async generalPdfFactura(){
       // Abrir carga loader
-  emitter.emit('abrir_loader_carga_incio');
+  emitter.emit('abrir_loader_carga_incio'); 
   emitter.emit('abrir_loader_carga_informe');
 
   try {
@@ -51,27 +51,27 @@ methods:{
     emitter.emit('cerrar_loader_carga_incio');
     emitter.emit('cerrar_loader_carga_informes');
 
-    // Cerrar ventana
-    this.close_comprobante_venta();
   }
-
-      
-
-
-       
 },
  
     close_comprobante_venta(){
-          emitter.emit('cerrer_comprobante_venta_inicio')
+          emitter.emit('cerrer_comprobante_venta_inf_inicio')
     }
   },
 
 }
 </script>
-
+ 
 <template>
     <div>
-      <div id="facturaContainer">
+      <section  class="  w-full h-[100vh] bg-white fixed -mt-[80px] z-40 ">
+        <header class="w-full p-3 inline-flex border-b-[1.5px] border-b-[#DFDFDF]">
+            <img @click="close_comprobante_venta"   class="w-[35px] mr-[25px]  order-1 cursor-pointer" src="/src/assets/iconos/interfaz/regresar.png" >
+            <h2 class="text-[1.7rem] ml-[30px] order-2">Vista de factura</h2>
+        </header>
+
+        <div class="w-full h-[80%] overflow-y-scroll box-border">
+          <div id="facturaContainer">
         <div class="factura">
               <div class="encabezado">
                 <div class="content-img">
@@ -130,6 +130,9 @@ methods:{
                 <p>Gracias por su compra</p>
               </div>
       </div>
+        </div>
+    </section>
+      
 
     </div>
 </template>

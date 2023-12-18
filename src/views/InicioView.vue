@@ -83,8 +83,8 @@ export default {
             this.ventaOperacion=data
             this.data.open_and_close_comprobante_venta=true
         })
-        emitter.on('cerrer_comprobante_venta_inicio',()=>{
-
+        emitter.on('cerrer_comprobante_venta_inf_inicio',()=>{
+            this.data.open_and_close_comprobante_venta=false
         })
 
     },

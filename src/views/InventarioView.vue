@@ -186,12 +186,7 @@ export default {
 
         open_busqueda_producto(){
             if(!this.dato_busqueda) {
-                toast.warn("ingrese un dato a buscar !", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
+                toast.warn("ingrese un dato a buscar !");
             }else{
                 this.data.open_and_close_busqueda_producto=true
             }

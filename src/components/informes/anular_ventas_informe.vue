@@ -26,7 +26,7 @@ export default {
         close_anular_ventas() {
             emitter.emit('cerrar_anular_venta_informe')
         },
-        anular_venta() {
+        anular_venta() {  
             emitter.emit('abrir_loader_carga_informe')
 
             //asignar los dator requeridos para anular la venta 

@@ -91,8 +91,7 @@ import 'vue3-toastify/dist/index.css';
         } 
  }
  </script>
- 
- <template>
+  <template>
     <section  class="  w-full h-[100vh] bg-white fixed  z-50 ">
 
         <header class="w-full p-3 inline-flex border-b-[1.5px] border-b-[#DFDFDF]">
@@ -101,36 +100,47 @@ import 'vue3-toastify/dist/index.css';
         </header>
 
         <form @submit.prevent="editar_cliente" class="w-full p-3 mt-[10px]" action="">
+            <label for="">
+                        <span class="text-[#9F9F9F] ml-[10px]">Nombre</span>
             <input  v-model="clienteEncontrado.nombre_cliente" required class="w-[95%] focus:border-[#FFB984] focus:border-[1.5px] h-[55px] border-[1px] outline-none pl-[5px] 
-            box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
+            box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
             placeholder="Nombre del cliente">
+            </label>
 
-
-
+            <label for="">
+                        <span class="text-[#9F9F9F] ml-[10px]">Direccion</span>
          <input v-model="clienteEncontrado.direccion" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
-            box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
+            box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
             placeholder="Direccion">
+            </label>
 
-
+            <label for="">
+                        <span class="text-[#9F9F9F] ml-[10px]">Contacto</span>
             <input v-model="clienteEncontrado.contacto" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
-            box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
+            box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
             placeholder="Contacto">
+            </label>
 
-
+            <label for="">
+                        <span class="text-[#9F9F9F] ml-[10px]">Tipo de cliente</span>
             <input v-model="clienteEncontrado.tipo_cliente" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
-            box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
+            box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
             placeholder="Tipo de cliente">
+            </label>
 
-
+            <label for="">
+                        <span class="text-[#9F9F9F] ml-[10px]">Description</span>
             <input v-model="clienteEncontrado.description" required class="w-[95%] h-[80px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
-            box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
+            box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
             placeholder="Description">
+            </label>
 
-
+            <label for="">
+                        <span class="text-[#9F9F9F] ml-[10px]">Deuda</span>
             <input v-model="clienteEncontrado.deuda" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
-            box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
+            box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
             placeholder="Deuda">
-
+            </label>
 
             
 

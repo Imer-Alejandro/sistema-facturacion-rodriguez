@@ -86,36 +86,46 @@ import axios from 'axios';
         </header>
 
         <form @submit.prevent="editar_proveedor" class="w-full p-3 mt-[10px]" action="">
+            <label for="">
+                        <span class="text-[#9F9F9F] ml-[10px]">Nombre del proveedor</span>
             <input  v-model="proveedorEncontrado.nombre_proveedor" required class="w-[95%] focus:border-[#FFB984] focus:border-[1.5px] h-[55px] border-[1px] outline-none pl-[5px] 
-            box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
-            placeholder="Nombre del cliente">
+            box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
+            placeholder="Nombre del proveedor">
+            </label>
 
-
-
+            <label for="">
+                        <span class="text-[#9F9F9F] ml-[10px]">Direccion</span>
          <input v-model="proveedorEncontrado.direccion" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
-            box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
+            box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
             placeholder="Direccion">
+            </label>
 
-
+            <label for="">
+                        <span class="text-[#9F9F9F] ml-[10px]">Contacto</span>
             <input v-model="proveedorEncontrado.contacto" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
-            box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
+            box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
             placeholder="Contacto">
+            </label>
 
-
+            <label for="">
+                        <span class="text-[#9F9F9F] ml-[10px]">Tipo de proveedor</span>
             <input v-model="proveedorEncontrado.tipo_proveedor" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
-            box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
-            placeholder="Tipo de cliente">
+            box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
+            placeholder="Tipo de proveedor">
+            </label>
 
-
+            <label for="">
+                        <span class="text-[#9F9F9F] ml-[10px]">Description</span>
             <input v-model="proveedorEncontrado.description" required class="w-[95%] h-[80px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
-            box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
+            box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
             placeholder="Description">
-
-
+            </label>
+            <label for="">
+                        <span class="text-[#9F9F9F] ml-[10px]">Deuda a pagar</span>
             <input v-model="proveedorEncontrado.deuda_a_proveedor" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
-            box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
+            box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
             placeholder="Deuda">
-
+            </label>
 
             
 

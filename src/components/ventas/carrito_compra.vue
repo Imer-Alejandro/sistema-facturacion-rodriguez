@@ -154,7 +154,7 @@ export default {
                 axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/registro-ventas',carritoStore.carrito_compras)
                     .then((response)=>{
                         console.log(response.data) 
-
+ 
 
                         //abirir ventana de finalizar proceso de ventas
                         this.visibilidad_confirmacion_venta=true

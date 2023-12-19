@@ -230,7 +230,7 @@ export default {
 </script>
 
 <template>
-    <section class="w-full h-[100%] bg-[#FEFEE5]">
+    <section class="w-full h-[100%] bg-[#FEFEE5] pb-[200px]">
         <menu-footer/>
 
         <carga-loader v-if="estados.visibilidad_carga_loader_proveedor" />
@@ -253,7 +253,7 @@ export default {
         <menu-header :nameSession="title"/>
 
 
-        <div class=" p-3 w-[95%] ml-[2.5%] h-[80px] rounded shadow-md shadow-[#00000031] mb-[20px] bg-[#FFB984]">
+        <div class=" p-3 w-[95%] ml-[2.5%] h-[80px] rounded shadow-md shadow-[#00000031]  mb-[20px] bg-[#FFB984]">
             <span class="text-[#F9F9F9]">Total por pagar</span>
             <h3 class="text-[1.6rem] text-white font-bold">{{ deudasPorPagar }}</h3>
             <img src="" >

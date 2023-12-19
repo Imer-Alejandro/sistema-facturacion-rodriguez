@@ -118,15 +118,27 @@ methods:{
             </tbody>
           </table>
 
-
+ 
              <!-- Total de la venta -->
              <div class="total">
                 <span>Total: <span class="contenido"> {{this.ventaOperacion.total_venta}}</span></span>
               </div>
+
               <hr>
               <br>
               <!-- Pie de página -->
               <div class="pie-pagina">
+                
+                <p style="text-align: left; font-size: 0.7rem;">
+                  <span style="font-weight: bold;">NOTA:</span> Cláusula de responsabilidad: Rodríguez Embutidos, 
+                  no se hace responsable de uso, o el destino final de los productos detallados en esta factura. 
+                  Favor verificar su mercancía y factura, no aceptamos devoluciones luego de dos días de entrega, 
+                  descuentos por mermas ( tener en cuenta que la chuleta marcada está supuesta a rebajar de peso), 
+                  ni modificaciones después de haber recibido la mercancía.
+                </p>
+                <br>
+                <hr>
+                <br>
                 <p>Gracias por su compra</p>
               </div>
       </div>

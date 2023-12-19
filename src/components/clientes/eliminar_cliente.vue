@@ -10,7 +10,7 @@ import 'vue3-toastify/dist/index.css';
 
 
 export default {
-        props:['id_cliente_operacione'],
+        props:['cliente_operacion'],
 
         data(){
             return{
@@ -19,11 +19,15 @@ export default {
         methods:{
             cerrar_eliminar_cliente(){
                 emitter.emit('cerrar_eliminar_cliente')
-            },
+            },  
             eliminar_cliente(){
+                //validar que no se elimine un cliente con deduda pendiente
+                if (this.cliente_operacion.deuda != 0) {
+                    toast.warn('no se puede eliminar un cliente con deuda pendiente!')
+                }else{
                 emitter.emit('abrir_loader_carga_vista_cliente')
                  // Realizar la solicitud DELETE a la ruta /eliminar-cliente/:idCliente
-                axios.delete(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/eliminar-cliente/${this.id_cliente_operacione}`)
+                axios.delete(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/eliminar-cliente/${this.cliente_operacion.id_cliente}`)
                     .then((response) => {
 
                         toast.success("se elimino el cliente!", {
@@ -55,6 +59,7 @@ export default {
                      emitter.emit('cerrar_loader_carga_vista_cliente')
 
                     });
+                }
              }
         }  
 }

@@ -24,7 +24,7 @@ export default {
             emitter.emit('abrir_modal_abono_deuda_cliente',this.idCliente)
         },
         abrir_historial_abonos(){
-            emitter.emit('abrir_modal_historial_deuda_cliente',this.idCliente)
+            emitter.emit('abrir_modal_historial_deuda_cliente',this.cliente)
         }
    }
 }

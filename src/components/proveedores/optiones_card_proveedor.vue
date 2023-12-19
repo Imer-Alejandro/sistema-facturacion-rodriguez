@@ -4,22 +4,22 @@ import { emitter } from '@/eventBus';
  
 export default {
 
-    props:['idProveedor'],
+    props:['proveedor'],
 
-
+ 
    methods:{
         abrir_eliminar_proveedor(){
             //emitir un evento para eliminar clientes
-            emitter.emit('abrir_modal_eliminar_proveedor',this.idProveedor)
+            emitter.emit('abrir_modal_eliminar_proveedor',this.proveedor)
         },
         abrir_editar_proveedor(){
-            emitter.emit('abrir_editar_proveedor',this.idProveedor)
+            emitter.emit('abrir_editar_proveedor',this.proveedor.id_proveedores)
         },
         abrir_abono_deuda_proveedor(){
-            emitter.emit('abrir_abono_deuda_proveedor',this.idProveedor)
+            emitter.emit('abrir_abono_deuda_proveedor',this.proveedor.id_proveedores)
         },
         abrir_historial_abonos_proveedor(){
-            emitter.emit('abrir_historial_deuda_proveedor',this.idProveedor)
+            emitter.emit('abrir_historial_deuda_proveedor',this.proveedor.id_proveedores)
         }
    }
 }

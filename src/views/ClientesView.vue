@@ -104,7 +104,7 @@ export default {
         //ventana para eliminar cliente
 
         emitter.on('abrir_modal_eliminar_cliente',(data)=>{
-            this.id_cliente_operacione=data
+            this.cliente_operacion=data
             this.estado_visisbilidad_eliminar_cliente=true
         })
         
@@ -160,6 +160,7 @@ export default {
             datosBusquedaCliente:[],
             termino_busqueda_cliente:'',
             id_cliente_operacione:0,
+            cliente_operacion:''
         }
     },
     methods:{
@@ -225,7 +226,7 @@ export default {
                     });
             },
          sumarDeuda(objetoJSON) {
-                let sumaDeuda = 0;
+                let sumaDeuda = 0; 
 
                 for (let key in objetoJSON) {
                         if (objetoJSON.hasOwnProperty(key)) {
@@ -261,7 +262,7 @@ export default {
 
         <editar-cliente  :id_cliente_operacione="id_cliente_operacione" v-if="estado_visibilidad_editar_cliente"/>
 
-        <eliminar-cliente :id_cliente_operacione="id_cliente_operacione" v-show="estado_visisbilidad_eliminar_cliente" />
+        <eliminar-cliente :cliente_operacion="cliente_operacion" v-show="estado_visisbilidad_eliminar_cliente" />
 
         <btn-registrar-clients @click="abrir_modal_registro_cliente"/>
 

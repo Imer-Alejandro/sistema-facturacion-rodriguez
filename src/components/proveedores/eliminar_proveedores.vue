@@ -10,16 +10,19 @@ import 'vue3-toastify/dist/index.css';
 import axios from 'axios';
 
 export default {
-        props:['idProveedor'],
+        props:['proveedor_operacion'],
         methods:{
             cerrar_eliminar_proveedor(){
                 emitter.emit('cerrar_eliminar_proveedores')
             },
             eliminar_proveedor(){
-                emitter.emit('abrir_loader_carga_vista_proveedor')
-                 
+                //validar que no se elimine un proveedor con deudas pendiente
+                if (this.proveedor_operacion.duda_a_proveedor != 0) {
+                    toast.warn('no se puede eliminar un proveedor al que se debe!')
+                } else {
+                    emitter.emit('abrir_loader_carga_vista_proveedor')
 
-                axios.delete(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/eliminar-proveedor/${this.idProveedor}`)
+                axios.delete(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/eliminar-proveedor/${this.proveedor_operacion.id_proveedores}`)
                     .then((response) => {
                     toast.success('se elimino el proveedor!')
                         console.log(response)
@@ -41,6 +44,8 @@ export default {
                     emitter.emit('actualizar_vista_proveedores')
 
                     });
+                }
+
             }
         }
 }

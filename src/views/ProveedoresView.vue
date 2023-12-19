@@ -92,7 +92,7 @@ export default {
         //ventana de eliminar proveedor
         emitter.on('abrir_modal_eliminar_proveedor',(data)=>{
             //indicar el id del proveedor a ejecutar operacion
-            this.idProveedor=data
+            this.proveedor_operacion=data
             //abrir ventana
             this.estados.visibilidad_eliminar_proveedor=true
         })
@@ -135,6 +135,7 @@ export default {
             title: "Proveedores",
             DatosProveedores:[],
             idProveedor:'',
+            proveedor_operacion:'',
             deudasPorPagar:0,
 
             termino_busqueda_proveedor:'',
@@ -241,7 +242,7 @@ export default {
 
         <editar-proveedor  :idProveedor="idProveedor"  v-if="estados.visibilidad_editar_proveedores" />
 
-        <eliminar-proveedor :idProveedor="idProveedor" v-if="estados.visibilidad_eliminar_proveedor"/>
+        <eliminar-proveedor :proveedor_operacion="proveedor_operacion" v-if="estados.visibilidad_eliminar_proveedor"/>
 
         <result_busqueda_proveedor :termino_busqueda_proveedor="termino_busqueda_proveedor"
         :datosBusquedaProveedor="datosBusquedaProveedor" v-if="estados.visibilidad_result_busqueda_proveedores" />

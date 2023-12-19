@@ -62,7 +62,7 @@ export default {
                    <h3 class="mb-[10px]">{{proveedor.nombre_proveedor}}</h3>
                    <h3 class="text-[0.9rem]">total deuda: <span class="text-[#E55226]">{{proveedor.deuda_a_proveedor}}</span></h3>
            
-                <optiones-proveedor v-show="estado_visibilidad_optiones"  :idProveedor="proveedor.id_proveedores" ref="menu"/>
+                <optiones-proveedor v-show="estado_visibilidad_optiones"  :proveedor="proveedor" ref="menu"/>
         </div>
     </div>
 

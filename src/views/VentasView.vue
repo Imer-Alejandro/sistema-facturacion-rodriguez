@@ -207,7 +207,7 @@ computed:{
 </script>
  
 <template>
-    <section class="w-full h-[100%] bg-[#FCF0D7]">
+    <section class="w-full h-[100%] bg-[#FCF0D7]  pb-[200px]">
 
         <resultado-busqueda :dato_busqueda="dato_busqueda"  v-if="visibilidad_result_busqueda_producto"/>
 

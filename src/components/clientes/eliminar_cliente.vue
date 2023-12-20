@@ -22,7 +22,7 @@ export default {
             },  
             eliminar_cliente(){
                 //validar que no se elimine un cliente con deduda pendiente
-                if (this.cliente_operacion.deuda != 0) {
+                if (this.cliente_operacion.deuda > 0) {
                     toast.warn('no se puede eliminar un cliente con deuda pendiente!')
                 }else{
                 emitter.emit('abrir_loader_carga_vista_cliente')

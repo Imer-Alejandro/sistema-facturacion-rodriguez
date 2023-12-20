@@ -17,7 +17,7 @@ export default {
             },
             eliminar_proveedor(){
                 //validar que no se elimine un proveedor con deudas pendiente
-                if (this.proveedor_operacion.duda_a_proveedor != 0) {
+                if (this.proveedor_operacion.duda_a_proveedor > 0) {
                     toast.warn('no se puede eliminar un proveedor al que se debe!')
                 } else {
                     emitter.emit('abrir_loader_carga_vista_proveedor')

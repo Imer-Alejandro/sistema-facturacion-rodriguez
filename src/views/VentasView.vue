@@ -147,7 +147,7 @@ export default {
            
         }
     },
-computed:{
+computed:{ 
          
         },
     methods:{

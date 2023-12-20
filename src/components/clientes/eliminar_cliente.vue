@@ -24,7 +24,7 @@ export default {
                 //validar que no se elimine un cliente con deduda pendiente
                 if (this.cliente_operacion.deuda > 0) {
                     toast.warn('no se puede eliminar un cliente con deuda pendiente!')
-                }else{
+                }else if(this.cliente_operacion.deuda == 0 || this.cliente_operacion.deuda < 0){
                 emitter.emit('abrir_loader_carga_vista_cliente')
                  // Realizar la solicitud DELETE a la ruta /eliminar-cliente/:idCliente
                 axios.delete(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/eliminar-cliente/${this.cliente_operacion.id_cliente}`)

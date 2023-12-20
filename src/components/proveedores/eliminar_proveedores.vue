@@ -19,7 +19,7 @@ export default {
                 //validar que no se elimine un proveedor con deudas pendiente
                 if (this.proveedor_operacion.duda_a_proveedor > 0) {
                     toast.warn('no se puede eliminar un proveedor al que se debe!')
-                } else {
+                } else if(this.proveedor_operacion.duda_a_proveedor == 0 || this.proveedor_operacion.duda_a_proveedor < 0){
                     emitter.emit('abrir_loader_carga_vista_proveedor')
 
                 axios.delete(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/eliminar-proveedor/${this.proveedor_operacion.id_proveedores}`)

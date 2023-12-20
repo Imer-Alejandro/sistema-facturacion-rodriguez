@@ -9,7 +9,7 @@ import DetalleAbonoCliente from './detalle_abono_cliente.vue'
 import { emitter } from '@/eventBus';
 
 import axios from 'axios';
-
+ 
 
 
 export default {

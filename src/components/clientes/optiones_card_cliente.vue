@@ -15,7 +15,7 @@ export default {
    methods:{
         abrir_eliminar_cliente(){
             //emitir un evento para eliminar clientes
-            emitter.emit('abrir_modal_eliminar_cliente',this.idCliente)
+            emitter.emit('abrir_modal_eliminar_cliente',this.cliente)
         },
         abrir_editar_cliente(){
             emitter.emit('abrir_modal_editar_cliente',this.idCliente)
@@ -24,7 +24,7 @@ export default {
             emitter.emit('abrir_modal_abono_deuda_cliente',this.idCliente)
         },
         abrir_historial_abonos(){
-            emitter.emit('abrir_modal_historial_deuda_cliente',this.cliente)
+            emitter.emit('abrir_modal_historial_deuda_cliente',this.idCliente)
         }
    }
 }

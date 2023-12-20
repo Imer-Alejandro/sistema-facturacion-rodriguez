@@ -43,7 +43,7 @@ export default {
         emitter.on('cerrar_anular_abono_proveedor',()=>{
             this.estados.visibilidad_anular_abono_proveedor=false
         })
- 
+  
         //actualizar luego de una operacion 
         emitter.on('actualizar_historial_abonos_proveedores',()=>{
             //buscar proveedor del registro

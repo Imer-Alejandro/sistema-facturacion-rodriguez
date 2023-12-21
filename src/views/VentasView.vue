@@ -168,12 +168,7 @@ computed:{
                 })
                 .catch((error)=>{
                     console.log(error)
-                    toast.error("error al solicitar los productos!", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
+                    toast.error("error al solicitar los productos!");
                 })
                 .finally(()=>{
                     this.visibilidad_ventana_carga_venta=false
@@ -239,7 +234,7 @@ computed:{
         <div class="p-3 w-full">
             <input v-model="dato_busqueda"  class="w-[100%] h-[60px] rounded outline-0 pl-2  shadow-md shadow-[#0000001f] placeholder:text-[0.8rem]
             placeholder:italic"
-             type="text"  placeholder="Buscar producto por: nombre, id, precio..." >
+             type="text"  placeholder="Buscar producto por: nombre..." >
             <img @click="buscar_producto_por_nombre" class="w-[40px] -mt-[50px] cursor-pointer border-l-[2px]  border-[#DFDFDF] ml-[80%] absolute" src="../assets/iconos/interfaz/icono_buscador.png" >
         </div>
 

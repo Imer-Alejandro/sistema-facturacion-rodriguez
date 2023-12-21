@@ -55,9 +55,11 @@ export default {
         registrar_abono_proveedor(){
             if (this.proveedorEncontrado.deuda === '') {
                     alert("este proveedor no tiene deudas actualmente")
+                    toast.warn("este proveedor no tiene deudas actualmente!")
                 }
                 else if(this.datos_registro_abono.monto_abonado > this.proveedorEncontrado.deuda_a_proveedor ){
                     alert("el monto es mayor a la deuda ingrese un monto menor o igual")
+                    toast.warn("el monto es mayor a la deuda ingrese un monto menor o igual!")
                 }
                 else{
 

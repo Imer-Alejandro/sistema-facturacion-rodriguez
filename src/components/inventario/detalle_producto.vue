@@ -72,7 +72,7 @@ export default {
                 </div>
 
                 <div class="w-full pb-2 border-b-[1.5px] pt-2 border-b-[#DFDFDF]">
-                    <h3 class="text-[1.3rem] font-medium mb-[10px]">Existencias en stop: <span class="font-normal text-[#9F9F9F]">{{ producto_indicado && producto_indicado.cantidad_existente}}/{{producto_indicado && producto_indicado.vender_por}}</span></h3>
+                    <h3 class="text-[1.3rem] font-medium mb-[10px]">Existencias en stock: <span class="font-normal text-[#9F9F9F]">{{ producto_indicado && producto_indicado.cantidad_existente}}/{{producto_indicado && producto_indicado.vender_por}}</span></h3>
                 </div>
 
                 <div class="w-full pb-2 border-b-[1.5px] pt-2 border-b-[#DFDFDF]">

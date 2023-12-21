@@ -54,10 +54,11 @@ export default {
 
             registrar_abono_deuda_cliente(){
                 if (this.clienteEncontrado.deuda == '') {
-                    alert("este cliente no tiene deudas actualmente")
+                    toast.warn("este cliente no tiene deuda para abonar!")
                 }
                 else if(this.datos_registro_abono.monto_abonado > this.clienteEncontrado.deuda ){
                     alert("el monto es mayor a la deuda ingrese un monto menor o igual")
+                    toast.warn("el monto es mayor a la deuda, indique un monto menor o igual!")
                 }
                 else{
                     emitter.emit('abrir_loader_carga_vista_cliente')

@@ -34,7 +34,7 @@ export default {
         return{
             mostrar_detalle: false,
             mostrar_optiones:false,
-
+            opciones :{ style: 'decimal', useGrouping: true, maximumFractionDigits: 0 },
             horaVenta:this.ventas.fecha.substring(13)
         }
     },
@@ -81,7 +81,7 @@ export default {
             </div>
 
            
-            <h3 class="font-bold mt-[18px] mr-[8px] ">Total: <span class="font-medium">{{ventas.total_venta}}</span></h3>
+            <h3 class="font-bold mt-[18px] mr-[8px] ">Total: <span class="font-medium">{{ventas.total_venta.toLocaleString('en-US',opciones)}}</span></h3>
            
             <div class="border-l-[1.5px] pt-[17px]  pl-[4px] border-l-[#DFDFDF]">
                 <span class="mt-[15px] ">{{horaVenta}}</span>

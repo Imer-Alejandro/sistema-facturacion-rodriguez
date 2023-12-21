@@ -27,6 +27,7 @@ export default {
                 icono:'',
                 description:'',
                 vender_por:'',
+                precio_compra:'',
                 total_producto:''
             }
         }
@@ -56,6 +57,7 @@ export default {
                                 this.objeto_producto.vender_por=this.producto_asignado_carrito.vender_por
                                 this.objeto_producto.description=this.producto_asignado_carrito.description
                                 this.objeto_producto.total_producto=this.objeto_producto.precio_venta * this.objeto_producto.cantidad_venta
+                                this.objeto_producto.precio_compra=this.producto_asignado_carrito.costo
                                 //agregar al  carrito
                                 this.agregarProductoAlCarrito(this.objeto_producto)
 

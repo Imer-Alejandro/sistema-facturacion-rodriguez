@@ -63,7 +63,7 @@ export default {
      <div class="w-full h-[80px]  mb-[20px] relative rounted p-2 rounded  flex shadow-md shadow-[#0000001f]">
                 <div class=" order-1 flex-col text-center w-[180px] border-r-2 flex justify-center">
                     <h2>Monto abonado</h2>
-                    <span class="text-[#FFB984] text-[0.9rem]">{{ abono.monto_abonado }}</span>
+                    <span class="text-[#FFB984] text-[0.9rem]">{{ abono.monto_abonado.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 }) }}</span>
                 </div>
 
                 <div class="order-2 w-[180px] text-center flex-col flex justify-center ">

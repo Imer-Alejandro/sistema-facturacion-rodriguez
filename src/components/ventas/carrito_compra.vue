@@ -247,7 +247,7 @@ export default {
     <hr>
         <div class="w-full h-[60px] flex p-2">
             <h3 class="order-1 text-[1.3rem]">Total venta:</h3>
-            <h3 class="order-2 text-[1.3rem] text-[#E55226] ml-[50%]">{{datosCarrito.total_venta}}</h3>
+            <h3 class="order-2 text-[1.3rem] text-[#E55226] ml-[50%]">{{datosCarrito.total_venta.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</h3>
         </div>
 
         <div class="p-2 bg-[#F8FBFF]">

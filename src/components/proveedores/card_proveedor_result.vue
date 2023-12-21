@@ -60,7 +60,7 @@ export default {
                  <img @click="abrir_optiones_proveedor" class="w-[35px] absolute ml-[65%] cursor-pointer -mt-[140px] h-[35px]" src="/src/assets/iconos/interfaz/navegacion.png" alt="" srcset="">
                 <img class="w-[80px] h-[80px] mb-[5px]" src="/src/assets/iconos/interfaz/furgoneta-de-reparto.png" alt="" srcset="">
                    <h3 class="mb-[10px]">{{proveedor.nombre_proveedor}}</h3>
-                   <h3 class="text-[0.9rem]">total deuda: <span class="text-[#E55226]">{{proveedor.deuda_a_proveedor}}</span></h3>
+                   <h3 class="text-[0.9rem]">total deuda: <span class="text-[#E55226]">{{proveedor.deuda_a_proveedor.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</span></h3>
            
                 <optiones-proveedor v-show="estado_visibilidad_optiones"  :idProveedor="proveedor.id_proveedores" ref="menu"/>
         </div>

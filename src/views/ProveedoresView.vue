@@ -256,7 +256,7 @@ export default {
 
         <div class=" p-3 w-[95%] ml-[2.5%] h-[80px] rounded shadow-md shadow-[#00000031]  mb-[20px] bg-[#FFB984]">
             <span class="text-[#F9F9F9]">Total por pagar</span>
-            <h3 class="text-[1.6rem] text-white font-bold">{{ deudasPorPagar }}</h3>
+            <h3 class="text-[1.6rem] text-white font-bold">{{ deudasPorPagar.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 }) }}</h3>
             <img src="" >
         </div>
 

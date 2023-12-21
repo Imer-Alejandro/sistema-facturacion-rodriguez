@@ -135,7 +135,7 @@ export default {
     
     data() {
         return {
-
+            opciones :{ style: 'decimal', useGrouping: true, maximumFractionDigits: 0 },
             title: "Inventario",
             producto_indicado:'',
             id_producto_indicado:0,
@@ -219,7 +219,8 @@ export default {
             },
             suma_precio_costo_producto(){
                  // Calcular la suma del precio de venta de los productos
-                    return this.DatosProductos.reduce((acumulador, DatosProductos) => acumulador + DatosProductos.costo * DatosProductos.cantidad_existente , 0);
+                    var totalSumaCosto= this.DatosProductos.reduce((acumulador, DatosProductos) => acumulador + DatosProductos.costo * DatosProductos.cantidad_existente , 0);
+                    return totalSumaCosto
             },
             calcular_inventrio(){
                 return this.DatosProductos.reduce((acumulador, DatosProductos) => acumulador + DatosProductos.cantidad_existente , 0);
@@ -265,7 +266,7 @@ export default {
         <div class=" flex">
             <div class=" p-2 w-[45%] enline-flex ml-[2.5%] h-[80px] rounded shadow-md shadow-[#0000002a] mb-[20px] bg-[#FF7850]">
                 <span class="text-[#F9F9F9]">costo del inventario</span>
-                <h3 class="text-[1.6rem] text-white font-bold">{{ suma_precio_costo_producto }}</h3>
+                <h3 class="text-[1.6rem] text-white font-bold">{{ suma_precio_costo_producto.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 }) }}</h3>
                 <img src="" >
             </div>
 

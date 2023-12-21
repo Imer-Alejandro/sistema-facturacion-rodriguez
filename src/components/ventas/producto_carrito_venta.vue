@@ -60,7 +60,7 @@ export default {
                 <button @click="actualizar_cantidad_producto" title="editar cantidad a vender" class="h-[50px] focus:border-[#2CF95C] focus:border-2 border-2 outline-none mt-[10px] rounded box-border  text-center  w-[90px] mb-[8px]">
                     {{productos.cantidad_venta}}
                 </button>         
-                <h3 class="text-[0.9rem] text-center">Total: <span>{{ productos.total_producto }}</span></h3>
+                <h3 class="text-[0.9rem] text-center">Total: <span>{{ productos.total_producto.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 }) }}</span></h3>
             </div>
         </div>
     </div>

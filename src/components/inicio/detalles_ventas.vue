@@ -63,7 +63,7 @@ export default {
                         <td>{{venta.nombre_producto}}</td> 
                         <td>{{venta.precio_venta}}</td> 
                         <td>{{venta.cantidad_venta}}</td> 
-                        <td>{{venta.total_producto}}</td> 
+                        <td>{{venta.total_producto.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</td> 
                     </tr>  
                     
                 </tbody> 
@@ -74,7 +74,7 @@ export default {
             
         </div>
         <div class="w-full border-b-[1.5px] bg-white mt-[30px] p-3 inline-flex border-b-[#DFDFDF]">
-            <h3 class="text-[1.4rem] order-1 font-medium mb-[10px]">Total de la venta: </h3> <span class="font-normal order-2  text-[1.4rem] ml-[10%] text-[#E55226]">{{ventaOperacion.total_venta}}</span>
+            <h3 class="text-[1.4rem] order-1 font-medium mb-[10px]">Total de la venta: </h3> <span class="font-normal order-2  text-[1.4rem] ml-[10%] text-[#E55226]">{{ventaOperacion.total_venta.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</span>
         </div>
     </section>
    

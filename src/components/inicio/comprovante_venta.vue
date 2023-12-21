@@ -112,7 +112,7 @@ methods:{
                     <span v-else>/und</span>
                 </td>
                 <td class="derecha">{{ productos.cantidad_venta }}</td>
-                <td class="derecha">{{productos.total_producto}}</td>
+                <td class="derecha">{{productos.total_producto.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</td>
               </tr>
               <!-- Agrega más filas según sea necesario -->
             </tbody>
@@ -121,7 +121,7 @@ methods:{
  
              <!-- Total de la venta -->
              <div class="total">
-                <span>Total: <span class="contenido"> {{this.ventaOperacion.total_venta}}</span></span>
+                <span>Total: <span class="contenido"> {{this.ventaOperacion.total_venta.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</span></span>
               </div>
 
               <hr>

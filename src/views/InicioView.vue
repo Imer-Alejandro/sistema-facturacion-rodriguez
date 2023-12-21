@@ -104,7 +104,8 @@ export default {
         return {
             title: "Inicio",
             datosVentasDelDia:[],
-
+            ganaciasDiaria:'',
+            opciones :{ style: 'decimal', useGrouping: true, maximumFractionDigits: 0 },
             //recibe el registro pasado de las optiones 
             ventaOperacion:'',
 
@@ -130,6 +131,7 @@ export default {
             axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/ventas-dia-actual')
                 .then((response)=>{
                     this.datosVentasDelDia=response.data
+                    console.log(this.datosVentasDelDia)
                 })
                 .catch((err)=>{
                     console.log(err)
@@ -137,12 +139,17 @@ export default {
                 .finally(()=>{
                     this.data.visibilidad_carga_loader=false
                     this.ingresosDiario= this.suma_ingresos_ventas_diaria()
+                    this.ganaciasDiaria=this.SumaGanacias_Diarias()
                 })
         },
         suma_ingresos_ventas_diaria(){
                  // Calcular la suma del precio de venta de los productos
                     return this.datosVentasDelDia.reduce((acumulador, datosVentasDelDia) => acumulador += datosVentasDelDia.total_venta  , 0);
             },
+
+        SumaGanacias_Diarias(){
+
+        },
 
     }
 }
@@ -167,10 +174,15 @@ export default {
 
         <div class=" p-3 w-[95%] ml-[2.5%] h-[80px] rounded shadow-md shadow-[#00000031] mb-[20px] bg-[#FF7850]">
             <span class="text-[#F9F9F9]">Ingresos por ventas hoy</span>
-            <h3 class="text-[1.6rem] text-white font-bold">{{ingresosDiario}}</h3>
+            <h3 class="text-[1.6rem] text-white font-bold">{{ingresosDiario.toLocaleString('en-US',opciones)}}</h3>
             <img src="" >
         </div>
-
+        
+        <div class=" p-3 w-[95%] ml-[2.5%] h-[80px] rounded shadow-md shadow-[#00000031] mb-[20px] bg-[#FFB984]">
+            <span class="text-[#F9F9F9]">Ganacias por ventas hoy</span>
+            <h3 class="text-[1.6rem] text-white font-bold">0</h3>
+            <img src="" >
+        </div>
   
 
         <h3 class=" pl-2 text-[2rem] mt-[50px]">Ventas de hoy</h3>

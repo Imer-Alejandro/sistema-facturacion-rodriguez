@@ -147,7 +147,7 @@ export default {
                     <img class="order-1 w-[60px] h-[60px] mr-[30px] " src="/src/assets/iconos/interfaz/furgoneta-de-reparto.png" alt="" srcset="">
                     <div class="order-2">
                         <h3>{{proveedorEncontrado.nombre_proveedor}}</h3>
-                        <h3 class="text-[#9F9F9F]">Total de la deuda: <span class="text-[#E55226]">{{ proveedorEncontrado.deuda_a_proveedor }}</span></h3>
+                        <h3 class="text-[#9F9F9F]">Total de la deuda: <span class="text-[#E55226]">{{ proveedorEncontrado.deuda_a_proveedor.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 }) }}</span></h3>
                     </div>
                 </div>
     </div>

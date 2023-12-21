@@ -60,7 +60,7 @@ export default {
                  <img @click="abrir_optiones_clientes" class="w-[35px] absolute ml-[33%] cursor-pointer -mt-[130px] h-[35px]" src="/src/assets/iconos/interfaz/navegacion.png" alt="" srcset="">
                 <img class="w-[80px] h-[80px] mb-[5px]" src="/src/assets/iconos/interfaz/tienda.png" alt="" srcset="">
                    <h3 class="mb-[10px]">{{cliente.nombre_cliente}}</h3>
-                   <h3 class="text-[0.9rem]">total deuda: <span class="text-[#E55226]">{{ cliente.deuda }}</span></h3>
+                   <h3 class="text-[0.9rem]">total deuda: <span class="text-[#E55226]">{{ cliente.deuda.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 }) }}</span></h3>
            
                 <optiones-clients v-show="estado_visibilidad_optiones" :cliente="cliente" ref="menu"/>
         </div>

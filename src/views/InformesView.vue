@@ -118,7 +118,7 @@ export default {
         busquedaPorFecha(){
             const fecha = this.convertirFormatoFechaHora(this.busquedaPorFecha)
             this.estados.visibilidad_carga_loader = true;
-            axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/busqueda-registro-venta-por-fecha/${fecha}`)
+            axios.post(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/busqueda-registro-venta-por-fecha`,{fecha})
                 .then((response)=>{
                     this.datosVentas = response.data;
 
@@ -381,23 +381,23 @@ export default {
             <div class="w-[280%] inline-flex">
                 <div class=" p-3 w-[320px] mr-[10px]  h-[120px] rounded shadow-md shadow-[#00000031] mb-[20px] bg-[#FF7850]">
                     <span class="text-[#F9F9F9]">Ingresos por ventas / {{indicadoIngreso }}</span>
-                    <h3 class="text-[1.6rem] mb-[10px] text-white font-bold">{{ingresosVentas}}</h3>
+                    <h3 class="text-[1.6rem] mb-[10px] text-white font-bold">{{ingresosVentas.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</h3>
                     
                 </div>
                    
                 <div class=" p-3 w-[320px] mr-[10px]  h-[120px] rounded shadow-md shadow-[#00000031] mb-[20px] bg-[#FFB984]">
                     <span class="text-[#F9F9F9]">Valor total del inventario</span>
-                     <h3 class="text-[1.6rem] mb-[10px] text-white font-bold">{{ valorInventario }}</h3>
+                     <h3 class="text-[1.6rem] mb-[10px] text-white font-bold">{{ valorInventario.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 }) }}</h3>
                 </div>
 
                 <div class=" p-3 w-[320px] mr-[10px]  h-[120px] rounded shadow-md shadow-[#00000031] mb-[20px] bg-[#f07e5c]">
                     <span class="text-[#F9F9F9]">Total de la deuda por cobrar</span>
-                    <h3 class="text-[1.6rem] mb-[10px] text-white font-bold">{{deudasPorCobrar}}</h3>
+                    <h3 class="text-[1.6rem] mb-[10px] text-white font-bold">{{deudasPorCobrar.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</h3>
                 </div>
 
                 <div class=" p-3 w-[320px] mr-[10px]  h-[120px] rounded shadow-md shadow-[#00000031] mb-[20px] bg-[#FFB984]">
                     <span class="text-[#F9F9F9]">Total de la deuda a proveedores</span>
-                    <h3 class="text-[1.6rem] mb-[10px] text-white font-bold">{{deudasPorPagar}}</h3>
+                    <h3 class="text-[1.6rem] mb-[10px] text-white font-bold">{{deudasPorPagar.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</h3>
                 </div>
             </div>
                 

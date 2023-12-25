@@ -37,6 +37,8 @@ export default {
 
         this.obtener_ventas_del_dia()
 
+        
+
         //ventana de editar venta
         emitter.on('cerrar_editar_venta',()=>{
             this.data.open_and_close_editar_venta=false
@@ -104,12 +106,16 @@ export default {
         return {
             title: "Inicio",
             datosVentasDelDia:[],
-            ganaciasDiaria:'',
+            datosVentas:'',
+            ganaciasDiaria:0,
+            estadoGanaciasDelFiltro:'hoy',
+            ingresosDiario:0,
+            datosAbonos:'',
+            filtroGanaciasFecha:'',
             opciones :{ style: 'decimal', useGrouping: true, maximumFractionDigits: 0 },
             //recibe el registro pasado de las optiones 
             ventaOperacion:'',
 
-            ingresosDiario:0,
             data:{
                 open_and_close_detalle_venta:false,
 
@@ -123,7 +129,128 @@ export default {
             },
         }
     },
+    watch:{
+        //filtrar ganacias por fecha especifica
+        filtroGanaciasFecha(){
+           const fecha = this.convertirFormatoFecha(this.filtroGanaciasFecha)
+
+           this.visibilidad_carga_loader = true;
+            axios.post(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/busqueda-registro-venta-por-fecha`,{fecha})
+                .then((response)=>{
+                    this.datosVentas = response.data;
+
+                    if(this.datosVentas.length > 0){
+                        toast.success(`se obtuvo las ganancias del ${fecha}!`);
+                        }
+
+                        this.estadoGanaciasDelFiltro = fecha
+                    
+                    this.ganaciasDiaria=this.SumaGanacias(this.datosVentas)
+
+                })
+                .catch((err)=>{
+                    console.log(err)
+                    toast.error(`error al obtener las ganacias del ${fecha}!`);
+                })
+                .finally(()=>{
+                    this.estadoGanaciasDelFiltro = fecha
+                    this.visibilidad_carga_loader = false;
+                    
+                })
+            
+       
+        },
+
+        //filtrar ganancias por rango de fechas
+        estadoGanaciasDelFiltro(){
+            if(this.estadoGanaciasDelFiltro== 'hoy'){
+                this.obtener_ventas_del_dia()
+            }
+            else if(this.estadoGanaciasDelFiltro== 'mes'){
+                this.data.visibilidad_carga_loader = true;
+                axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/buscar-venta-mensual')
+                    .then((response)=>{
+                        this.datosVentas = response.data;
+                        //ingresos de ventas mensuales
+                        if(this.datosVentas.length > 0){
+                            toast.success("se obtuvieron las ganancias mensuales!");
+                        }
+                        this.estadoGanaciasDelFiltro='mes'
+                        this.ganaciasDiaria=this.SumaGanacias(this.datosVentas)
+
+                    })
+                    .catch((error)=>{
+                        console.log(error);
+                    })
+                    .finally(()=>{
+                        this.estadoGanaciasDelFiltro='mes'
+                        
+                        //cerrar ventana de carga
+                        this.data.visibilidad_carga_loader= false;
+                    })
+            }
+            else if(this.estadoGanaciasDelFiltro== 'año'){
+                this.data.visibilidad_carga_loader = true;
+                axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/ventas-anuales')
+                    .then((response)=>{
+                        this.datosVentas = response.data;
+                        //ingresos de ventas anuales
+                        if(this.datosVentas.length > 0){
+                            toast.success("se obtuvieron las ganancias anuales!");
+                        }
+                        this.estadoGanaciasDelFiltro='año'
+                        this.ganaciasDiaria=this.SumaGanacias(this.datosVentas)
+                        
+                    })
+                    .catch((error)=>{
+                        console.log(error);
+                    })
+                    .finally(()=>{
+                        this.estadoGanaciasDelFiltro='año'
+                        
+                        //cerrar ventana de carga
+                        this.data.visibilidad_carga_loader= false;
+                    })
+            }
+            else if(this.estadoGanaciasDelFiltro== 'todas'){
+                this.data.visibilidad_carga_loader= true;
+                 axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-ventas')
+                    .then((response)=>{
+                        this.datosVentas = response.data;
+                        //ingresos de ventas general
+                        if (this.datosVentas.length > 0) {
+                            toast.success("se obtuvieron las ganancias en general!");
+                        }
+                        this.estadoGanaciasDelFiltro='todas'
+                        this.ganaciasDiaria=this.SumaGanacias(this.datosVentas)
+
+                    })
+                    .catch((error)=>{
+                        console.log(error);
+                    })
+                    .finally(()=>{
+                        this.estadoGanaciasDelFiltro='todas'
+
+                        this.data.visibilidad_carga_loader= false;
+                    })
+            }
+        }
+    },
     methods:{
+        convertirFormatoFecha(fechaInput) {
+        const mesesAbreviados = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+        const fecha = new Date(fechaInput);
+
+        const opciones = { month: 'numeric', day: 'numeric', year: 'numeric' };
+        const [mes, dia, anio] = fecha.toLocaleDateString('en-US', opciones).split('/');
+
+        const mesAbreviado = mesesAbreviados[parseInt(mes, 10) - 1];
+
+        const fechaFormateada = `${mesAbreviado} ${dia} ${anio}`;
+
+        return fechaFormateada;
+},
 
         obtener_ventas_del_dia(){
             this.data.visibilidad_carga_loader=true
@@ -131,24 +258,47 @@ export default {
             axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/ventas-dia-actual')
                 .then((response)=>{
                     this.datosVentasDelDia=response.data
-                    console.log(this.datosVentasDelDia)
+
+                    this.ingresosDiario= this.suma_ingresos_ventas_diaria(this.datosVentasDelDia)
+                    this.ganaciasDiaria=this.SumaGanacias(this.datosVentasDelDia)
+                    this.estadoGanaciasDelFiltro='hoy'
+                    
                 })
                 .catch((err)=>{
                     console.log(err)
                 })
                 .finally(()=>{
+                    
                     this.data.visibilidad_carga_loader=false
-                    this.ingresosDiario= this.suma_ingresos_ventas_diaria()
-                    this.ganaciasDiaria=this.SumaGanacias_Diarias()
+                 
                 })
         },
-        suma_ingresos_ventas_diaria(){
+       
+
+        
+        suma_ingresos_ventas_diaria(datosVentas){
                  // Calcular la suma del precio de venta de los productos
-                    return this.datosVentasDelDia.reduce((acumulador, datosVentasDelDia) => acumulador += datosVentasDelDia.total_venta  , 0);
+                    return datosVentas.reduce((acumulador, datosVentasDelDia) => acumulador += datosVentasDelDia.total_venta  , 0);
             },
 
-        SumaGanacias_Diarias(){
+        SumaGanacias(datosVentas){
+            let sumaGanancias = 0;
 
+            datosVentas.forEach((venta) => {
+        // Verificamos que exista la propiedad detalles_productos y que tenga al menos un elemento
+        if (venta.detalles_producto && venta.detalles_producto.length > 0) {
+                    
+            // Convertimos la cadena JSON a un objeto JavaScript
+            const detallesProductos = JSON.parse(venta.detalles_producto);
+
+            // Iteramos sobre los detalles de cada producto vendido
+            detallesProductos.forEach((producto) => {
+                sumaGanancias += (producto.precio_venta - producto.precio_compra) * producto.cantidad_venta;
+            });
+        }
+    });
+
+    return sumaGanancias;
         },
 
     }
@@ -172,17 +322,30 @@ export default {
 
         <comprobante-venta :ventaOperacion="ventaOperacion" v-if="data.open_and_close_comprobante_venta" />
 
-        <div class=" p-3 w-[95%] ml-[2.5%] h-[80px] rounded shadow-md shadow-[#00000031] mb-[20px] bg-[#FF7850]">
+        <div class=" p-3 w-[95%] ml-[2.5%] h-[80px] rounded shadow-md shadow-[#00000031] mb-[15px] bg-[#FF7850]">
             <span class="text-[#F9F9F9]">Ingresos por ventas hoy</span>
             <h3 class="text-[1.6rem] text-white font-bold">{{ingresosDiario.toLocaleString('en-US',opciones)}}</h3>
             <img src="" >
         </div>
         
-        <div class=" p-3 w-[95%] ml-[2.5%] h-[80px] rounded shadow-md shadow-[#00000031] mb-[20px] bg-[#FFB984]">
-            <span class="text-[#F9F9F9]">Ganacias por ventas hoy</span>
-            <h3 class="text-[1.6rem] text-white font-bold">0</h3>
-            <img src="" >
+        <div class="p-3 w-[95%]  box-border flex flex-row mb-[20px]">
+            <div class=" order-1 w-[95%]  h-[80px] p-3 rounded shadow-md  shadow-[#00000031] mr-[10px] bg-[#FFB984]">
+                <span class="text-[#F9F9F9] text-[1rem]">Ganancias / {{estadoGanaciasDelFiltro}}</span>
+                <h3 class="text-[1.6rem] text-white font-bold">{{ganaciasDiaria.toLocaleString('en-US',opciones)}}</h3>
+            </div>
+            <select v-model="estadoGanaciasDelFiltro" class="order-2 p-2 w-[70px]  outline-none h-[80px] rounded shadow-md mr-[20px] shadow-[#00000031]  bg-[#FFB984] ">
+                <option value="hoy">hoy</option>
+                <option value="mes">mes</option>
+                <option value="año">año</option>
+                <option value="todas">todas</option>
+
+            </select>
+            <label class="order-3 ml-[5px] w-[15%] text-center justify-center items-center h-[80px] flex flex-row" for="fecha">
+                <img class="w-[30px]  z-[2] h-[30px]" src="/icons/calendario.png" >
+                <input id="fecha" v-model="filtroGanaciasFecha" type="date" class="text-[#FFB984] absolute z-[1]  outline-none p-2 w-[60px] h-[80px] rounded shadow-md shadow-[#00000031]  bg-[#FFB984] ">
+            </label>
         </div>
+        
   
 
         <h3 class=" pl-2 text-[2rem] mt-[50px]">Ventas de hoy</h3>

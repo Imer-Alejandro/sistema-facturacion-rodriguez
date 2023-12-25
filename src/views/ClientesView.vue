@@ -286,9 +286,15 @@ export default {
             <h2 class="text-[2rem] mt-[10px]  mb-[30px]">Clientes</h2>
             <div class="w-full pl-[5px] p-2 pb-[200px]   inline-block">
 
-                <div class="inline-block" v-for="cliente in  dataCliente" :key="cliente.id_cliente">
-                    <card-cliente :cliente="cliente" />
+                <div v-if="dataCliente.length > 0">
+                    <div class="inline-block" v-for="cliente in  dataCliente" :key="cliente.id_cliente">
+                        <card-cliente :cliente="cliente" />
+                    </div>
                 </div>
+                <div v-else>
+                    <h3 class="text-[1.4rem] text-center"> no se encontraron clientes...</h3>
+                </div>
+                
                
 
             </div>

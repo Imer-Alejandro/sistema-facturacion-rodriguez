@@ -24,23 +24,13 @@ export default {
             axios.delete(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/eliminar-producto/${this.id_producto_indicado}`)
             .then(response =>{
 
-                toast.success("se elimino el producto !", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
+                toast.success("se elimino el producto !");
 
                 console.log(response)
             })
             .catch(error=>{ 
                 
-                toast.error("error al eliminar el producto!", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
+                toast.error("error al eliminar el producto!");
 
                 console.log("Error", error);
             })

@@ -4,16 +4,16 @@
 import { emitter } from '@/eventBus';
 
 export default { 
-    props:['idRegistroAbono'],
-    methods:{
+    props:['RegistroAbono'],
+    methods:{ 
         abrir_eliminar_abono_proveedor(){
-            emitter.emit('abrir_eliminar_abono_proveedor',this.idRegistroAbono)
+            emitter.emit('abrir_eliminar_abono_proveedor',this.RegistroAbono)
         },
         abrir_editar_abono_proveedor(){
-            emitter.emit('abrir_editar_abono_proveedor',this.idRegistroAbono)
+            emitter.emit('abrir_editar_abono_proveedor',this.RegistroAbono)
         },
         abrir_detalle_abono_proveedor(){
-            emitter.emit('abrir_detalle_abono_proveedor',this.idRegistroAbono)
+            emitter.emit('abrir_detalle_abono_proveedor',this.RegistroAbono)
         }
     }
 }

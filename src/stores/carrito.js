@@ -99,13 +99,17 @@ export const useGlobalCarritoVenta = defineStore('carrito', {
       },
 
       asignar_cliente(id,nombre,deuda){
-          this.carrito_compras.id_cliente=id
+        //si el valor indicado como cliente de venta es niguno es decir que no se asigna nada
           if (nombre == 'ninguno...') {
             this.carrito_compras.nombre_cliente=''
+            this.carrito_compras.antigua_deuda_cliente=''
+            this.carrito_compras.id_cliente=''
           }else{
+            this.carrito_compras.id_cliente=id
             this.carrito_compras.nombre_cliente=nombre
+            this.carrito_compras.antigua_deuda_cliente=deuda
+
           }
-          this.carrito_compras.antigua_deuda_cliente=deuda
       }
   },
 });

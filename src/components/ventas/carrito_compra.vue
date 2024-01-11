@@ -24,6 +24,17 @@ import axios from 'axios';
 
 export default {
     mounted(){
+        //evento al remover clientes de la venta y al asignarlo 
+        emitter.on('cliente_removido_venta',()=>{
+            this.cliente='ninguno...'
+            toast.success('se elimino el cliente de la venta !')
+        })
+        emitter.on("mostrar_cliente_venta",()=>{
+            this.cliente= carritoStore.carrito_compras.nombre_cliente
+
+            toast.success("se asigno un clientes a la venta!"); 
+
+        })
 
         //ventana de carga 
         emitter.on('abrir_carga_loader_ventas',()=>{
@@ -69,7 +80,7 @@ export default {
 
         // ventana indicar cliente
         emitter.on('cerrar_modal_asignar_cliente',()=>{
-            this.cliente=carritoStore.carrito_compras.nombre_cliente
+            
             this.visibilidad_modal_asignar_cliente=false
         })
  
@@ -153,7 +164,7 @@ export default {
 
                 axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/registro-ventas',carritoStore.carrito_compras)
                     .then((response)=>{
-                        console.log(response.data) 
+                        console.log(response.data)  
  
 
                         //abirir ventana de finalizar proceso de ventas
@@ -241,7 +252,7 @@ export default {
             <img class="w-[30px] ml-[35%] -mt-[30px] h-[30px] absolute" src="/src/assets/iconos/interfaz/agregar.png" alt="" srcset="">
         </button>
     </div>
-    <h3 class="pl-2 text-[1.3rem] mb-[10px]">Cliente: <span class="text-[#E55226] ml-[40%]">{{cliente}}</span></h3>
+    <h3 class="pl-2 text-[1.3rem] mb-[10px]">Cliente: <span class="text-[#E55226] text-[1rem] ml-[25%]">{{cliente}}</span></h3>
 
 
     <hr>

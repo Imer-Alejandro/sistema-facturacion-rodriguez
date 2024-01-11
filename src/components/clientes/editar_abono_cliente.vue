@@ -57,12 +57,7 @@ export default {
             registrar_abono_editado_deuda_cliente(){
 
                 if (this.datosEditados.nuevo_monto_abonado > this.datosCliente.deuda  ) {
-                    toast.error("ingrese un monto igual o menor a la deuda actual !", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });  
+                    toast.error("ingrese un monto igual o menor a la deuda actual !");  
                 }else{
                     emitter.emit('abrir_loader_carga_vista_cliente')
 

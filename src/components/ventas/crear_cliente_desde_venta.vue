@@ -76,7 +76,7 @@ export default {
     </header>
 
     <form @submit.prevent="registrar_cliente" class="w-full p-3 mt-[10px]" >
-        <input v-model="cliente.nombre" required class="w-[95%] focus:border-[#FFB984] focus:border-[1.5px] h-[55px] border-[1px] outline-none pl-[5px] 
+        <input maxlength="43" v-model="cliente.nombre" required class="w-[95%] focus:border-[#FFB984] focus:border-[1.5px] h-[55px] border-[1px] outline-none pl-[5px] 
         box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
         placeholder="Nombre del cliente">
 
@@ -87,14 +87,14 @@ export default {
         placeholder="Direccion">
 
 
-        <input v-model="cliente.contacto" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
+        <input required v-model="cliente.contacto" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
         box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="tel" 
         placeholder="Contacto">
 
 
         <input v-model="cliente.tipo_cliente" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
         box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
-        placeholder="Tipo de cliente">
+        placeholder="Tipo de cliente - optional">
 
 
         <input v-model="cliente.description" required class="w-[95%] h-[80px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
@@ -104,7 +104,7 @@ export default {
 
         <input v-model="cliente.deuda" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
         box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="number" 
-        placeholder="Deuda">
+        placeholder="Deuda cliente - optional">
 
 
         

@@ -88,7 +88,7 @@ export default {
                         })
                         .catch((error) => {
                         console.error('Error al registrar el abono', error);
-                        toast.success("error al registrar el abono de la deuda !", {
+                        toast.error("error al registrar el abono de la deuda !", {
                                     autoClose: 3000,
                                     backgroundColor:'#CC0B09',
                                     close: false,

@@ -73,18 +73,21 @@ export default {
 }
 </script>
 <template>
-    <div class="w-[100%] relative flex p-2 pt-3 h-[150px] rounded-md mb-[15px] bg-white shadow-md shadow-[#0000001f]">
+    <div class="w-[100%] relative flex p-2 pt-3 h-[150px] overflow-hidden rounded-md mb-[15px] bg-white shadow-md shadow-[#0000001f]">
         <div @click="abirir_actualizar_cantidad_inventario" class="w-[100px] flex  justify-center items-center  rounded h-[95%] bg-[#FF7850]" >
             <img class=" order-1 w-[60px] h-[60px]"  :src="producto && producto.icono">
         </div>
         <div class="order-2 pl-2 w-[220px]  mb-[3px]">
             <h3 class="font-medium text-[#E55226]"> {{producto && producto.nombre_producto }} </h3>
             <p class="  text-[0.8rem] font-light mb-[8px] ">
-                {{ producto && producto.description }}
+                {{ producto && producto.descripcion }}
             </p>
  
             <div class="inline-flex">
-                <h3 class="text-[#858484] mr-[10px]">Precio:<span class="text-[#FF7850]">{{ producto && producto.precio_venta}}/{{ producto && producto.vender_por }}</span></h3>
+                <h3 class="text-[#858484] flex flex-row text-[0.9rem] mr-[10px]">Precio:<span class="text-[#FF7850] order-1">{{ producto && producto.precio_venta}}/ </span>
+                <span class="order-2 text-[#FF7850]" v-if="producto &&  producto.vender_por == 'unidad'"> und</span>
+                <span class="order-2 text-[#FF7850]" v-else> lb</span>
+            </h3>
                 <h3 class="text-[#858484] ">Cantidad:<span class="text-[#FF7850]">{{ producto && producto.cantidad_existente }}</span></h3>
             </div>  
         </div>

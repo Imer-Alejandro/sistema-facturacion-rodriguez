@@ -30,12 +30,7 @@ export default {
                 axios.delete(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/eliminar-cliente/${this.cliente_operacion.id_cliente}`)
                     .then((response) => {
 
-                        toast.success("se elimino el cliente!", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
+                        toast.success("se elimino el cliente!");
 
                     //cerrar ventana luego de eliminar
                     emitter.emit('cerrar_eliminar_cliente')
@@ -45,12 +40,7 @@ export default {
                     
                     })
                     .catch((error) => {
-                        toast.error("error al eliminar el cliente!", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
+                        toast.error("error al eliminar el cliente!");
 
                     console.error('Error al eliminar el cliente', error);
                     })

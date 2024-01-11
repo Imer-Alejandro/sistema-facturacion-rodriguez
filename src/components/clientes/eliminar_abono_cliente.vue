@@ -16,7 +16,7 @@ export default {
             this.buscar_registro_abono()
         },
 
-        data(){
+        data(){ 
             return{
                 datosRegistroAbono:[],
                 
@@ -39,12 +39,7 @@ export default {
                         data: { idCliente, nuevaDeuda },
                         });
 
-                        toast.success("se elimino el registro del abono !", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });  
+                        toast.success("se elimino el registro del abono !");  
 
                         console.log(response.data);
                         // Maneja la respuesta según tus necesidades

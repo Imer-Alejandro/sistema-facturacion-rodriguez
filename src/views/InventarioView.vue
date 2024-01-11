@@ -231,7 +231,7 @@ export default {
 </script> 
 
 <template> 
-    <section class=" w-full h-[100%]  bg-[#FEFEE5] ">
+    <section class=" w-full h-[100%] overflow-hidden bg-[#FEFEE5] ">
         <btn-crear-producto @click="form_new_product" />
         <menu-inferior/>
          <!-- ventana de carga  -->

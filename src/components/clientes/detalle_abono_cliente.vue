@@ -51,7 +51,7 @@ export default {
             </header>
             <div class="p-2 mt-[30px] ">
                 <h3 class="text-[1.3rem] mb-[10px]">Monto abonado</h3>
-                <span class="text-[#9F9F9F]">{{datosRegistroAbono.monto_abonado.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</span>
+                <span class="text-[#9F9F9F]">{{datosRegistroAbono.monto_abonado}}</span>
                 <br><br>
                 <h3 class="text-[1.3rem] mb-[10px]">Fecha del abono</h3>
                 <span class="text-[#9F9F9F]">{{ datosRegistroAbono.fecha_abono }}</span>

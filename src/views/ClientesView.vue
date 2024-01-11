@@ -9,7 +9,6 @@ import AbonarDeudaCliente from "../components/clientes/abonar_deuda_cliente.vue"
 import FormCrearCliente from '../components/clientes/form_crear_cliente.vue';
 import BusquedaCliente from "../components/clientes/buscar_cliente.vue";
 import HistorialAbonosCliente from "../components/clientes/historial_abonos_clientes.vue";
-
 import CargaLoader from '../components/carga_loader.vue';
 
 //importar el modulo de eventos globales 
@@ -121,6 +120,16 @@ export default {
         emitter.on('cerrar_historial_abono_cliente',()=>{
             this.estado_visibilidad_historial_abonos=false
         })
+
+        //ventana historial ventas
+        emitter.on('abrir_modal_historial_ventas_cliente',(data)=>{
+            this.cliente_operacion=data
+            this.estado_visibilidad_historial_ventas=true
+        })
+
+        emitter.on('cerrar_modal_historial_ventas_cliente',()=>{
+            this.estado_visibilidad_historial_ventas=false
+        })
     },
     components:{
         'menu-header': Header,
@@ -133,7 +142,7 @@ export default {
         'form-crear-cliente':FormCrearCliente,
         'buscar-cliente':BusquedaCliente,
         'carga-loader':CargaLoader,
-        'historial-abonos':HistorialAbonosCliente
+        'historial-abonos':HistorialAbonosCliente,
 
         
         
@@ -147,7 +156,6 @@ export default {
             estado_visibilidad_registrar_cliente:false,
             estado_visibilidad_buscar_cliente:false,
             estado_visibilidad_historial_abonos:false,
-
             estado_activacion_loader_Carga:false,
 
             //datos del servidor
@@ -253,6 +261,7 @@ export default {
         <carga-loader :id_cliente_operacione="id_cliente_operacione" v-if="estado_activacion_loader_Carga"/>
 
         <historial-abonos :id_cliente_operacione="id_cliente_operacione" v-if="estado_visibilidad_historial_abonos"/>
+
 
         <buscar-cliente :termino_busqueda_cliente="termino_busqueda_cliente" :datosBusquedaCliente="datosBusquedaCliente"  v-show="estado_visibilidad_buscar_cliente"/>
 

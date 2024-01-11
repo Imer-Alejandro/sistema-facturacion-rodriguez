@@ -159,7 +159,7 @@ export default {
             }
             else if (this.busquedaPorRango=='hoy') {
                 this.estados.visibilidad_carga_loader = true;
-                 axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/ventas-dia-actual')
+                 axios.post(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/ventas-dia-actual`,{fecha:this.obtenerFechaActual()})
                     .then((response)=>{
                         this.datosVentas = response.data;
                         //ingresos de ventas de hoy
@@ -355,7 +355,24 @@ export default {
                 const horaFormateada = fechaHora.toLocaleString('en-US', opcionesHora);
                 
                 return `${fechaFormateada} - ${horaFormateada}`;
-                }
+                },
+
+    obtenerFechaActual() {
+  const fechaHoraActual = new Date();
+
+  const meses = [
+    'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+    'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+  ];
+
+  const mes = meses[fechaHoraActual.getMonth()];
+  const dia = fechaHoraActual.getDate();
+  const anio = fechaHoraActual.getFullYear();
+
+  const fechaFormateada = `${mes} ${dia} ${anio}`;
+
+  return fechaFormateada;
+},
     }
 }
 </script>

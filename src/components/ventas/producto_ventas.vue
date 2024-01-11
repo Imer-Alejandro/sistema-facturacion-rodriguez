@@ -23,14 +23,14 @@ export default {
         <div class="order-2 pl-2 w-[220px] mr-[3px]  mb-[3px]">
             <h3 class="font-medium text-[#E55226]">{{productos.nombre_producto}}</h3>
             <p class="text-[0.8rem] font-light mb-[8px]">
-                {{ productos.description }}
+                {{ productos.descripcion }}
             </p>
 
             <div class="inline-flex">
-                <h3 class="text-[#858484] inline-flex text-[0.9rem] mr-[10px]">Precio:
+                <h3 class="text-[#858484] inline-flex text-[0.8rem] mr-[10px]">Precio:
                     <span class="text-[#FF7850] order-1">{{productos.precio_venta  }}</span>
-                    <span class="order-2 text-[#FF7850]" v-if="productos.vender_por == 'libras'">/lb</span>
-                    <span class="order-2 text-[#FF7850]" v-else>/und</span>
+                    <span class="order-2 text-[#FF7850]" v-if="productos.vender_por == 'libras'">/ lb</span>
+                    <span class="order-2 text-[#FF7850]" v-else>/ und</span>
                 </h3>
                 <h3 class="text-[#858484]  text-[0.9rem] ">Cantidad:
                     <span class="text-[#FF7850] order-3">{{productos.cantidad_existente}}</span>

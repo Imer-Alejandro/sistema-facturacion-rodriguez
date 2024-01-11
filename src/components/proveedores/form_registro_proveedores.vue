@@ -57,7 +57,7 @@ export default {
                         console.log(response.data);
 
                            
-                            toast("Se registro el proveedor !"); 
+                            toast.success("Se registro el proveedor !"); 
                             
 
                             //limpiar datos del estado
@@ -73,7 +73,7 @@ export default {
                         // Manejar errores
                             console.error(error);
 
-                            toast("error al registras Proveedor  !"); 
+                            toast.error("error al registras Proveedor  !"); 
 
                         })
                         .finally(()=>{
@@ -105,7 +105,7 @@ export default {
     </header>
 
     <form  @submit.prevent="registrar_proveedor" class="w-full p-3 mt-[10px]" >
-        <input v-model="proveedor.nombre" required class="w-[95%] focus:border-[#FFB984] focus:border-[1.5px] h-[55px] border-[1px] outline-none pl-[5px] 
+        <input maxlength="43" v-model="proveedor.nombre" required class="w-[95%] focus:border-[#FFB984] focus:border-[1.5px] h-[55px] border-[1px] outline-none pl-[5px] 
         box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
         placeholder="Nombre del proveedor">
 
@@ -116,7 +116,7 @@ export default {
         placeholder="Direccion">
 
 
-        <input v-model="proveedor.contacto"  class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
+        <input v-model="proveedor.contacto" required  class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
         box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="tel" 
         placeholder="Contacto">
 

@@ -182,14 +182,20 @@ export default {
                         <h3 class="text-[#9F9F9F]">Total de la deuda: <span class="text-[#E55226]">{{ clienteEncontrado.deuda }}</span></h3>
                     </div>
                 </div>
-    </div>
+    </div> 
     <div class="p-2">
         <h3 class="text-[1.3rem] mb-[10px]">Historial de abonos</h3>
         <div class="w-full h-[450px] pb-[40px]  p-1 overflow-hidden overflow-y-scroll">
 
-            <div v-for="abono in historialAbonosDelCliente" :key="abono.id_abono_deuda_del_cliente">
-                <card_hist_abono_cliente :abono="abono"/>
+            <div v-if="historialAbonosDelCliente.length > 0">
+                <div v-for="abono in historialAbonosDelCliente" :key="abono.id_abono_deuda_del_cliente">
+                    <card_hist_abono_cliente :abono="abono"/>
+                </div>
             </div>
+            <div v-else>
+                <h3 class="text-[1.1rem] mt-[20px] text-center"> no se encontraron registros abonos...</h3>
+            </div>
+            
 
         </div>
     </div>

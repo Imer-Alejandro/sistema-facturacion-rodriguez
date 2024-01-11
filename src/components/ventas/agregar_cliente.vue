@@ -39,7 +39,7 @@ export default {
             DatosClienteAsignado:'',
             DatosBusqueda:'',
             visibilidad_crear_clientes:false,
-            datosCliente:{
+            DatosVaciosRemoverCliente:{
                 id_cliente:'',
                 nombre:'ninguno...',
                 deuda:''
@@ -85,13 +85,17 @@ export default {
                 console.log(carritoStore.carrito_compras)
                 
             }
-            
+              
         },
         abrir_registro_cliente(){
             this.visibilidad_crear_clientes=true
         },
+
         eliminar_cliente_registro(){
-            emitter.emit('cliente_asignado_venta',this.datosCliente)
+            carritoStore.asignar_cliente(this.DatosVaciosRemoverCliente.id_cliente,this.DatosVaciosRemoverCliente.nombre,this.DatosVaciosRemoverCliente.deuda)
+            
+            emitter.emit('cliente_removido_venta')
+            this.cerrar_asignar_cliente()
         }
       
     }
@@ -116,10 +120,10 @@ export default {
             </button>
         </div> 
 
-        <div class="w-full mt-[10px] h-[200px] p-2 pb-[20px]   overflow-y-scroll  overflow-hidden">
+        <div class="w-full mt-[10px] h-[280px]  p-2 pb-[20px]   overflow-y-scroll  overflow-hidden">
             <div class="h-[175px] p-2   inline-flex  pr-[20px]  ">
                 
-                <div v-if="DatosCliente.length >0">
+                <div v-if="DatosCliente.length > 0">
                     <!-- primera card para eliminat clientes -->
                 <div class=" inline-flex  w-[150px] mb-[20px] mr-[20px] shadow-md shadow-[#0000001f]">
                    <button @click="eliminar_cliente_registro" class="outline-none w-full p-2 focus:border-[#2CF95C] focus:border-2 flex-col  
@@ -137,9 +141,7 @@ export default {
                 </div>
             </div>
         </div>
-            <div class="p-3">
-                <button @click="registrar_cliente_venta" class="w-[90%] ml-[5%] mt-[10px] text-[1.2rem] h-[60px] rounded text-white bg-[#FFB984]">Asignar cliente</button>
-            </div>
+            
         </div>      
     </section>
     </div>

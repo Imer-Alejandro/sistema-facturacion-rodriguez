@@ -6,7 +6,7 @@ import { emitter } from '@/eventBus';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
   
-
+ 
 import axios from 'axios';
 
 export default {
@@ -17,9 +17,9 @@ export default {
             },
             eliminar_proveedor(){
                 //validar que no se elimine un proveedor con deudas pendiente
-                if (this.proveedor_operacion.duda_a_proveedor > 0) {
-                    toast.warn('no se puede eliminar un proveedor al que se debe!')
-                } else if(this.proveedor_operacion.duda_a_proveedor == 0 || this.proveedor_operacion.duda_a_proveedor < 0){
+                if (this.proveedor_operacion.deuda_a_proveedor > 0) {
+                    toast.warn('no se puede eliminar un proveedor al que se debe !')
+                } else if(this.proveedor_operacion.deuda_a_proveedor == 0 || this.proveedor_operacion.deuda_a_proveedor < 0){
                     emitter.emit('abrir_loader_carga_vista_proveedor')
 
                 axios.delete(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/eliminar-proveedor/${this.proveedor_operacion.id_proveedores}`)

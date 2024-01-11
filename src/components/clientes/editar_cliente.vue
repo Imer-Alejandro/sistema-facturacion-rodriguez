@@ -57,12 +57,7 @@ import 'vue3-toastify/dist/index.css';
                             .then((response) => {
                             console.log('Cliente editado con éxito');
 
-                            toast.success("se edito con exito el cliente!", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
+                            toast.success("se edito con exito el cliente!", );
 
                              //cerrar la carga luego de crear el cliente
                              emitter.emit('cerrar_loader_carga_vista_cliente')
@@ -77,15 +72,15 @@ import 'vue3-toastify/dist/index.css';
                             })
                             .catch((error) => {
 
-                                toast.error("error al editar el cliente!", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
+                                toast.error("error al editar el cliente!",);
 
                             console.error('Error al editar el cliente', error);
-                            });
+                            })
+                            .finally(()=>{
+                            emitter.emit('cerrar_modal_editar_cliente')
+                            emitter.emit('cerrar_loader_carga_vista_cliente')
+
+                            })
             }
 
         } 
@@ -106,7 +101,7 @@ import 'vue3-toastify/dist/index.css';
             box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
             placeholder="Nombre del cliente">
             </label>
-
+ 
             <label for="">
                         <span class="text-[#9F9F9F] ml-[10px]">Direccion</span>
          <input v-model="clienteEncontrado.direccion" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
@@ -130,7 +125,7 @@ import 'vue3-toastify/dist/index.css';
 
             <label for="">
                         <span class="text-[#9F9F9F] ml-[10px]">Description</span>
-            <input v-model="clienteEncontrado.description" required class="w-[95%] h-[80px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
+            <input v-model="clienteEncontrado.descripcion" required class="w-[95%] h-[80px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
             box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
             placeholder="Description">
             </label>

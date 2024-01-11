@@ -77,6 +77,6 @@ export default {
                 </button>
 
                 
-                <opciones-historial v-if="visibilidadOptiones" :idRegistroAbono="this.abono.id_abono_deuda_a_proveedor" ref="menu"/>
+                <opciones-historial v-if="visibilidadOptiones" :RegistroAbono="abono" ref="menu"/>
             </div>
 </template>

@@ -9,70 +9,33 @@ import axios from 'axios';
 
 export default {
 
-    mounted(){
-        this.buscar_registro_abono()
-    },  
+     
 
-        props:['id_registro_operacion','proveedorEncontrado'],
+        props:['abono_registro_operacion','proveedorEncontrado'],
 
-        data(){
-            return{
-                datosRegistroAbono:[],
-                
-            }
-        },
 
         methods:{
             cerrar_anular_abono_proveedor(){
                 emitter.emit('cerrar_anular_abono_proveedor')
             }, 
-            buscar_registro_abono(){
-                emitter.emit('abrir_loader_carga_vista_proveedor')
-
-                 // Realiza la solicitud GET al servidor para obtener el registro de abono por id
-                axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/abono-proveedor/${this.id_registro_operacion}`)
-                    .then((response) => {
-                    // El registro de abono se encuentra en response.data
-                    this.datosRegistroAbono = response.data; 
-                        console.log('registro obtenido')
-                    })
-
-                    .catch((error) => {
-                    console.error('Error al obtener el registro de abono por id', error);
-                    })
-                    .finally(()=>{
-                        //cerrar la carga luego de crear el cliente
-                        emitter.emit('cerrar_loader_carga_vista_proveedor')
-                    });
-            },
-
+           
             async  eliminar_abono_proveedor(){
                 emitter.emit('abrir_loader_carga_vista_proveedor')
                
                     const idProveedor = this.proveedorEncontrado.id_proveedores; // Reemplaza con el ID del proveedor
-                    const nuevaDeuda = this.proveedorEncontrado.deuda_a_proveedor + this.datosRegistroAbono.monto_abonado; // Reemplaza con la nueva deuda
+                    const nuevaDeuda = this.proveedorEncontrado.deuda_a_proveedor + this.abono_registro_operacion.monto_abonado; // Reemplaza con la nueva deuda
 
                     try {
-                        const response = await axios.delete(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/eliminar-abono-proveedor/${this.id_registro_operacion}`, {
+                        const response = await axios.delete(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/eliminar-abono-proveedor/${this.abono_registro_operacion.id_abono_deuda_a_proveedor}`, {
                         data: { idProveedor, nuevaDeuda },
                         });
 
-                            toast("registro de abono de deuda eliminado !", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                }); 
+                            toast.success("registro de abono de deuda eliminado !"); 
 
                         console.log(response.data);
                         // Maneja la respuesta según tus necesidades
                     } catch (error) {
-                        toast("error al eliminar el abono !", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                }); 
+                        toast.error("error al eliminar el abono !"); 
 
                         console.error('Error al enviar la solicitud DELETE:', error);
                         // Maneja el error según tus necesidades

@@ -11,7 +11,7 @@ export default {
             idCliente:this.cliente.id_cliente
         }
     },
-
+ 
    methods:{
         abrir_eliminar_cliente(){
             //emitir un evento para eliminar clientes
@@ -25,7 +25,8 @@ export default {
         },
         abrir_historial_abonos(){
             emitter.emit('abrir_modal_historial_deuda_cliente',this.idCliente)
-        }
+        },
+        
    }
 }
 </script>
@@ -47,6 +48,7 @@ export default {
                     </button>
                     
                 </li>
+
 
                 <li  @click="abrir_editar_cliente"  class="border-b-[#DFDFDF]  border-b-[2px] p-2 cursor-pointer">
                     <button>

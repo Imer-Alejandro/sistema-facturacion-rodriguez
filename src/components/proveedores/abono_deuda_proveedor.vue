@@ -81,24 +81,14 @@ export default {
                             
                             console.log('Abono registrado con éxito', response.data);
 
-                            toast.success("abono de deuda registrado !", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                }); 
+                            toast.success("abono de deuda registrado !"); 
                            
                             // Realiza cualquier acción adicional después de registrar el abono
                         })
                         .catch((error) => {
                             console.error('Error al registrar el abono', error);
 
-                            toast.error("error al registrar el abono !", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                }); 
+                            toast.error("error al registrar el abono !"); 
                         })
                         .finally(()=>{
                             //cerrar la carga luego de crear el cliente
@@ -152,7 +142,7 @@ export default {
                    <img class="order-1 w-[60px] h-[60px] mr-[30px] " src="/src/assets/iconos/interfaz/furgoneta-de-reparto.png" alt="" srcset="">
                    <div class="order-2">
                        <h3>{{ proveedorEncontrado.nombre_proveedor }}</h3>
-                       <h3 class="text-[#9F9F9F]">Total de la deuda: <span class="text-[#E55226]">{{ proveedorEncontrado.deuda_a_proveedor.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 }) }}</span></h3>
+                       <h3 class="text-[#9F9F9F]">Total de la deuda: <span class="text-[#E55226]">{{ proveedorEncontrado.deuda_a_proveedor }}</span></h3>
                    </div>
                </div>
                <form @submit.prevent="registrar_abono_proveedor" >

@@ -130,7 +130,7 @@ export default {
         
     },
    
-    data() {
+    data() { 
         return {
             title: "Proveedores",
             DatosProveedores:[],
@@ -201,6 +201,7 @@ export default {
                 .then((response) => {
                     let datosRespuestas = response.data;
                     this.DatosProveedores =datosRespuestas
+                    
                 })
                 .catch((error) => {
                     console.error('Error al obtener la lista de proveedores', error);

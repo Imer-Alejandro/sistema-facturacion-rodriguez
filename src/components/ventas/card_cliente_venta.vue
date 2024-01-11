@@ -1,5 +1,11 @@
 <script>
 
+//importamos el carrito global
+import { useGlobalCarritoVenta } from '/src/stores/carrito';
+const carritoStore = useGlobalCarritoVenta();
+
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 import { emitter } from '@/eventBus';
 
@@ -17,7 +23,12 @@ export default {
     },
     methods:{
         indicar_cliente(){
-            emitter.emit('cliente_asignado_venta',this.datosCliente)
+            carritoStore.asignar_cliente(this.datosCliente.id_cliente,this.datosCliente.nombre,this.datosCliente.deuda)
+
+                emitter.emit('cerrar_modal_asignar_cliente')
+                emitter.emit('mostrar_cliente_venta')
+
+                
         }
     }
 }

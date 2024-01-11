@@ -84,7 +84,7 @@ export default {
                            codigo:  this.producto_indicado.codigo,
                            categoria: this.producto_indicado.categoria,
                            proveedor:  this.producto_indicado.proveedor,
-                           description: this.producto_indicado.description,
+                           description: this.producto_indicado.descripcion,
                            vender_por: this.producto_indicado.vender_por, 
                            cantidad:  this.producto_indicado.cantidad_existente, 
                            icono: this.icono
@@ -96,24 +96,14 @@ export default {
                              //cerrar la carga luego de crear el cliente
                              emitter.emit('cerrar_loader_carga_vista_cliente')
 
-                             toast.success("se edito el producto!", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
+                             toast.success("se edito el producto!");
 
                             // Realizar cualquier acción adicional después de la edición del cliente
                             })
                             .catch((error) => {
                             console.error('Error al editar el cliente', error);
 
-                            toast.error("error al edito el producto !", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
+                            toast.error("error al edito el producto !");
                             })
                             .finally(()=>[
 
@@ -206,7 +196,7 @@ export default {
 
                     <label for="">
                         <span class="text-[#9F9F9F] ml-[10px]">Description</span>
-                    <input v-model="producto_indicado.description" maxlength="80"  class="w-[95%] h-[50px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
+                    <input v-model="producto_indicado.descripcion" maxlength="80"  class="w-[95%] h-[50px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
                     box-border rounded-md mb-[10px] border-[#9F9F9F]  ml-[2.5%]" type="text" 
                     placeholder="Description">
                         </label>

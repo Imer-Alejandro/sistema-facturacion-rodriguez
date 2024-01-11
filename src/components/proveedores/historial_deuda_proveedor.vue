@@ -14,7 +14,7 @@ export default {
     mounted(){
         //ventana editar abono
         emitter.on('abrir_editar_abono_proveedor',(data)=>{
-            this.id_registro_operacion=data
+            this.abono_registro_operacion=data
             this.estados.visibilidad_editar_abono_proveedor=true
         })
 
@@ -29,13 +29,13 @@ export default {
         })
 
         emitter.on('abrir_detalle_abono_proveedor',(data)=>{
-            this.id_registro_operacion=data
+            this.abono_registro_operacion=data
             this.estados.visibilidad_detalles_abono_proveedor=true
         })
 
         //ventana de anular abono de deuda 
         emitter.on('abrir_eliminar_abono_proveedor',(data)=>{
-            this.id_registro_operacion=data
+            this.abono_registro_operacion=data
 
             this.estados.visibilidad_anular_abono_proveedor=true
         })
@@ -75,7 +75,7 @@ export default {
         return{
             proveedorEncontrado:[],
             historialAbonosProveedor:[],
-            id_registro_operacion:'',
+            abono_registro_operacion:'',
 
             estados:{
                 visibilidad_anular_abono_proveedor:false,
@@ -130,12 +130,12 @@ export default {
 <template>
     <section class="  w-full h-[100vh] bg-white fixed  z-50 ">
 
-        <anular-abono :id_registro_operacion="id_registro_operacion"  :proveedorEncontrado="proveedorEncontrado" 
+        <anular-abono :abono_registro_operacion="abono_registro_operacion"  :proveedorEncontrado="proveedorEncontrado" 
         v-if="estados.visibilidad_anular_abono_proveedor"/>
 
-        <editar-abono :proveedorEncontrado="proveedorEncontrado" :id_registro_operacion="id_registro_operacion" v-if="estados.visibilidad_editar_abono_proveedor"/>
+        <editar-abono :proveedorEncontrado="proveedorEncontrado" :abono_registro_operacion="abono_registro_operacion" v-if="estados.visibilidad_editar_abono_proveedor"/>
 
-        <detalle-abono :id_registro_operacion="id_registro_operacion" v-if="estados.visibilidad_detalles_abono_proveedor" />
+        <detalle-abono :abono_registro_operacion="abono_registro_operacion" v-if="estados.visibilidad_detalles_abono_proveedor" />
  
     <header class="w-full p-3 inline-flex border-b-[1.5px] border-b-[#DFDFDF]">
         <img @click="cerrar_historial_abono" class="w-[35px] mr-[25px]  order-1 cursor-pointer" src="/src/assets/iconos/interfaz/regresar.png" >
@@ -147,7 +147,7 @@ export default {
                     <img class="order-1 w-[60px] h-[60px] mr-[30px] " src="/src/assets/iconos/interfaz/furgoneta-de-reparto.png" alt="" srcset="">
                     <div class="order-2">
                         <h3>{{proveedorEncontrado.nombre_proveedor}}</h3>
-                        <h3 class="text-[#9F9F9F]">Total de la deuda: <span class="text-[#E55226]">{{ proveedorEncontrado.deuda_a_proveedor.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 }) }}</span></h3>
+                        <h3 class="text-[#9F9F9F]">Total de la deuda: <span class="text-[#E55226]">{{ proveedorEncontrado.deuda_a_proveedor }}</span></h3>
                     </div>
                 </div>
     </div>

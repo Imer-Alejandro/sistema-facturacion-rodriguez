@@ -145,7 +145,7 @@ export default {
 
                         this.estadoGanaciasDelFiltro = fecha
                     
-                    this.ganaciasDiaria=this.SumaGanacias(this.datosVentas)
+                    this.ganaciasDiaria=this.SumaGanancias(this.datosVentas)
 
                 })
                 .catch((err)=>{
@@ -176,7 +176,7 @@ export default {
                             toast.success("se obtuvieron las ganancias mensuales!");
                         }
                         this.estadoGanaciasDelFiltro='mes'
-                        this.ganaciasDiaria=this.SumaGanacias(this.datosVentas)
+                        this.ganaciasDiaria=this.SumaGanancias(this.datosVentas)
 
                     })
                     .catch((error)=>{
@@ -199,7 +199,7 @@ export default {
                             toast.success("se obtuvieron las ganancias anuales!");
                         }
                         this.estadoGanaciasDelFiltro='año'
-                        this.ganaciasDiaria=this.SumaGanacias(this.datosVentas)
+                        this.ganaciasDiaria=this.SumaGanancias(this.datosVentas)
                         
                     })
                     .catch((error)=>{
@@ -222,7 +222,7 @@ export default {
                             toast.success("se obtuvieron las ganancias en general!");
                         }
                         this.estadoGanaciasDelFiltro='todas'
-                        this.ganaciasDiaria=this.SumaGanacias(this.datosVentas)
+                        this.ganaciasDiaria=this.SumaGanancias(this.datosVentas)
 
                     })
                     .catch((error)=>{
@@ -250,17 +250,18 @@ export default {
         const fechaFormateada = `${mesAbreviado} ${dia} ${anio}`;
 
         return fechaFormateada;
-},
+}, 
 
         obtener_ventas_del_dia(){
             this.data.visibilidad_carga_loader=true
+            console.log(this.obtenerFechaActual())
 
-            axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/ventas-dia-actual')
+            axios.post(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/ventas-dia-actual`,{fecha:this.obtenerFechaActual()})
                 .then((response)=>{
                     this.datosVentasDelDia=response.data
 
                     this.ingresosDiario= this.suma_ingresos_ventas_diaria(this.datosVentasDelDia)
-                    this.ganaciasDiaria=this.SumaGanacias(this.datosVentasDelDia)
+                    this.ganaciasDiaria=this.SumaGanancias(this.datosVentasDelDia)
                     this.estadoGanaciasDelFiltro='hoy'
                     
                 })
@@ -273,33 +274,50 @@ export default {
                  
                 })
         },
+        
+obtenerFechaActual() {
+  const fechaHoraActual = new Date();
+
+  const meses = [
+    'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+    'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+  ];
+
+  const mes = meses[fechaHoraActual.getMonth()];
+  const dia = fechaHoraActual.getDate();
+  const anio = fechaHoraActual.getFullYear();
+
+  const fechaFormateada = `${mes} ${dia} ${anio}`;
+
+  return fechaFormateada;
+},
        
 
         
-        suma_ingresos_ventas_diaria(datosVentas){
-                 // Calcular la suma del precio de venta de los productos
-                    return datosVentas.reduce((acumulador, datosVentasDelDia) => acumulador += datosVentasDelDia.total_venta  , 0);
-            },
-
-        SumaGanacias(datosVentas){
-            let sumaGanancias = 0;
-
-            datosVentas.forEach((venta) => {
-        // Verificamos que exista la propiedad detalles_productos y que tenga al menos un elemento
-        if (venta.detalles_producto && venta.detalles_producto.length > 0) {
-                    
-            // Convertimos la cadena JSON a un objeto JavaScript
-            const detallesProductos = JSON.parse(venta.detalles_producto);
-
-            // Iteramos sobre los detalles de cada producto vendido
-            detallesProductos.forEach((producto) => {
-                sumaGanancias += (producto.precio_venta - producto.precio_compra) * producto.cantidad_venta;
-            });
+suma_ingresos_ventas_diaria(datosVentas) {
+    // Calcular la suma del precio de venta de los productos, omitiendo ventas a crédito
+    return datosVentas.reduce((acumulador, datosVentasDelDia) => {
+        // Verificar si el tipo de venta es diferente de 'credito' antes de sumar el total
+        if (datosVentasDelDia.tipo_venta !== 'credito') {
+            acumulador += datosVentasDelDia.total_venta;
         }
-    });
+        return acumulador;
+    }, 0);
+},
+SumaGanancias(datosVentas) {
+    return datosVentas.reduce((ganancias,ventas)=>{
+        if (ventas.tipo_venta !== 'credito') {
+            //onvertir el listado de producto en json
+            const detallesProductos = JSON.parse(ventas.detalles_producto);
+            detallesProductos.forEach((producto)=>{
+                ganancias += (producto.precio_venta - producto.precio_compra) * producto.cantidad_venta;
+            })
 
-    return sumaGanancias;
-        },
+        }
+        return ganancias;
+    },0)
+  
+}
 
     }
 }

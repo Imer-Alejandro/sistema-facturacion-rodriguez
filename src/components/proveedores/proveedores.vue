@@ -26,7 +26,7 @@ export default {
    components:{
     'optiones-proveedor':OptionesProveedor
 
-   },
+   }, 
    data(){
         return{
             estado_visibilidad_optiones:false
@@ -58,8 +58,8 @@ export default {
         <div class="flex-col flex text-center justify-center items-center   bg-white p-2  w-[160px] h-[190px]
                   shadow-md shadow-[#0000001f]">
                  <img @click="abrir_optiones_proveedor" class="w-[35px] absolute ml-[33%] cursor-pointer -mt-[140px] h-[35px]" src="/src/assets/iconos/interfaz/navegacion.png" alt="" srcset="">
-                <img class="w-[80px] h-[80px] mb-[5px]" src="/src/assets/iconos/interfaz/furgoneta-de-reparto.png" alt="" srcset="">
-                   <h3 class="mb-[10px]">{{proveedor.nombre_proveedor}}</h3>
+                <img class="w-[60px] h-[60px] mb-[5px]" src="/src/assets/iconos/interfaz/furgoneta-de-reparto.png" alt="" srcset="">
+                   <h3 class="mb-[10px] text-[0.9rem]">{{proveedor.nombre_proveedor}}</h3>
                    <h3 class="text-[0.9rem]">total deuda: <span class="text-[#E55226]">{{proveedor.deuda_a_proveedor.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</span></h3>
            
                 <optiones-proveedor v-show="estado_visibilidad_optiones"  :proveedor="proveedor" ref="menu"/>

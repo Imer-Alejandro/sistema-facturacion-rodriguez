@@ -3,7 +3,10 @@
 import { emitter } from '@/eventBus';
 import axios from 'axios';
 
-
+//libreria de notificacion 
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+  
  export default {
         props:['idProveedor'],
 
@@ -54,11 +57,12 @@ import axios from 'axios';
                             console.log('Cliente editado con éxito', response);
 
                              //cerrar la carga luego de crear el cliente
-
-                            alert('se edito el proveedor con exito')
+                            toast.success('se edito el proveedor !')
+                            
                             // Realizar cualquier acción adicional después de la edición del cliente
                             })
                             .catch((error) => {
+                                toast.error('ocurrio un error al editar el proveedor !')
                                 console.error('Error al editar el proveedor', error);
                             })
 

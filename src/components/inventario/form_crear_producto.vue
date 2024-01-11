@@ -115,42 +115,50 @@ export default {
                     if (listadoDuplicados.length > 0) {
                         toast.warn('error de registro, existe un producto con este nombre!')
                     }else{
-                        emitter.emit('abrir_ventana_carga_inventario')
 
-                        axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/registro-producto', this.datosNewProduct)
-                            .then(response => {
-                            console.log(response.data.message); // Mensaje exitoso del servidor
-                            // Puedes manejar la respuesta del servidor según tus necesidades
-                            toast.success("se registro el producto!");
-                                //dejar el formulario limpio para otro registro
-                                this.datosNewProduct.nombre='',
-                                this.datosNewProduct.precio_venta='',
-                                this.datosNewProduct.precio_compra='',
-                                this.datosNewProduct.codigo='',
-                                this.datosNewProduct.categoria='',
-                                this.datosNewProduct.proveedor='',
-                                this.datosNewProduct.description='',
-                                this.datosNewProduct.vender_por='',
-                                this.datosNewProduct.stock='',
-                                this.datosNewProduct.icono=''
+                        //validar que el costo y el precio venta no sean igual ni el costo mayor al de venta
+                        if ( this.datosNewProduct.precio_venta > this.datosNewProduct.precio_compra &&  this.datosNewProduct.precio_venta != this.datosNewProduct.precio_compra) {
+                            emitter.emit('abrir_ventana_carga_inventario')
 
-                            })
-                            .catch(error => {
-                                    console.error('Error al registrar el producto:', error.response.data.error);
-                                    // Puedes manejar el error según tus necesidades
-                                    toast.success("error al registrar producto!");
-                               
+                            axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/registro-producto', this.datosNewProduct)
+                                .then(response => {
+                                console.log(response.data.message); // Mensaje exitoso del servidor
+                                // Puedes manejar la respuesta del servidor según tus necesidades
+                                toast.success("se registro el producto!");
+                                    //dejar el formulario limpio para otro registro
+                                    this.datosNewProduct.nombre='',
+                                    this.datosNewProduct.precio_venta='',
+                                    this.datosNewProduct.precio_compra='',
+                                    this.datosNewProduct.codigo='',
+                                    this.datosNewProduct.categoria='',
+                                    this.datosNewProduct.proveedor='',
+                                    this.datosNewProduct.description='',
+                                    this.datosNewProduct.vender_por='',
+                                    this.datosNewProduct.stock='',
+                                    this.datosNewProduct.icono=''
 
-                            })
-                            .finally(()=>{
-                                //cerrar ventana 
-                                this.close_form() 
-                                //cerrar ventana carga
-                                emitter.emit('cerrar_ventana_carga_inventario')
+                                })
+                                .catch(error => {
+                                        console.error('Error al registrar el producto:', error.response.data.error);
+                                        // Puedes manejar el error según tus necesidades
+                                        toast.error("error al registrar producto!");
                                 
-                                //actualizar la vista inventario
-                                emitter.emit('actualizar_inventario')
-                            })
+
+                                })
+                                .finally(()=>{
+                                    //cerrar ventana 
+                                    this.close_form() 
+                                    //cerrar ventana carga
+                                    emitter.emit('cerrar_ventana_carga_inventario')
+                                    
+                                    //actualizar la vista inventario
+                                    emitter.emit('actualizar_inventario')
+                                })
+                        }else{
+                            toast.warn("el precio de venta debe ser mayor al costo !");
+
+                        }
+                       
                     }
                        
                        
@@ -187,7 +195,7 @@ export default {
 
 
             <div class="inline-flex">
-                    <input v-model="datosNewProduct.precio_venta" required class="w-[45%] order-1 focus:border-[#FFB984] focus:border-[1.5px] h-[45px] border-[1px] outline-none pl-[5px] 
+                    <input maxlength="5" v-model="datosNewProduct.precio_venta" required class="w-[45%] order-1 focus:border-[#FFB984] focus:border-[1.5px] h-[45px] border-[1px] outline-none pl-[5px] 
                 box-border rounded-md mb-[20px]  border-[#9F9F9F]  ml-[2.5%] mr-2" type="number" 
                 placeholder="Precio de venta">
 
@@ -246,7 +254,7 @@ export default {
                         </label>
                         
 
-                        <input id="cantidad_stok" v-model="datosNewProduct.stock" required class="w-[65%] focus:border-[#FFB984] focus:border-[1.5px] order h-[45px] border-[1px] outline-none pl-[5px] 
+                        <input maxlength="4" id="cantidad_stok" v-model="datosNewProduct.stock" required class="w-[65%] focus:border-[#FFB984] focus:border-[1.5px] order h-[45px] border-[1px] outline-none pl-[5px] 
                         box-border rounded-md mb-[20px] border-[#9F9F9F]  mr-[2.5%]" type="number" 
                         placeholder="cantidad existente">
                     </div>

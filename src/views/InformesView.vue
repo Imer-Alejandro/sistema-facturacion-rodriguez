@@ -118,7 +118,7 @@ export default {
         busquedaPorFecha(){
             const fecha = this.convertirFormatoFechaHora(this.busquedaPorFecha)
             this.estados.visibilidad_carga_loader = true;
-            axios.post(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/busqueda-registro-venta-por-fecha`,{fecha})
+            axios.post(`${import.meta.env.VITE_API_SERVER}busqueda-registro-venta-por-fecha`,{fecha})
                 .then((response)=>{
                     this.datosVentas = response.data;
 
@@ -137,7 +137,7 @@ export default {
         busquedaPorRango(){
             if (this.busquedaPorRango=='todas') {
                 this.estados.visibilidad_carga_loader = true;
-                 axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-ventas')
+                 axios.get(`${import.meta.env.VITE_API_SERVER}obtener-ventas`)
                     .then((response)=>{
                         this.datosVentas = response.data;
                         //ingresos de ventas general
@@ -159,7 +159,7 @@ export default {
             }
             else if (this.busquedaPorRango=='hoy') {
                 this.estados.visibilidad_carga_loader = true;
-                 axios.post(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/ventas-dia-actual`,{fecha:this.obtenerFechaActual()})
+                 axios.post(`${import.meta.env.VITE_API_SERVER}ventas-dia-actual`,{fecha:this.obtenerFechaActual()})
                     .then((response)=>{
                         this.datosVentas = response.data;
                         //ingresos de ventas de hoy
@@ -181,7 +181,7 @@ export default {
 
             else if (this.busquedaPorRango=='este mes') {
                 this.estados.visibilidad_carga_loader = true;
-                axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/buscar-venta-mensual')
+                axios.get(`${import.meta.env.VITE_API_SERVER}buscar-venta-mensual`)
                     .then((response)=>{
                         this.datosVentas = response.data;
                         //ingresos de ventas mensuales
@@ -205,7 +205,7 @@ export default {
             }
             else if(this.busquedaPorRango=='del año'){
                 this.estados.visibilidad_carga_loader = true;
-                axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/ventas-anuales')
+                axios.get(`${import.meta.env.VITE_API_SERVER}ventas-anuales`)
                     .then((response)=>{
                         this.datosVentas = response.data;
                         //ingresos de ventas anuales
@@ -231,7 +231,7 @@ export default {
         
         buscar_ventas(){
             this.estados.visibilidad_carga_loader = true;
-            axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-ventas')
+            axios.get(`${import.meta.env.VITE_API_SERVER}obtener-ventas`)
                 .then((response)=>{
                     this.datosVentas = response.data;
                 })
@@ -266,7 +266,7 @@ export default {
                     this.ingresosVentas = sumaDeuda;
         },
         total_deuda_clientes() {
-            axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-clientes')
+            axios.get(`${import.meta.env.VITE_API_SERVER}obtener-clientes`)
                 .then((response) => {
                     let objetoJSON = response.data;
 
@@ -292,7 +292,7 @@ export default {
             //buscar la deuda a proveedores
 
         total_deuda_proveedores(){
-            axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-proveedores')
+            axios.get(`${import.meta.env.VITE_API_SERVER}obtener-proveedores`)
                 .then((response) => {
                     let objetoJSON = response.data;
                     let sumaDeuda = 0;
@@ -309,7 +309,7 @@ export default {
 
             //buscar el total del inventario
         buscar_valor_inventario(){
-            axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/productos')
+            axios.get(`${import.meta.env.VITE_API_SERVER}productos`)
                 .then(response =>{
                     const inventario=response.data
 
@@ -324,7 +324,7 @@ export default {
         buscar_venta_cliente(){
             if (this.terminoBusqudaCliente != '') {
                 this.estados.visibilidad_carga_loader = true;
-                axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/busqueda-registro-venta-cliente/${this.terminoBusqudaCliente}`)
+                axios.get(`${import.meta.env.VITE_API_SERVER}busqueda-registro-venta-cliente/${this.terminoBusqudaCliente}`)
                     .then((response)=>{
                         this.datosVentas = response.data;
                         toast.success("se obtuvieron las ventas del cliente!");

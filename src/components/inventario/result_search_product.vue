@@ -32,7 +32,7 @@ export default {
         buscar_productos(){
             emitter.emit('abrir_ventana_carga_inventario')
 
-            axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/buscar-producto/${this.dato_busqueda}`)
+            axios.get(`${import.meta.env.VITE_API_SERVER}buscar-producto/${this.dato_busqueda}`)
             .then((response)=>{
                 console.log(response.data)
                 this.productos= response.data

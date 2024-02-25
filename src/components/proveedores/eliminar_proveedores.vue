@@ -22,7 +22,7 @@ export default {
                 } else if(this.proveedor_operacion.deuda_a_proveedor == 0 || this.proveedor_operacion.deuda_a_proveedor < 0){
                     emitter.emit('abrir_loader_carga_vista_proveedor')
 
-                axios.delete(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/eliminar-proveedor/${this.proveedor_operacion.id_proveedores}`)
+                axios.delete(`${import.meta.env.VITE_API_SERVER}eliminar-proveedor/${this.proveedor_operacion.id_proveedores}`)
                     .then((response) => {
                     toast.success('se elimino el proveedor!')
                         console.log(response)

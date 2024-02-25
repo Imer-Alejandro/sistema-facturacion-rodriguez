@@ -31,7 +31,7 @@ export default {
         },
         obtener_proveedores(){
             emitter.emit('abrir_loader_carga_vista_proveedor')
-            axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-proveedores')
+            axios.get(`${import.meta.env.VITE_API_SERVER}obtener-proveedores`)
                 .then((response) => {
                     this.DatosProveedores =response.data
                 })
@@ -51,7 +51,7 @@ export default {
             }else{
                 emitter.emit('abrir_loader_carga_vista_proveedor')
                  // Enviar datos al servidor utilizando Axios
-                     axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/registrar-proveedor', this.proveedor)
+                     axios.post(`${import.meta.env.VITE_API_SERVER}registrar-proveedor`, this.proveedor)
                         .then(response => {
                         // Manejar la respuesta del servidor
                         console.log(response.data);

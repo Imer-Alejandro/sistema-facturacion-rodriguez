@@ -72,7 +72,7 @@ export default {
         buscar_proveedores(){
             emitter.emit('abrir_ventana_carga_inventario')
 
-            axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-proveedores')
+            axios.get(`${import.meta.env.VITE_API_SERVER}obtener-proveedores`)
                 .then((response)=>{
                     this.listadoProveedores=response.data
                     console.log('se obtubo el registro de los proveedores')
@@ -88,7 +88,7 @@ export default {
         buscar_producto(){
             emitter.emit('abrir_ventana_carga_inventario')
 
-            axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/productos')
+            axios.get(`${import.meta.env.VITE_API_SERVER}productos`)
                 .then((response)=>{
                     this.listadoProductos=response.data
                     console.log('se obtubo el registro de los productos')
@@ -120,7 +120,7 @@ export default {
                         if ( this.datosNewProduct.precio_venta > this.datosNewProduct.precio_compra &&  this.datosNewProduct.precio_venta != this.datosNewProduct.precio_compra) {
                             emitter.emit('abrir_ventana_carga_inventario')
 
-                            axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/registro-producto', this.datosNewProduct)
+                            axios.post(`${import.meta.env.VITE_API_SERVER}registro-producto`, this.datosNewProduct)
                                 .then(response => {
                                 console.log(response.data.message); // Mensaje exitoso del servidor
                                 // Puedes manejar la respuesta del servidor según tus necesidades
@@ -196,11 +196,11 @@ export default {
 
             <div class="inline-flex">
                     <input maxlength="5" v-model="datosNewProduct.precio_venta" required class="w-[45%] order-1 focus:border-[#FFB984] focus:border-[1.5px] h-[45px] border-[1px] outline-none pl-[5px] 
-                box-border rounded-md mb-[20px]  border-[#9F9F9F]  ml-[2.5%] mr-2" type="number" 
+                box-border rounded-md mb-[20px]  border-[#9F9F9F]  ml-[2.5%] mr-2" type="number" step="any"
                 placeholder="Precio de venta">
 
                 <input v-model="datosNewProduct.precio_compra" required class="w-[45%] order-2 focus:border-[#FFB984] focus:border-[1.5px] h-[45px] border-[1px] outline-none pl-[5px] 
-                box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="number" 
+                box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="number" step="any"
                 placeholder="Costo">
             </div>
 
@@ -255,7 +255,7 @@ export default {
                         
 
                         <input maxlength="4" id="cantidad_stok" v-model="datosNewProduct.stock" required class="w-[65%] focus:border-[#FFB984] focus:border-[1.5px] order h-[45px] border-[1px] outline-none pl-[5px] 
-                        box-border rounded-md mb-[20px] border-[#9F9F9F]  mr-[2.5%]" type="number" 
+                        box-border rounded-md mb-[20px] border-[#9F9F9F]  mr-[2.5%]" type="number" step="any"
                         placeholder="cantidad existente">
                     </div>
 

@@ -40,7 +40,7 @@ export default {
                         <span class="text-[1rem]">Abonar deuda</span>
                     </button>
                     
-                </li>
+                </li> 
 
                 <li @click="abrir_historial_abonos"   class=" p-2 cursor-pointer border-b-[#DFDFDF]  border-b-[2px] ">
                     <button >

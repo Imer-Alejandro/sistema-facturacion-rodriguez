@@ -58,7 +58,7 @@ export default {
         buscar_cliente(){
             emitter.emit('abrir_carga_loader_ventas')
 
-            axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-clientes')
+            axios.get(`${import.meta.env.VITE_API_SERVER}obtener-clientes`)
                 .then((response)=>{
                     this.DatosCliente=response.data
                 })

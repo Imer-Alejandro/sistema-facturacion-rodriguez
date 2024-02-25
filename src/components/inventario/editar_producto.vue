@@ -56,7 +56,7 @@ export default {
         buscar_proveedores(){
             emitter.emit('abrir_ventana_carga_inventario')
 
-            axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-proveedores')
+            axios.get(`${import.meta.env.VITE_API_SERVER}obtener-proveedores`)
                 .then((response)=>{
                     this.listadoProveedores=response.data
                     console.log('se obtubo el registro de los proveedores',this.listadoProveedores)
@@ -76,7 +76,7 @@ export default {
                 if (this.icono) {
                     emitter.emit('abrir_ventana_carga_inventario')
 
-                     axios.put(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/editar-producto/${this.producto_indicado.id}`,{
+                     axios.put(`${import.meta.env.VITE_API_SERVER}editar-producto/${this.producto_indicado.id}`,{
                            
                            nombre: this.producto_indicado.nombre_producto,
                            precio_venta: this.producto_indicado.precio_venta,
@@ -148,14 +148,14 @@ export default {
                 <label for="">
                         <span class="text-[#9F9F9F] -mt-[10px] flex-none absolute ml-[10px]">Precio venta</span>
                     <input v-model="producto_indicado.precio_venta" class="w-[80%] order-1 focus:border-[#FFB984] focus:border-[1.5px] h-[40px] border-[1px] outline-none pl-[5px] 
-                box-border rounded-md mb-[10px] mt-[15px] border-[#9F9F9F]  ml-[2.6%] mr-2" type="number" 
+                box-border rounded-md mb-[10px] mt-[15px] border-[#9F9F9F]  ml-[2.6%] mr-2" type="number"  step="any"
                 placeholder="Precio de venta">
                 </label>
 
                 <label for="">
                         <span class="text-[#9F9F9F] -mt-[10px] absolute ml-[10px]">Costo</span>
                 <input v-model="producto_indicado.costo" class="w-[90%] order-2 focus:border-[#FFB984] focus:border-[1.5px] h-[40px] border-[1px] outline-none pl-[5px] 
-                box-border rounded-md mt-[15px] mb-[10px] border-[#9F9F9F]  ml-[2.5%]" type="number" 
+                box-border rounded-md mt-[15px] mb-[10px] border-[#9F9F9F]  ml-[2.5%]" type="number" step="any"
                 placeholder="Costo">
                 </label>
             </div>
@@ -214,8 +214,8 @@ export default {
                         <label for="">
                         <span class="text-[#9F9F9F] absolute -mt-[25px] ml-[10px]">Cantidad</span>
                         <input v-model="producto_indicado.cantidad_existente" class="w-[90%] focus:border-[#FFB984] focus:border-[1.5px] order h-[45px] border-[1px] outline-none pl-[5px] 
-                        box-border rounded-md mb-[15px] border-[#9F9F9F]  mr-[2.5%]" type="text" 
-                        placeholder="Cantidad en unidades">
+                        box-border rounded-md mb-[15px] border-[#9F9F9F]  mr-[2.5%]" type="number" step="any"
+                        placeholder="Cantidad ">
                         </label>
                     </div>
 

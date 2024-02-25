@@ -135,7 +135,7 @@ export default {
            const fecha = this.convertirFormatoFecha(this.filtroGanaciasFecha)
 
            this.visibilidad_carga_loader = true;
-            axios.post(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/busqueda-registro-venta-por-fecha`,{fecha})
+            axios.post(`${import.meta.env.VITE_API_SERVER}busqueda-registro-venta-por-fecha`,{fecha})
                 .then((response)=>{
                     this.datosVentas = response.data;
 
@@ -168,7 +168,7 @@ export default {
             }
             else if(this.estadoGanaciasDelFiltro== 'mes'){
                 this.data.visibilidad_carga_loader = true;
-                axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/buscar-venta-mensual')
+                axios.get(`${import.meta.env.VITE_API_SERVER}buscar-venta-mensual`)
                     .then((response)=>{
                         this.datosVentas = response.data;
                         //ingresos de ventas mensuales
@@ -191,7 +191,7 @@ export default {
             }
             else if(this.estadoGanaciasDelFiltro== 'año'){
                 this.data.visibilidad_carga_loader = true;
-                axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/ventas-anuales')
+                axios.get(`${import.meta.env.VITE_API_SERVER}ventas-anuales`)
                     .then((response)=>{
                         this.datosVentas = response.data;
                         //ingresos de ventas anuales
@@ -214,7 +214,7 @@ export default {
             }
             else if(this.estadoGanaciasDelFiltro== 'todas'){
                 this.data.visibilidad_carga_loader= true;
-                 axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-ventas')
+                 axios.get(`${import.meta.env.VITE_API_SERVER}obtener-ventas`)
                     .then((response)=>{
                         this.datosVentas = response.data;
                         //ingresos de ventas general
@@ -256,7 +256,7 @@ export default {
             this.data.visibilidad_carga_loader=true
             console.log(this.obtenerFechaActual())
 
-            axios.post(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/ventas-dia-actual`,{fecha:this.obtenerFechaActual()})
+            axios.post(`${import.meta.env.VITE_API_SERVER}ventas-dia-actual`,{fecha:this.obtenerFechaActual()})
                 .then((response)=>{
                     this.datosVentasDelDia=response.data
 

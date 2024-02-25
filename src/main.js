@@ -19,7 +19,9 @@ const app = createApp(App)
 
 app.use(Vue3Toasity,{limit: 2,})
 
-const socket = io('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/');
+const socket = io('http://localhost:3000/');
+
+
 
 // Puedes hacer que el socket esté disponible globalmente en toda la aplicación si es necesario
 app.config.globalProperties.$socket = socket;

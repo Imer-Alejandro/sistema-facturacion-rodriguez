@@ -166,7 +166,7 @@ export default {
             else{
                 this.estados.visibilidad_carga_loader_proveedor=true;
                  // Realizar la solicitud GET a la ruta /buscar-clientes-por-nombre con el nombre como parámetro
-                axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/buscar-proveedor-por-nombre', {
+                axios.get(`${import.meta.env.VITE_API_SERVER}buscar-proveedor-por-nombre`, {
                     params: {
                         nombre: datoInput.value,
                     }, 
@@ -197,7 +197,7 @@ export default {
         obtener_proveedores(){
             this.estados.visibilidad_carga_loader_proveedor=true
 
-            axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-proveedores')
+            axios.get(`${import.meta.env.VITE_API_SERVER}obtener-proveedores`)
                 .then((response) => {
                     let datosRespuestas = response.data;
                     this.DatosProveedores =datosRespuestas

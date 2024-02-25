@@ -21,7 +21,7 @@ export default {
         eliminar_producto(){
             emitter.emit('abrir_ventana_carga_inventario')
             
-            axios.delete(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/eliminar-producto/${this.id_producto_indicado}`)
+            axios.delete(`${import.meta.env.VITE_API_SERVER}eliminar-producto/${this.id_producto_indicado}`)
             .then(response =>{
 
                 toast.success("se elimino el producto !");

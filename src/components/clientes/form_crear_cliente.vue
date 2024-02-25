@@ -33,7 +33,7 @@ export default {
             optener_clientes() {
                 emitter.emit('abrir_loader_carga_vista_cliente')
 
-                axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-clientes')
+                axios.get(`${import.meta.env.VITE_API_SERVER}obtener-clientes`)
                 .then((response) => {
                     this.listadoCliente = response.data;
                     console.log('se obtubieron los clientes')
@@ -54,7 +54,7 @@ export default {
                 }else{
                     emitter.emit('abrir_loader_carga_vista_cliente')
                  // Enviar datos al servidor utilizando Axios
-                     axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/registrar-cliente', this.cliente)
+                     axios.post(`${import.meta.env.VITE_API_SERVER}registrar-cliente`, this.cliente)
                         .then(response => {
                         // Manejar la respuesta del servidor
                         console.log(response.data);
@@ -133,7 +133,7 @@ export default {
 
 
         <input v-model="cliente.deuda" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
-        box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="number" 
+        box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="number" step="any"
         placeholder="Deuda">
 
 

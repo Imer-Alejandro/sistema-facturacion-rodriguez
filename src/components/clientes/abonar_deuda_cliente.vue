@@ -38,7 +38,7 @@ export default {
             emitter.emit('abrir_loader_carga_vista_cliente')
 
                // Realizar la solicitud GET a la ruta /buscar-cliente/:idCliente
-                axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/buscar-cliente/${this.id_cliente_operacione}`)
+                axios.get(`${import.meta.env.VITE_API_SERVER}buscar-cliente/${this.id_cliente_operacione}`)
                     .then((response) => {
                     this.clienteEncontrado = response.data;
                     })
@@ -73,7 +73,7 @@ export default {
 
                     console.log(this.datos_registro_abono)
                      // Realiza la solicitud POST al servidor para registrar el abono
-                    axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/registrar-abono-cliente', this.datos_registro_abono)
+                    axios.post(`${import.meta.env.VITE_API_SERVER}registrar-abono-cliente`, this.datos_registro_abono)
                         .then((response) => {
                             toast.success("se registro el abono de la deuda !", {
                                     autoClose: 3000,
@@ -150,10 +150,10 @@ export default {
                 </div>
                 <form @submit.prevent="registrar_abono_deuda_cliente" >
                     <input v-model="this.datos_registro_abono.monto_abonado" required class="  w-[90%] ml-[5%] h-[70px] pl-2 mt-[30px] focus:border-[#FFB984] outline-none border-2 rounded" 
-                    type="number" placeholder="Ingrese el monto abonado aqui..." name="" id="">
+                    type="number" step="any" placeholder="Ingrese el monto abonado aqui..." name="" id="">
 
                     <input v-model="this.datos_registro_abono.comentario" class=" w-[90%] ml-[5%] h-[70px] pl-2 mt-[30px] focus:border-[#FFB984] outline-none border-2 rounded" 
-                    type="text" placeholder="Ingrese un comentario" name="" id="">
+                    type="text" placeholder="Ingrese un comentario - (opcional)" name="" id="">
 
                     <button  class="w-[90%] ml-[5%] mt-[30px] text-[1.2rem] h-[60px] rounded text-white
                      bg-[#FFB984]">Guardar abono</button>

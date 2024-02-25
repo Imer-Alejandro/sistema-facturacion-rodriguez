@@ -27,7 +27,7 @@ export default {
                 }else if(this.cliente_operacion.deuda == 0 || this.cliente_operacion.deuda < 0){
                 emitter.emit('abrir_loader_carga_vista_cliente')
                  // Realizar la solicitud DELETE a la ruta /eliminar-cliente/:idCliente
-                axios.delete(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/eliminar-cliente/${this.cliente_operacion.id_cliente}`)
+                axios.delete(`${import.meta.env.VITE_API_SERVER}eliminar-cliente/${this.cliente_operacion.id_cliente}`)
                     .then((response) => {
 
                         toast.success("se elimino el cliente!");

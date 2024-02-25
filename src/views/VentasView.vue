@@ -157,7 +157,7 @@ computed:{
         cargar_productos(){
             this.visibilidad_ventana_carga_venta=true
 
-            axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/productos')
+            axios.get(`${import.meta.env.VITE_API_SERVER}productos`)
                 .then(response =>{
                     this.DatosProductos=response.data;
                     /*registrar un listado del carrito de forma local para editar la cantidad en cada registro 

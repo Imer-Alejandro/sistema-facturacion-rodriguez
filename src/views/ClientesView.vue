@@ -51,7 +51,7 @@ export default {
         emitter.on('actualizar_objetos_cliente_vista_cliente',()=>{
             this.estado_activacion_loader_Carga=true;
 
-            axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-clientes')
+            axios.get(`${process.env.API_SERVER}obtener-clientes`)
             .then((response) => {
                 let result_data =response.data
                 this.dataCliente =result_data ;
@@ -183,7 +183,7 @@ export default {
             else{
                 this.estado_activacion_loader_Carga=true;
                  // Realizar la solicitud GET a la ruta /buscar-clientes-por-nombre con el nombre como parámetro
-                axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/buscar-clientes-por-nombre', {
+                axios.get(`${import.meta.env.VITE_API_SERVER}buscar-clientes-por-nombre`, {
                     params: {
                         nombre: datoInput.value,
                     },
@@ -215,7 +215,7 @@ export default {
             optener_clientes() {
                 this.estado_activacion_loader_Carga=true;
 
-                axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/obtener-clientes')
+                axios.get(`${import.meta.env.VITE_API_SERVER}obtener-clientes`)
                 .then((response) => {
                     let datosRespuestas = response.data;
                     this.dataCliente =datosRespuestas
@@ -248,7 +248,7 @@ export default {
                 this.deudasPorCobrar = sumaDeuda;
                 }
  
-    }
+    } 
 
 }
 </script>
@@ -283,7 +283,7 @@ export default {
             <h3 class="text-[1.6rem] text-white font-bold">{{deudasPorCobrar.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</h3>
             <img src="" >
         </div>
-
+ 
         <div class="p-3 w-full">
             <input id="buscar_clientes"  class="w-[100%] h-[60px] rounded outline-0 pl-2  shadow-md shadow-[#0000001f] placeholder:text-[0.8rem]
             placeholder:italic" type="text"   placeholder="Buscar cliente por nombre..." >

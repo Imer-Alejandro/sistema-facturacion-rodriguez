@@ -27,7 +27,7 @@ import 'vue3-toastify/dist/index.css';
             buscar_proveedor(){
             emitter.emit('abrir_loader_carga_vista_proveedor')
 
-            axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/buscar-proveedores/${this.idProveedor}`)
+            axios.get(`${import.meta.env.VITE_API_SERVER}buscar-proveedores/${this.idProveedor}`)
             .then((response)=>{
                 this.proveedorEncontrado=response.data;
             })
@@ -45,7 +45,7 @@ import 'vue3-toastify/dist/index.css';
                 emitter.emit('abrir_loader_carga_vista_proveedor')
 
                      // Realizar la solicitud PUT a la ruta /editar-cliente/:idCliente
-                        axios.put(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/editar-proveedor/${this.idProveedor}`, {
+                        axios.put(`${import.meta.env.VITE_API_SERVER}editar-proveedor/${this.idProveedor}`, {
                             nombre: this.proveedorEncontrado.nombre_proveedor,
                             direccion: this.proveedorEncontrado.direccion,
                             contacto: this.proveedorEncontrado.contacto,

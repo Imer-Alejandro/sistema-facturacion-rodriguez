@@ -85,7 +85,7 @@ export default {
             emitter.emit('abrir_loader_carga_vista_cliente')
 
                // Realizar la solicitud GET a la ruta /buscar-cliente/:idCliente
-                axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/buscar-cliente/${this.id_cliente_operacione}`)
+                axios.get(`${import.meta.env.VITE_API_SERVER}buscar-cliente/${this.id_cliente_operacione}`)
                     .then((response) => {
                     this.clienteEncontrado = response.data;
                     })
@@ -102,7 +102,7 @@ export default {
                 emitter.emit('abrir_loader_carga_vista_cliente')
 
                 // Realizar la solicitud GET a la ruta /buscar-cliente/:idCliente
-                axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/abonos-por-cliente/${this.id_cliente_operacione}`)
+                axios.get(`${import.meta.env.VITE_API_SERVER}abonos-por-cliente/${this.id_cliente_operacione}`)
                     .then((response) => {
                     this.historialAbonosDelCliente = response.data;
                     console.log(response.data)
@@ -128,7 +128,7 @@ export default {
                 emitter.emit('abrir_loader_carga_vista_cliente')
 
                 // buscar el registro de abono
-                axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/abonos-por-cliente/${this.id_cliente_operacione}`)
+                axios.get(`${import.meta.env.VITE_API_SERVER}abonos-por-cliente/${this.id_cliente_operacione}`)
                     .then((response) => {
                     this.historialAbonosDelCliente = response.data;
                     })
@@ -139,7 +139,7 @@ export default {
 
                     //buscar el cliente
                     //buscar los datos del cliente
-                    axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/buscar-cliente/${this.id_cliente_operacione}`)
+                    axios.get(`${import.meta.env.VITE_API_SERVER}buscar-cliente/${this.id_cliente_operacione}`)
                         .then((response) => {
                         this.clienteEncontrado = response.data;
                         })
@@ -171,7 +171,7 @@ export default {
 
     <header class="w-full p-3 inline-flex border-b-[1.5px] border-b-[#DFDFDF]">
         <img @click="cerrar_modal_historial_abono_cliente" class="w-[35px] mr-[25px]  order-1 cursor-pointer" src="/src/assets/iconos/interfaz/regresar.png" >
-        <h2 class="text-[1.7rem] ml-[15px] order-2">Historial de abonos </h2>
+        <h2 class="text-[1.7rem] ml-[30px] order-2">Realizar abono </h2>
     </header>
     <div class="p-2 pt-[20px]">
         <h3 class="text-[1.3rem] mb-[10px]">Cliente</h3>
@@ -184,17 +184,18 @@ export default {
                 </div>
     </div> 
     <div class="p-2">
-        <h3 class="text-[1.3rem] mb-[10px]">Historial de abonos</h3>
+        <h3 class="text-[1.3rem] mb-[10px]">Historial de deudas</h3>
         <div class="w-full h-[450px] pb-[40px]  p-1 overflow-hidden overflow-y-scroll">
 
-            <div v-if="historialAbonosDelCliente.length > 0">
+            
+            <!-- <div v-if="historialAbonosDelCliente.length > 0">
                 <div v-for="abono in historialAbonosDelCliente" :key="abono.id_abono_deuda_del_cliente">
                     <card_hist_abono_cliente :abono="abono"/>
                 </div>
             </div>
             <div v-else>
                 <h3 class="text-[1.1rem] mt-[20px] text-center"> no se encontraron registros abonos...</h3>
-            </div>
+            </div> -->
             
 
         </div>

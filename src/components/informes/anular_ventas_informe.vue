@@ -38,7 +38,7 @@ export default {
 
             console.log(this.datosAnularVenta)
 
-            axios.post(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/anular-registro-venta/${this.ventaOperacion.id_ventas}`,this.datosAnularVenta)
+            axios.post(`${import.meta.env.VITE_API_SERVER}anular-registro-venta/${this.ventaOperacion.id_ventas}`,this.datosAnularVenta)
             .then((response)=>{
                 console.log(response)
                 //notificar de que se elimino el registro 

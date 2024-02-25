@@ -90,7 +90,7 @@ export default {
             </header>
             <div class="p-3">
                 <h3 class="text-center text-[#9F9F9F]">Indique la cantidad a vender en: <span class="text-black">{{this.producto_asignado_carrito.vender_por}}</span></h3>
-                <input v-model="cantidad_producto" class=" w-[90%] text-center ml-[5%] h-[70px] pl-2 mt-[30px] focus:border-[#FFB984] outline-none border-2 rounded"  type="number" placeholder="Ingrese la cantidad aqui..." name="" id="">
+                <input v-model="cantidad_producto" class=" w-[90%] text-center ml-[5%] h-[70px] pl-2 mt-[30px] focus:border-[#FFB984] outline-none border-2 rounded"  type="number" step="any" placeholder="Ingrese la cantidad aqui..." name="" id="">
                 <button @click="registrar_producto_al_carrito" class="w-[90%] ml-[5%] mt-[30px] text-[1.2rem] h-[60px] rounded text-white bg-[#FFB984]">Agregar a la venta</button>
             </div>
         </div>

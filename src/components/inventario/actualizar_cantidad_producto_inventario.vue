@@ -34,7 +34,7 @@ export default {
             }else{
                 emitter.emit('abrir_ventana_carga_inventario')
                 console.log(this.cantidad)
-                axios.put(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/editar-cantidad-producto/${this.datosActualizarCantidad.id_producto}`,{
+                axios.put(`${import.meta.env.VITE_API_SERVER}editar-cantidad-producto/${this.datosActualizarCantidad.id_producto}`,{
                     nueva_cantidad:this.cantidad + this.datosActualizarCantidad.cantidad
                 })
                     .then((response)=>{
@@ -55,7 +55,7 @@ export default {
             }
         }
     }
-}
+} 
 </script>
 
 <template>
@@ -67,7 +67,7 @@ export default {
            </header>
            <div class="p-3">
                <h3 class="text-center text-[#9F9F9F]">Indique la cantidad a incrementar en: <span class="text-black">{{ datosActualizarCantidad.tipoVenta }}</span></h3>
-               <input v-model="cantidad"  class="text-center w-[90%] ml-[5%] h-[70px] pl-2 mt-[30px] focus:border-[#FFB984] outline-none border-2 rounded"  type="number" placeholder="Ingrese la cantidad nueva aqui..." name="" id="inventario">
+               <input v-model="cantidad"  class="text-center w-[90%] ml-[5%] h-[70px] pl-2 mt-[30px] focus:border-[#FFB984] outline-none border-2 rounded"  type="number" step="any" placeholder="Ingrese la cantidad nueva aqui..." name="" id="inventario">
                <button @click="actualizar_cantidad_producto" class="w-[90%] ml-[5%] mt-[30px] text-[1.2rem] h-[60px] rounded text-white bg-[#FFB984]">Guardar</button>
            </div>
        </div>

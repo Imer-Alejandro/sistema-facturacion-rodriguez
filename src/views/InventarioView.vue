@@ -26,6 +26,8 @@ import 'vue3-toastify/dist/index.css';
   
 export default {
     mounted() {
+
+        
         //eventos de modificacion de proveedores en tiempo real
         this.$socket.on('actualizacion_registro_inventario',()=>{
                 toast.success("actualizando el registro!");
@@ -196,7 +198,7 @@ export default {
 
                 emitter.emit('abrir_ventana_carga_inventario')
             
-                axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/productos')
+                axios.get(`${import.meta.env.VITE_API_SERVER}productos`)
                 .then(response =>{
                     this.DatosProductos=response.data;
 

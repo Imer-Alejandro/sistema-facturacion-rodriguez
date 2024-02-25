@@ -23,7 +23,7 @@ export default {
         todos_producto(){
             emitter.emit('abrir_ventana_carga_ventas')
 
-            axios.get('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/productos')
+            axios.get(`${import.meta.env.VITE_API_SERVER}productos`)
                 .then(response =>{
                     emitter.emit('categoria_ventas',response.data)
 
@@ -42,7 +42,7 @@ export default {
         buscar_categoria(categoria){
             emitter.emit('abrir_ventana_carga_ventas')
 
-            axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/productos-por-categoria/${categoria}`)
+            axios.get(`${import.meta.env.VITE_API_SERVER}productos-por-categoria/${categoria}`)
             .then((response)=>{
                 console.log(response)
                 //enviar el nuevo listado de productos correspondiente a la categoria 

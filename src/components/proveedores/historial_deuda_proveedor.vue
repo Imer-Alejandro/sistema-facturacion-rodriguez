@@ -92,7 +92,7 @@ export default {
         buscar_proveedor(){
             emitter.emit('abrir_loader_carga_vista_proveedor')
 
-            axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/buscar-proveedores/${this.idProveedor}`)
+            axios.get(`${import.meta.env.VITE_API_SERVER}buscar-proveedores/${this.idProveedor}`)
             .then((response)=>{
                 this.proveedorEncontrado=response.data;
             })
@@ -109,7 +109,7 @@ export default {
                 emitter.emit('abrir_loader_carga_vista_proveedor')
 
                 // Realizar la solicitud GET a la ruta /buscar-cliente/:idCliente
-                axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/abonos-por-proveedor/${this.idProveedor}`)
+                axios.get(`${import.meta.env.VITE_API_SERVER}abonos-por-proveedor/${this.idProveedor}`)
                     .then((response) => {
                     this.historialAbonosProveedor = response.data;
                     console.log(response.data)

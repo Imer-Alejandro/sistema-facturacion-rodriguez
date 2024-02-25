@@ -48,7 +48,7 @@ import 'vue3-toastify/dist/index.css';
 
 
                 // realizar el envio de los nuevos dato al servidor 
-                axios.put(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/editar-abono-proveedor/${this.abono_registro_operacion.id_abono_deuda_a_proveedor}`,this.datosEditados)
+                axios.put(`${import.meta.env.VITE_API_SERVER}editar-abono-proveedor/${this.abono_registro_operacion.id_abono_deuda_a_proveedor}`,this.datosEditados)
                     .then((response)=>{
                         console.log(response)
 

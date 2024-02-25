@@ -26,7 +26,7 @@ export default {
                     const nuevaDeuda = this.proveedorEncontrado.deuda_a_proveedor + this.abono_registro_operacion.monto_abonado; // Reemplaza con la nueva deuda
 
                     try {
-                        const response = await axios.delete(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/eliminar-abono-proveedor/${this.abono_registro_operacion.id_abono_deuda_a_proveedor}`, {
+                        const response = await axios.delete(`${import.meta.env.VITE_API_SERVER}eliminar-abono-proveedor/${this.abono_registro_operacion.id_abono_deuda_a_proveedor}`, {
                         data: { idProveedor, nuevaDeuda },
                         });
 

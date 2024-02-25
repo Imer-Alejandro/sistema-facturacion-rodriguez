@@ -162,7 +162,7 @@ export default {
                 //convertir el array del listado de producto a texto
                 //asignar el array convertido como el nuevo valor del listado de producto
 
-                axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/registro-ventas',carritoStore.carrito_compras)
+                axios.post(`${import.meta.env.VITE_API_SERVER}registro-ventas`,carritoStore.carrito_compras)
                     .then((response)=>{
                         console.log(response.data)  
  

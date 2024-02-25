@@ -39,7 +39,7 @@ export default {
                 
 
                  // Realiza la solicitud GET al servidor para obtener el registro de abono por id
-                axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/abono-cliente/${this.id_abono_Operacion}`)
+                axios.get(`${import.meta.env.VITE_API_SERVER}abono-cliente/${this.id_abono_Operacion}`)
                     .then((response) => {
                     // El registro de abono se encuentra en response.data
                     this.datosRegistroAbono = response.data;
@@ -73,7 +73,7 @@ export default {
 
                 
 
-                axios.put(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/editar-abono-cliente/${this.id_abono_Operacion}`, this.datosEditados)
+                axios.put(`${import.meta.env.VITE_API_SERVER}editar-abono-cliente/${this.id_abono_Operacion}`, this.datosEditados)
                 .then(response => {
                         // Maneja la respuesta exitosa
                         console.log(response.data.message);
@@ -147,7 +147,7 @@ export default {
     
     <form  @submit.prevent="registrar_abono_editado_deuda_cliente" class="p-2 mt-[100px]">
         <input id="abono" required  v-model="datosRegistroAbono.monto_abonado" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
-        box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="number" 
+        box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="number" step="any"
         placeholder="Monto abonado">
 
         

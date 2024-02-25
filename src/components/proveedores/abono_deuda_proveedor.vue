@@ -39,7 +39,7 @@ export default {
         buscar_proveedor(){
             emitter.emit('abrir_loader_carga_vista_proveedor')
 
-            axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/buscar-proveedores/${this.idProveedor}`)
+            axios.get(`${import.meta.env.VITE_API_SERVER}buscar-proveedores/${this.idProveedor}`)
             .then((response)=>{
                 this.proveedorEncontrado=response.data;
             })
@@ -76,7 +76,7 @@ export default {
                     this.datos_registro_abono.nueva_deuda=   this.proveedorEncontrado.deuda_a_proveedor - this.datos_registro_abono.monto_abonado
 
                      // Realiza la solicitud POST al servidor para registrar el abono
-                     axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/registrar-abono-proveedor', this.datos_registro_abono)
+                     axios.post(`${process.env.API_SERVER}registrar-abono-proveedor`, this.datos_registro_abono)
                         .then((response) => {
                             
                             console.log('Abono registrado con éxito', response.data);

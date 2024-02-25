@@ -2,7 +2,7 @@
 import OptionesClientes from './optiones_card_cliente.vue'
 //importar el modulo de eventos globales 
 import { emitter } from '@/eventBus';
-
+ 
 export default {
     mounted() {
 
@@ -47,7 +47,7 @@ export default {
                     this.estado_visibilidad_optiones = false;
                 }
          },
-   }
+   } 
 }
 </script>
  

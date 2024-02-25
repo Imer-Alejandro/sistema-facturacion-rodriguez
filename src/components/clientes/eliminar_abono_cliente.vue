@@ -35,7 +35,7 @@ export default {
                     const nuevaDeuda = this.clienteEncontrado.deuda + this.datosRegistroAbono.monto_abonado; // Reemplaza con la nueva deuda
 
                     try {
-                        const response = await axios.delete(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/eliminar-abono-cliente/${idAbono}`, {
+                        const response = await axios.delete(`${process.env.API_SERVER}eliminar-abono-cliente/${idAbono}`, {
                         data: { idCliente, nuevaDeuda },
                         });
 
@@ -74,7 +74,7 @@ export default {
 
 
                  // Realiza la solicitud GET al servidor para obtener el registro de abono por id
-                axios.get(`https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/abono-cliente/${this.id_abono_Operacion}`)
+                axios.get(`${import.meta.env.VITE_API_SERVER}abono-cliente/${this.id_abono_Operacion}`)
                     .then((response) => {
                     // El registro de abono se encuentra en response.data
                     this.datosRegistroAbono = response.data;

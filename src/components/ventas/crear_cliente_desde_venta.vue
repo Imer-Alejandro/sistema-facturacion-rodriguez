@@ -34,7 +34,7 @@ export default {
                 }else{
                     emitter.emit('abrir_carga_loader_ventas')
                  // Enviar datos al servidor utilizando Axios
-                     axios.post('https://api-sistema-facturacion-c521f94ffcfb.herokuapp.com/registrar-cliente', this.cliente)
+                     axios.post(`${import.meta.env.VITE_API_SERVER}registrar-cliente`, this.cliente)
                         .then(response => {
                         // Manejar la respuesta del servidor
                         console.log(response.data);

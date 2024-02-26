@@ -51,7 +51,7 @@ export default {
         emitter.on('actualizar_objetos_cliente_vista_cliente',()=>{
             this.estado_activacion_loader_Carga=true;
 
-            axios.get(`${process.env.API_SERVER}obtener-clientes`)
+            axios.get(`${import.meta.env.VITE_API_SERVER}obtener-clientes`)
             .then((response) => {
                 let result_data =response.data
                 this.dataCliente =result_data ;

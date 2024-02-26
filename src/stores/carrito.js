@@ -15,7 +15,8 @@ export const useGlobalCarritoVenta = defineStore('carrito', {
         id_cliente:'',
         antigua_deuda_cliente:'',
         total_venta:0,
-        detalles_productos:[]
+        detalles_productos:[],
+        balance_pendiente:0,
     },
     
   }),

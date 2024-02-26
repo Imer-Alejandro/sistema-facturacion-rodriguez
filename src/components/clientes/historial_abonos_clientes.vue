@@ -1,6 +1,8 @@
 <script>
 import card_hist_abono_cliente from './card_hist_abono_cliente.vue';
 
+import card_deudas_pendientes from "./card_deuda_cliente.vue";
+
 import EliminarAbonoCliente from './eliminar_abono_cliente.vue'
 import EditarAbonoCliente from './editar_abono_cliente.vue'
 import DetalleAbonoCliente from './detalle_abono_cliente.vue'
@@ -76,8 +78,8 @@ export default {
         card_hist_abono_cliente,
         EliminarAbonoCliente,
         EditarAbonoCliente,
-        DetalleAbonoCliente
-
+        DetalleAbonoCliente,
+        card_deudas_pendientes
         
     },
     methods:{
@@ -184,10 +186,11 @@ export default {
                 </div>
     </div> 
     <div class="p-2">
-        <h3 class="text-[1.3rem] mb-[10px]">Historial de deudas</h3>
+        <h3 class="text-[1.3rem] mb-[10px]">Historial de deudas pendientes</h3>
         <div class="w-full h-[450px] pb-[40px]  p-1 overflow-hidden overflow-y-scroll">
 
-            
+            <card_deudas_pendientes/>
+
             <!-- <div v-if="historialAbonosDelCliente.length > 0">
                 <div v-for="abono in historialAbonosDelCliente" :key="abono.id_abono_deuda_del_cliente">
                     <card_hist_abono_cliente :abono="abono"/>

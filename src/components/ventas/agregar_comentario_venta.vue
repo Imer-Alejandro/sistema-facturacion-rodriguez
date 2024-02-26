@@ -52,7 +52,7 @@ export default {
                 <h2 class="text-[1.7rem] ml-[20px] order-2">Agregar comentario</h2>
             </header>
             <div class="p-3">
-                <input maxlength="80" v-model="comentario" class=" w-[90%] ml-[5%] h-[100px] pl-2 mt-[30px] focus:border-[#FFB984] outline-none border-2 rounded"  type="text" placeholder="Ingrese el comentario aqui..." name="" id="">
+                <input maxlength="150" v-model="comentario" class=" w-[90%] ml-[5%] h-[100px] pl-2 mt-[30px] focus:border-[#FFB984] outline-none border-2 rounded"  type="text" placeholder="Ingrese el comentario aqui..." name="" id="">
                 <button @click="guardar_comentario" class="w-[90%] ml-[5%] mt-[30px] text-[1.2rem] h-[60px] rounded text-white bg-[#FFB984]">Guardar</button>
             </div>
         </div>      

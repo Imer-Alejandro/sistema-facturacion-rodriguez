@@ -151,16 +151,22 @@ export default {
                 toast.warn("agrege productos para finalizar la venta!");   
             }
             else if (this.metodoPago === 'credito' && carritoStore.carrito_compras.nombre_cliente == '') {
+                //asignar el valance de deuda de la venta con 
                 toast.warn("para ventas a credito debe indicar un cliente!");           
             }
             else{
                 this.visibilidad_carga_loader=true
-                //asignar datos al objeto del registro de la venta
+                //asignar fecha y metodo de pago
                 carritoStore.carrito_compras.fecha_compra=this.convertir_formato_hora_actual()
                 carritoStore.carrito_compras.tipo_venta=this.metodoPago
+
+                /*validar si el metodo de pago es credido asignar el total de la venta al balance 
+                pendiente para crear el estado de deuda asociado a la venta a  credito del cliente*/
+                if (this.metodoPago === 'credito') {
+                    carritoStore.carrito_compras.balance_pendiente= carritoStore.carrito_compras.total_venta
+                }
                 
-                //convertir el array del listado de producto a texto
-                //asignar el array convertido como el nuevo valor del listado de producto
+                
 
                 axios.post(`${import.meta.env.VITE_API_SERVER}registro-ventas`,carritoStore.carrito_compras)
                     .then((response)=>{

@@ -33,7 +33,7 @@ export default {
 
 
 <template>
-           <div class=" optiones_ventas  overflow-hidden  w-[140px] z-0 h-[160px] bg-[#f7f8ff] flex-none absolute rounded shadow-md shadow-[#00000031] -ml-[8%] mt-[40px]">
+           <div class=" optiones_ventas  overflow-hidden  w-[140px] z-0 h-[140px] bg-[#f7f8ff] flex-none absolute rounded shadow-md shadow-[#00000031] -ml-[8%] mt-[40px]">
             <ul>
                 <li @click="abrir_abono_deuda_cliente"   class=" p-2 cursor-pointer border-b-[#DFDFDF]  border-b-[2px] ">
                     <button >
@@ -42,12 +42,12 @@ export default {
                     
                 </li> 
 
-                <li @click="abrir_historial_abonos"   class=" p-2 cursor-pointer border-b-[#DFDFDF]  border-b-[2px] ">
+                <!-- <li @click="abrir_historial_abonos"   class=" p-2 cursor-pointer border-b-[#DFDFDF]  border-b-[2px] ">
                     <button >
                         <span class="text-[1rem]">Historial abonos</span>
                     </button>
                     
-                </li>
+                </li> -->
 
 
                 <li  @click="abrir_editar_cliente"  class="border-b-[#DFDFDF]  border-b-[2px] p-2 cursor-pointer">

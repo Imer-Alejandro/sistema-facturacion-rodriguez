@@ -81,7 +81,7 @@ export default {
 
         //ventana para registrar abono de deuda cliente
         emitter.on('abrir_modal_abono_deuda_cliente',(data)=>{
-            this.id_cliente_operacione=data
+            this.datosAbonoDeuda=data
             this.estado_visibilidad_abono_deuda_cliente=true
         })
         emitter.on('cerrar_modal_abono_deuda_cliente',()=>{
@@ -163,7 +163,7 @@ export default {
 
             //deuda por cobrar
             deudasPorCobrar:0,
-
+            datosAbonoDeuda:"",
             //datos para buscar un cliente
             datosBusquedaCliente:[],
             termino_busqueda_cliente:'',
@@ -267,7 +267,7 @@ export default {
 
         <form-crear-cliente v-show="estado_visibilidad_registrar_cliente"/>
 
-        <abonar-deuda-cliente  :id_cliente_operacione="id_cliente_operacione"  v-if="estado_visibilidad_abono_deuda_cliente"/>
+        <abonar-deuda-cliente  :ventas_credito="datosAbonoDeuda"  v-if="estado_visibilidad_abono_deuda_cliente"/>
 
         <editar-cliente  :id_cliente_operacione="id_cliente_operacione" v-if="estado_visibilidad_editar_cliente"/>
 

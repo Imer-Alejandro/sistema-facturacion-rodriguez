@@ -1,13 +1,14 @@
 <script>
-import card_hist_abono_cliente from './card_hist_abono_cliente.vue';
 
 import card_deudas_pendientes from "./card_deuda_cliente.vue";
 
-import EliminarAbonoCliente from './eliminar_abono_cliente.vue'
-import EditarAbonoCliente from './editar_abono_cliente.vue'
-import DetalleAbonoCliente from './detalle_abono_cliente.vue'
+import historial_abonos_deudas from "./historial_abono_deuda_pendiente.vue";
 
-//importar el modulo de eventos globales 
+
+
+import detalles_venta_crendito from "../inicio/detalles_ventas.vue";
+
+//importar el modulo de eventos globales  
 import { emitter } from '@/eventBus';
 
 import axios from 'axios';
@@ -23,6 +24,32 @@ export default {
         //cargargar el historial de los abonos del cliente
         this.buscar_historial_abono_cliente()
 
+        //evento para actualizar luego de un abono
+        emitter.on('actualizar_historial_deudas_cliente',()=>{
+            this.buscar_cliente_id()
+            this.buscar_historial_abono_cliente()
+        })
+
+        //ventana de detalles de venta a credito del cliente
+        emitter.on('detalles_venta_credito_cliente',(datos_venta)=>{
+            this.datos_venta_operacion=datos_venta;
+            this.visibilidad_detalle_venta_credito=true
+
+        })
+
+        //abirir el historial de abonos de deuda de la venta a credito
+        emitter.on('historial_abonos_deuda_pendiente',(datos_venta)=>{
+            this.datos_venta_operacion=datos_venta;
+            this.visibilidad_historial_abonos=true
+        })
+
+        emitter.on('cerrar_historial_abonos_deuda_pendiente',()=>{
+            this.visibilidad_historial_abonos=false
+        })
+
+        emitter.on('cerrar_detalle_historial_deuda',()=>{
+            this.visibilidad_detalle_venta_credito=false
+        })
 
         emitter.on('actualizar_historial_abonos_clientes',()=>{
             this.buscar_cliente_id()
@@ -31,56 +58,25 @@ export default {
             this.buscar_historial_abono_cliente()
         })
 
-        //ventana eliminar registro de abono
-        emitter.on('abrir_eliminar_abono_cliente',(data)=>{
-            this.id_abono_Operacion=data
-            this.visibilidad_eliminar_abono_cliente=true
-        })
-        emitter.on('cerrar_eliminar_abono_cliente',()=>{
-            this.visibilidad_eliminar_abono_cliente=false
-          
-        })
 
-        //ventana editar abono
-        emitter.on('cerrar_editar_abono_cliente',()=>{
-            this.visibilidad_editar_abono_cliente=false
-            //luego de modificar el abono actualizar los datos del historial
-           this.actualizar()
-
-        })
-        emitter.on('abrir_editar_abono_cliente',(data)=>{
-            this.id_abono_Operacion=data
-            this.visibilidad_editar_abono_cliente=true
-        })
-
-        //ventana detalles del abono
-        emitter.on('cerrar_detalle_abono_cliente',()=>{
-            this.visibilidad_detalle_abono_cliente=false
-        })
-
-        emitter.on('abrir_detalle_abono_cliente',(data)=>{
-            this.id_abono_Operacion=data
-            this.visibilidad_detalle_abono_cliente=true
-        })
+       
+ 
+        
     },
     data(){
         return{
             clienteEncontrado:[],
             historialAbonosDelCliente:[],
-            id_abono_Operacion:'',
+            datos_venta_operacion:'',
 
-            visibilidad_eliminar_abono_cliente:false,
-            visibilidad_editar_abono_cliente:false,
-            visibilidad_detalle_abono_cliente:false
+            visibilidad_detalle_venta_credito:false,
+            visibilidad_historial_abonos:false
         }
     },
     components:{
-        card_hist_abono_cliente,
-        EliminarAbonoCliente,
-        EditarAbonoCliente,
-        DetalleAbonoCliente,
-        card_deudas_pendientes
-        
+        card_deudas_pendientes,
+        detalles_venta_crendito,
+        historial_abonos_deudas
     },
     methods:{
         buscar_cliente_id(){
@@ -103,11 +99,11 @@ export default {
             buscar_historial_abono_cliente(){
                 emitter.emit('abrir_loader_carga_vista_cliente')
 
-                // Realizar la solicitud GET a la ruta /buscar-cliente/:idCliente
-                axios.get(`${import.meta.env.VITE_API_SERVER}abonos-por-cliente/${this.id_cliente_operacione}`)
+                // buscar las ventas a credito pendiente del cliente
+                axios.get(`${import.meta.env.VITE_API_SERVER}ventas-cliente-deudas/${this.id_cliente_operacione}`)
                     .then((response) => {
                     this.historialAbonosDelCliente = response.data;
-                    console.log(response.data)
+                    
                     })
                     .catch((error) => {
                     console.error('Error al buscar el cliente', error);
@@ -129,15 +125,20 @@ export default {
          
                 emitter.emit('abrir_loader_carga_vista_cliente')
 
-                // buscar el registro de abono
-                axios.get(`${import.meta.env.VITE_API_SERVER}abonos-por-cliente/${this.id_cliente_operacione}`)
+                // buscar el registro de ventas a credito pendiente del cliente
+                axios.get(`${import.meta.env.VITE_API_SERVER}ventas-cliente-deudas/${this.id_cliente_operacione}`)
                     .then((response) => {
                     this.historialAbonosDelCliente = response.data;
+                    
                     })
                     .catch((error) => {
                     console.error('Error al buscar el cliente', error);
                     this.historialAbonosDelCliente = [];
                     })
+                    .finally(()=>{
+                        //cerrar la carga luego de crear el cliente
+                        emitter.emit('cerrar_loader_carga_vista_cliente')
+                    }) 
 
                     //buscar el cliente
                     //buscar los datos del cliente
@@ -155,9 +156,9 @@ export default {
             }
 
 
-    }
+    } 
 
-}
+} 
 </script>
 
 
@@ -165,11 +166,11 @@ export default {
 <template>
     <section  class="  w-full h-[100vh] bg-white fixed  z-50 ">
 
-        <DetalleAbonoCliente :id_abono_Operacion="id_abono_Operacion" v-if="visibilidad_detalle_abono_cliente"/>
 
-        <EditarAbonoCliente :clienteEncontrado="clienteEncontrado" :id_abono_Operacion="id_abono_Operacion" v-if="visibilidad_editar_abono_cliente"/>
+        <detalles_venta_crendito :ventaOperacion="datos_venta_operacion" v-if="visibilidad_detalle_venta_credito"/>
 
-        <EliminarAbonoCliente :clienteEncontrado="clienteEncontrado" :id_abono_Operacion="id_abono_Operacion" v-if="visibilidad_eliminar_abono_cliente"/>
+        <historial_abonos_deudas :ventas_credito="datos_venta_operacion"  v-if="visibilidad_historial_abonos"/>
+
 
     <header class="w-full p-3 inline-flex border-b-[1.5px] border-b-[#DFDFDF]">
         <img @click="cerrar_modal_historial_abono_cliente" class="w-[35px] mr-[25px]  order-1 cursor-pointer" src="/src/assets/iconos/interfaz/regresar.png" >
@@ -189,17 +190,14 @@ export default {
         <h3 class="text-[1.3rem] mb-[10px]">Historial de deudas pendientes</h3>
         <div class="w-full h-[450px] pb-[40px]  p-1 overflow-hidden overflow-y-scroll">
 
-            <card_deudas_pendientes/>
-
-            <!-- <div v-if="historialAbonosDelCliente.length > 0">
-                <div v-for="abono in historialAbonosDelCliente" :key="abono.id_abono_deuda_del_cliente">
-                    <card_hist_abono_cliente :abono="abono"/>
+            <div v-if="historialAbonosDelCliente.length >  0">
+                <div v-for="ventas_credito in historialAbonosDelCliente" :key="ventas_credito.id_ventas">
+                    <card_deudas_pendientes :ventas_credito="ventas_credito" />
                 </div>
             </div>
             <div v-else>
-                <h3 class="text-[1.1rem] mt-[20px] text-center"> no se encontraron registros abonos...</h3>
-            </div> -->
-            
+                <h3 class="text-[1.1rem] mt-[20px] text-center"> no se encontraron deudas pendientes...</h3>
+            </div>
 
         </div>
     </div>

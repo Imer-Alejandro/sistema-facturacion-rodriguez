@@ -19,7 +19,7 @@ const app = createApp(App)
 
 app.use(Vue3Toasity,{limit: 2,})
 
-const socket = io('http://localhost:3000/');
+const socket = io(`${import.meta.env.VITE_API_SERVER}`);
 
 
 

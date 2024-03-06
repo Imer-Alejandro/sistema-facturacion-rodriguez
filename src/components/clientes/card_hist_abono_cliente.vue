@@ -28,7 +28,7 @@ export default {
             document.removeEventListener('click', this.closeMenuOnClickOutside);
         },
 
-    data(){
+    data(){ 
         return{
             visibilidadOptiones:false,
             idRegistroAbono:this.abono.id_abono_deuda_del_cliente
@@ -57,7 +57,7 @@ export default {
 }
 </script>
 
-
+ 
 <template>
      <div class="w-full h-[80px]  mb-[20px] relative rounted p-2 rounded  flex shadow-md shadow-[#0000001f]">
                 <div class=" order-1 flex-col text-center w-[180px] border-r-2 flex justify-center">
@@ -69,13 +69,13 @@ export default {
                     <h3>Fecha del abono</h3>
                     <span class="text-[#FFB984] text-[0.9rem]">{{ abono.fecha_abono }}</span>
                 </div>
-
+ 
 
                 <button class="order-3 h-full w-[50px] ">
                     <img @click="abrir_y_cerrar_optiones_abonos" class="w-[40px] h-[40px]" src="/src/assets/iconos/interfaz/navegacion.png" alt="" srcset="">
                 </button>
 
                 
-                <opciones-historial v-if="visibilidadOptiones" :idRegistroAbono="idRegistroAbono" ref="menu"/>
+                <opciones-historial v-if="visibilidadOptiones" :abono="abono" ref="menu"/>
             </div>
 </template>

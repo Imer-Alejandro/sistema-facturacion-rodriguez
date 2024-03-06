@@ -9,6 +9,7 @@ export default {
     methods:{
         close_detalle_ventas() {
             emitter.emit('cerrar_detalles_venta_inicio')
+            emitter.emit('cerrar_detalle_historial_deuda')
         }
     },
 
@@ -20,13 +21,13 @@ export default {
 
 
 
-    <section  class="  w-full h-[100vh] bg-white fixed -mt-[80px] z-40 ">
+    <section  class="  w-full h-[100vh] bg-white fixed  z-40 ">
         <header class="w-full p-3 mb-[15px] inline-flex border-b-[1.5px] border-b-[#DFDFDF]">
             <img @click="close_detalle_ventas" class="w-[35px] mr-[25px]  order-1 cursor-pointer" src="/src/assets/iconos/interfaz/regresar.png" >
             <h2 class="text-[1.7rem] ml-[5%] order-2">Detalles de venta</h2>
         </header>
         
-
+ 
         <div class="w-full pl-2 pb-2 border-b-[1.5px] pt-2 inline-flex border-b-[#DFDFDF]">
             <h3 class="text-[1.2rem] order-1 font-medium mb-[8px]">fecha: </h3> <span class="font-normal order-2  text-[1.2rem] ml-[10%] text-[#363636]">{{ventaOperacion.fecha}}</span>
         </div>

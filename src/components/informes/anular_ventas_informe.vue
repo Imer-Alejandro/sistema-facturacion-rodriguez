@@ -18,7 +18,8 @@ export default {
             nombre_cliente:'',
             total_venta:'',
             detalles_productos:'',
-            tipo_venta:''
+            tipo_venta:'',
+            balance_pendiente:0
             }
         }
     },
@@ -35,6 +36,8 @@ export default {
             this.datosAnularVenta.total_venta=this.ventaOperacion.total_venta,
             this.datosAnularVenta.detalles_productos=this.ventaOperacion.detalles_producto,
             this.datosAnularVenta.tipo_venta=this.ventaOperacion.tipo_venta
+            this.datosAnularVenta.balance_pendiente=this.ventaOperacion.balance_pendiente
+
 
             console.log(this.datosAnularVenta)
 

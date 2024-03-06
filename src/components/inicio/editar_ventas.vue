@@ -53,7 +53,7 @@ export default {
         obtener_cliente(){
             emitter.emit('abrir_loader_carga_incio')
 
-            axios.get(`${process.env.API_SERVER}obtener-clientes`)
+            axios.get(`${import.meta.env.VITE_API_SERVER}obtener-clientes`)
                 .then((response) => {
                     let datosRespuestas = response.data;
                     this.dataCliente =datosRespuestas

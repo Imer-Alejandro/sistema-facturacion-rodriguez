@@ -130,12 +130,12 @@ import 'vue3-toastify/dist/index.css';
             placeholder="Description">
             </label>
 
-            <label for="">
+            <!-- <label for="">
                         <span class="text-[#9F9F9F] ml-[10px]">Deuda</span>
             <input v-model="clienteEncontrado.deuda" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
             box-border rounded-md mb-[15px] border-[#9F9F9F]  ml-[2.5%]" type="number"  step="any"
             placeholder="Deuda">
-            </label>
+            </label> -->
 
             
 

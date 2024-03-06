@@ -28,19 +28,41 @@ export default {
         
 
         <div class="w-full pl-2 pb-2 border-b-[1.5px] pt-2 inline-flex border-b-[#DFDFDF]">
-            <h3 class="text-[1.2rem] order-1 font-medium mb-[10px]">fecha: </h3> <span class="font-normal order-2  text-[1.2rem] ml-[10%] text-[#363636]">{{ventaOperacion.fecha}}</span>
+            <h3 class="text-[1.2rem] order-1 font-medium mb-[8px]">fecha: </h3> <span class="font-normal order-2  text-[1.2rem] ml-[10%] text-[#363636]">{{ventaOperacion.fecha}}</span>
         </div>
         <div class="w-full pl-2 pb-2 border-b-[1.5px] pt-2 inline-flex border-b-[#DFDFDF]">
-            <h3 class="text-[1.2rem] order-1 font-medium mb-[10px]">Tipo de venta: </h3> <span class="font-normal order-2  text-[#363636] text-[1.2rem] ml-[10%] ">{{ventaOperacion.tipo_venta}}</span>
+            <h3 class="text-[1.2rem] order-1 font-medium mb-[8px]">Tipo de venta: </h3>
+             <span class="font-normal order-2  text-[#363636] text-[1.2rem] ml-[10%] ">{{ventaOperacion.tipo_venta}}</span>
         </div>
+
+        <div v-if="ventaOperacion.tipo_venta == 'credito'">
+            <div v-if="ventaOperacion.tipo_venta == 'credito' && ventaOperacion.balance_pendiente != 0 " class="w-full pl-2 pb-2 border-b-[1.5px] pt-2 inline-flex border-b-[#DFDFDF]">
+                <h3 class="text-[1.2rem] order-1 font-medium mb-[8px]">estado de la deuda: </h3>
+                <span class="font-normal order-2  text-[#363636] text-[1.2rem] ml-[10%] ">pendiente</span>
+            </div>
+
+            <div v-else class="w-full pl-2 pb-2 border-b-[1.5px] pt-2 inline-flex border-b-[#DFDFDF]">
+                <h3 class="text-[1.2rem] order-1 font-medium mb-[8px]">estado de la deuda: </h3>
+                <span class="font-normal order-2  text-[#363636] text-[1.2rem] ml-[10%] ">pagada</span>
+            </div>
+        </div>
+
+
+        <div v-if="ventaOperacion.tipo_venta == 'credito'" class="w-full pl-2 pb-2 border-b-[1.5px] pt-2 inline-flex border-b-[#DFDFDF]">
+            <h3 class="text-[1.2rem] order-1 font-medium mb-[8px]">deuda pendiente: </h3>
+             <span class="font-normal order-2  text-[#363636] text-[1.2rem] ml-[10%] ">{{ventaOperacion.balance_pendiente.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</span>
+        </div>
+   
         <div class="w-full pl-2 pb-2 border-b-[1.5px] pt-2 inline-flex border-b-[#DFDFDF]">
             <h3 class="text-[1.2rem] order-1 font-medium mb-[10px]">Cliente: </h3> <span class="font-normal order-2  text-[#363636] text-[1.2rem] ml-[10%] ">{{ventaOperacion.nombre_cliente}}</span>
         </div>
         <div class="w-full pl-2 pb-2 pr-2 border-b-[1.5px] pt-2 inline-flex border-b-[#DFDFDF]">
-            <h3 class="text-[1.2rem] order-1 font-medium mb-[10px]">Comentario: </h3> <span class="font-normal text-[#363636] order-2  text-[1.1rem] ml-[8%] ">{{ ventaOperacion.comentario }}</span>
+            <h3 class="text-[1.2rem] order-1 font-medium mb-[8px]">Comentario: 
+                <span class="font-normal text-[#363636] text-[1.1rem]  ">{{ ventaOperacion.comentario }}</span>
+            </h3> 
         </div>
 
-        <div class="p-2 w-full h-[300px] overflow-hidden ">
+        <div class="p-2 w-full h-[250px] border-b-2 overflow-hidden ">
             <h3 class="text-[1.1rem] font-medium">Detalles de productos</h3>
             
             <div class="w-full h-full overflow-scroll">
@@ -63,7 +85,7 @@ export default {
                         <td>{{venta.nombre_producto}}</td> 
                         <td>{{venta.precio_venta}}</td> 
                         <td>{{venta.cantidad_venta}}</td> 
-                        <td>{{venta.total_producto}}</td> 
+                        <td>{{venta.total_producto.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</td> 
                     </tr>  
                     
                 </tbody> 
@@ -73,7 +95,7 @@ export default {
             </div>
             
         </div>
-        <div class="w-full border-b-[1.5px] bg-white mt-[30px] p-3 inline-flex border-b-[#DFDFDF]">
+        <div class="w-full border-b-[1.5px] bg-white mt-[10px] p-3 inline-flex border-b-[#DFDFDF]">
             <h3 class="text-[1.4rem] order-1 font-medium mb-[10px]">Total de la venta: </h3> <span class="font-normal order-2  text-[1.4rem] ml-[10%] text-[#E55226]">{{ventaOperacion.total_venta.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</span>
         </div>
     </section>

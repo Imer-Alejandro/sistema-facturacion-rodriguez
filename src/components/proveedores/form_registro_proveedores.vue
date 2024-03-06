@@ -46,7 +46,7 @@ export default {
         registrar_proveedor(){
             //validar que no existan proveedores con el mismo nombre 
             let listadoDuplicados = this.DatosProveedores.filter(iten => iten.nombre_proveedor == this.proveedor.nombre)
-            if (listadoDuplicados.length >0) {
+            if (listadoDuplicados.length > 0) {
                 toast.warn('error de registro, existe un proveedor con este nombre!')
             }else{
                 emitter.emit('abrir_loader_carga_vista_proveedor')

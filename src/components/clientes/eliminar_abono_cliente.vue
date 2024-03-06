@@ -7,19 +7,29 @@ import axios from 'axios';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
-
+ 
 
 export default {
-        props:['id_abono_Operacion','clienteEncontrado'],
+        props:['abono_Operacion'], 
 
         mounted(){
-            this.buscar_registro_abono()
+            this.buscar_registro_venta()
+            this.buscar_registro_cliente()
+
         },
 
         data(){ 
             return{
-                datosRegistroAbono:[],
-                
+                datos_venta_credito:[],
+                datos_cliente:[],
+                data:{
+                    idAbono:'',
+                    idCliente:'', 
+                    id_venta:'',
+                    nuevaDeuda_venta: 0,
+                    nuevaDeuda_cliente: 0
+
+                }
             }
         },
 
@@ -27,62 +37,76 @@ export default {
             cerrar_ventana_eliminar_abono_cliente(){
                 emitter.emit('cerrar_eliminar_abono_cliente')
             },
-            async  eliminar_abono_cliente(){
-                emitter.emit('abrir_loader_carga_vista_cliente')
-               
-                    const idAbono = this.id_abono_Operacion; // Reemplaza con el ID del abono que deseas eliminar
-                    const idCliente = this.clienteEncontrado.id_cliente; // Reemplaza con el ID del cliente
-                    const nuevaDeuda = this.clienteEncontrado.deuda + this.datosRegistroAbono.monto_abonado; // Reemplaza con la nueva deuda
+            eliminar_abono_cliente(){
+                // emitter.emit('abrir_loader_carga_vista_cliente')
 
-                    try {
-                        const response = await axios.delete(`${process.env.API_SERVER}eliminar-abono-cliente/${idAbono}`, {
-                        data: { idCliente, nuevaDeuda },
-                        });
-
-                        toast.success("se elimino el registro del abono !");  
-
-                        console.log(response.data);
-                        // Maneja la respuesta según tus necesidades
-                    } catch (error) {
-
-                        toast.error("ocurrio un error al eliminar el registro del abono !", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                }); 
-                        console.error('Error al enviar la solicitud DELETE:', error);
-                        // Maneja el error según tus necesidades
-                    } finally{
-                        //cerrar la ventana de eliminar abono
-                    emitter.emit('cerrar_eliminar_abono_cliente')
+                //asignar datos 
+                this.data.idAbono=this.abono_Operacion.id_abono_deuda_del_cliente,
+                this.data.idCliente=this.abono_Operacion.id_cliente, 
+                this.data.id_venta=this.abono_Operacion.id_venta,
+                this.data.nuevaDeuda_venta=this.datos_venta_credito.balance_pendiente + this.abono_Operacion.monto_abonado,
+                this.data.nuevaDeuda_cliente=this.datos_cliente.deuda + this.abono_Operacion.monto_abonado
+                console.log(this.data)
+                        axios.post(`${import.meta.env.VITE_API_SERVER}eliminar-abono-cliente/${this.data.idAbono}`,this.data)
                         
-                    //cerrar la ventana de carga de proceso
-                     emitter.emit('cerrar_loader_carga_vista_cliente')
+                        .then((response)=>{
+                            toast.success("se elimino el registro del abono !");  
+                            console.log(response.data);
+                        })
+                        .catch((error)=>{
+                            toast.error("ocurrio un error al eliminar el registro del abono !"); 
+                            console.error('Error al enviar la solicitud DELETE:', error);
+                        })
+                        
+                        .finally( ()=> {
+                        
+                        //cerrar la ventana de eliminar abono
+                        emitter.emit('cerrar_eliminar_abono_cliente')
 
-                    //actualizar el historial de abonos
-                    emitter.emit('actualizar_historial_abonos_clientes')
+                        //cerrar la ventana de carga de proceso
+                        emitter.emit('cerrar_loader_carga_vista_cliente')
 
-                    }
-                    
-   
+                        //actualizar el historial de abonos
+                        emitter.emit('actualizar_historial_abonos_clientes')
+                        })
+
             },
 
            
-            buscar_registro_abono(){
+            buscar_registro_venta(){
                 emitter.emit('abrir_loader_carga_vista_cliente')
 
 
                  // Realiza la solicitud GET al servidor para obtener el registro de abono por id
-                axios.get(`${import.meta.env.VITE_API_SERVER}abono-cliente/${this.id_abono_Operacion}`)
+                axios.get(`${import.meta.env.VITE_API_SERVER}buscar-ventas-id/${this.abono_Operacion.id_venta}`)
                     .then((response) => {
                     // El registro de abono se encuentra en response.data
-                    this.datosRegistroAbono = response.data;
-
+                    this.datos_venta_credito = response.data;
+                    
                     })
 
                     .catch((error) => {
                     console.error('Error al obtener el registro de abono por id', error);
+                    })
+                    .finally(()=>{
+                        //cerrar la carga luego de crear el cliente
+                        emitter.emit('cerrar_loader_carga_vista_cliente')
+                    });
+            },
+
+            buscar_registro_cliente(){
+                emitter.emit('abrir_loader_carga_vista_cliente')
+
+
+                 // Realiza la solicitud GET al servidor para obtener el registro de abono por id
+                axios.get(`${import.meta.env.VITE_API_SERVER}deuda-cliente/${this.abono_Operacion.id_cliente}`)
+                    .then((response) => {
+                    // El registro de abono se encuentra en response.data
+                    this.datos_cliente = response.data;
+                    })
+
+                    .catch((error) => {
+                    console.error('Error al obtener el registro del cliente', error);
                     })
                     .finally(()=>{
                         //cerrar la carga luego de crear el cliente

@@ -8,6 +8,7 @@ import EliminarProveedor from '../components/proveedores/eliminar_proveedores.vu
 import AbonarDeudaProveedor from '../components/proveedores/abono_deuda_proveedor.vue'
 import BuscarProveedor from "../components/proveedores/result_busqueda_proveedor.vue"
 import EditarProveedor from '../components/proveedores/editar_proveedor.vue'
+import registro_deuda_proveedor from '../components/proveedores/registro_deuda_proveedor.vue'
 
 import HistorialAbonoProveedor from '../components/proveedores/historial_deuda_proveedor.vue'
 
@@ -21,6 +22,7 @@ import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
   
 import axios from 'axios';
+import { data } from "autoprefixer";
 
 export default {
     mounted(){
@@ -29,6 +31,17 @@ export default {
         this.$socket.on('actualizacion_registro_proveedores',()=>{
             toast.success("actualizando el registro luego de modificacion!");
             //actualizar el registro
+            this.obtener_proveedores()
+        })
+
+        //registrar nueva deuda del proveedor 
+        emitter.on('abrir_registro_deuda_proveedor',(data)=>{
+            this.idProveedor=data
+            this.estados.visibilidad_registro_deuda=true
+        })
+
+        emitter.on('cerrar_registro_deuda_proveedor',()=>{
+            this.estados.visibilidad_registro_deuda=false
             this.obtener_proveedores()
         })
 
@@ -126,7 +139,8 @@ export default {
         'abonar-deuda':AbonarDeudaProveedor,
         'result_busqueda_proveedor':BuscarProveedor,
         'historial-abono-proveedor':HistorialAbonoProveedor,
-        'editar-proveedor':EditarProveedor
+        'editar-proveedor':EditarProveedor,
+        registro_deuda_proveedor
         
     },
    
@@ -148,7 +162,8 @@ export default {
                 visibilidad_abono_deuda_proveedor:false,
                 visibilidad_result_busqueda_proveedores:false,
                 visibilidad_historial_abono_proveedor:false,
-                visibilidad_editar_proveedores:false
+                visibilidad_editar_proveedores:false,
+                visibilidad_registro_deuda:false
             }
 
         } 
@@ -251,6 +266,8 @@ export default {
         <form-registro-proveedor v-show="estados.visibilidad_form_registro_proveedor"/>
 
         <crear-proveedor @click="abrir_form_registro_proveedor"/>
+
+        <registro_deuda_proveedor :idProveedor="idProveedor" v-if="estados.visibilidad_registro_deuda"/>
 
         <menu-header :nameSession="title"/>
 

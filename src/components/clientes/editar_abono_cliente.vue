@@ -9,7 +9,7 @@ import 'vue3-toastify/dist/index.css';
 
 
 export default {
-    props:['id_abono_Operacion','clienteEncontrado'],
+    props:['id_abono_Operacion'],
 
     mounted(){
             this.buscar_registro_abono()
@@ -39,7 +39,7 @@ export default {
                 
 
                  // Realiza la solicitud GET al servidor para obtener el registro de abono por id
-                axios.get(`${import.meta.env.VITE_API_SERVER}abono-cliente/${this.id_abono_Operacion}`)
+                axios.get(`${import.meta.env.VITE_API_SERVER}abonos-por-ventas-pendiente/${this.id_abono_Operacion}`)
                     .then((response) => {
                     // El registro de abono se encuentra en response.data
                     this.datosRegistroAbono = response.data;
@@ -77,23 +77,13 @@ export default {
                 .then(response => {
                         // Maneja la respuesta exitosa
                         console.log(response.data.message);
-                        toast.success("se edito el registro del abono de la deuda!", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
+                        toast.success("se edito el registro del abono de la deuda!");
                     })
                     .catch(error => {
                         // Maneja el error
                         console.error('Error al actualizar el abono y la deuda:', error.response.data.error);
                        
-                        toast.error("error al editar el abono de la deuda !", {
-                                    autoClose: 3000,
-                                    backgroundColor:'#CC0B09',
-                                    close: false,
-                                    color: '#ffffff',
-                                });
+                        toast.error("error al editar el abono de la deuda !");
                     })
                     .finally(()=>{
 

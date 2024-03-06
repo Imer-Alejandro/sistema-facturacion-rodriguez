@@ -76,7 +76,7 @@ export default {
                     this.datos_registro_abono.nueva_deuda=   this.proveedorEncontrado.deuda_a_proveedor - this.datos_registro_abono.monto_abonado
 
                      // Realiza la solicitud POST al servidor para registrar el abono
-                     axios.post(`${process.env.API_SERVER}registrar-abono-proveedor`, this.datos_registro_abono)
+                     axios.post(`${import.meta.env.VITE_API_SERVER}registrar-abono-proveedor`, this.datos_registro_abono)
                         .then((response) => {
                             
                             console.log('Abono registrado con éxito', response.data);

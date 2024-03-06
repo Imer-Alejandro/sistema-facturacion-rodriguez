@@ -66,13 +66,18 @@ export default {
          mb-[20px] shadow-md shadow-[#00000031]">
         
            
-            <div v-if="ventas.tipo_venta != 'credito'">
-                <div class="h-[95%] flex items-center mt-[2px] p-2 rounded bg-[#A6F988] pt-[5px] mr-1">
+         <div v-if="ventas.tipo_venta === 'credito' && ventas.balance_pendiente != 0">
+                <div class="h-[95%] flex items-center mt-[2px] p-2 rounded bg-[#FF6161]  pt-[5px] mr-1">
                     <h3 class=" text-[1rem] ">{{ventas.tipo_venta}}</h3>
                 </div>
             </div>
+            <div v-else-if="ventas.tipo_venta === 'credito' && ventas.balance_pendiente === 0  ">
+                <div class="h-[95%] flex items-center mt-[2px] p-2 rounded bg-[#f9ee88] pt-[5px] mr-1">
+                    <h3 class=" text-[1rem] ">pagada</h3>
+                </div>
+            </div>
             <div v-else>
-                <div class="h-[95%] flex items-center mt-[2px] p-2 rounded bg-[#FF6161]  mr-1">
+                <div class="h-[95%] flex items-center mt-[2px] p-2 rounded bg-[#A6F988]  mr-1">
                     <h3 class=" text-[1rem] ">{{ventas.tipo_venta}}</h3>
                 </div>
             </div>

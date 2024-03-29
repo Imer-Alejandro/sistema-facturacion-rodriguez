@@ -77,8 +77,8 @@ methods:{
                 <div class="content-img">
                   <img src="/icons/icon-250x250.png" alt="">
                 </div>
-                <h2>Rodríguez Embutidos</h2>
-                <h3 class="slogan">Donde la calidad reina</h3>
+                <h2>CARNICOS DEL ESTE</h2>
+                <h3 class="slogan">Somos más que carne</h3>
                 <p class="contacto">Contacto: (829) 317-0381</p>
                 <br><br><br>
                 <div class="info">
@@ -86,7 +86,6 @@ methods:{
                   <div v-if="this.ventaOperacion.nombre_cliente != ''">
                   <div class="izquierda">Cliente: <span class="contenido">{{this.ventaOperacion.nombre_cliente}}</span></div>
                   </div>
-                  <div class="derecha">Código: <span class="contenido">{{this.ventaOperacion.id_ventas}}</span></div>
                 </div>
                 <div class="info">
                   <div class="derecha">Tipo de venta: <span class="contenido">{{this.ventaOperacion.tipo_venta}}</span></div>
@@ -130,7 +129,7 @@ methods:{
               <div class="pie-pagina">
                 
                 <p style="text-align: left; font-size: 0.7rem;">
-                  <span style="font-weight: bold;">NOTA:</span> Cláusula de responsabilidad: Rodríguez Embutidos, 
+                  <span style="font-weight: bold;">NOTA:</span> Cláusula de responsabilidad: Carnicos del este, 
                   no se hace responsable de uso, o el destino final de los productos detallados en esta factura. 
                   Favor verificar su mercancía y factura, no aceptamos devoluciones luego de dos días de entrega, 
                   descuentos por mermas ( tener en cuenta que la chuleta marcada está supuesta a rebajar de peso), 
@@ -182,8 +181,8 @@ methods:{
 }
 .content-img img{
   
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
 }
 .slogan{
   font-size: 0.9em;

@@ -20,13 +20,20 @@ export default defineConfig({
           {
             src: "/icons/icon-250x250.png",
             sizes: "250x250",
-            type: "image/png"
+            type: "image/png",
+            density: "2.0"
+          },
+          {
+            src: "/icons/icon-144x144.png",
+            sizes: "250x250",
+            type: "image/png",
+            density: "3.0",
+            purpose: 'maskable',
           },
           {
             src:"/icons/icon-192x192.png",
             sizes:"192x192",
-            type:"image/png",
-            purpose: 'maskable',
+            type:"image/png"
           }
         ]
       },

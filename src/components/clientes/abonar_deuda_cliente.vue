@@ -113,6 +113,8 @@ export default {
                 return fechaFormateada
             },
             obtener_deuda_cliente(){
+
+                console.log(this.ventas_credito)
                 emitter.emit('abrir_loader_carga_vista_cliente')
                 axios.get(`${import.meta.env.VITE_API_SERVER}deuda-cliente/${this.ventas_credito.id_clientes}`)
                     .then((response)=>{

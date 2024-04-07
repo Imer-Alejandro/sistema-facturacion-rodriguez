@@ -103,7 +103,9 @@ export default {
                 axios.get(`${import.meta.env.VITE_API_SERVER}ventas-cliente-deudas/${this.id_cliente_operacione}`)
                     .then((response) => {
                     this.historialAbonosDelCliente = response.data;
-                    
+                    console.log("id "+ this.id_cliente_operacione)
+
+                    console.log(this.historialAbonosDelCliente)
                     })
                     .catch((error) => {
                     console.error('Error al buscar el cliente', error);

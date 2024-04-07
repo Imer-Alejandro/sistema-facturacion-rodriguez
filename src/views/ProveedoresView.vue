@@ -150,7 +150,7 @@ export default {
             DatosProveedores:[],
             idProveedor:'',
             proveedor_operacion:'',
-            deudasPorPagar:0,
+            deudasPorPagar:'',
 
             termino_busqueda_proveedor:'',
             datosBusquedaProveedor:[],

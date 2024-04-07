@@ -102,10 +102,6 @@ export default {
         placeholder="Description">
 
 
-        <input v-model="cliente.deuda" class="w-[95%] h-[55px] focus:border-[#FFB984] focus:border-[1.5px] border-[1px] outline-none pl-[5px] 
-        box-border rounded-md mb-[20px] border-[#9F9F9F]  ml-[2.5%]" type="number" 
-        placeholder="Deuda cliente - optional">
-
 
         
 

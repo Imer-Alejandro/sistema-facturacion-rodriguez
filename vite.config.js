@@ -14,7 +14,7 @@ export default defineConfig({
         description: 'Una aplicación de inventario',
         start_url: '/',
         display: 'fullscreen',
-        background_color: '#E55226',
+        background_color: '#FFFFFF',
         theme_color: '#FFB984',
         icons: [
           {

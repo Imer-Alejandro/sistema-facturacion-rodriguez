@@ -21,7 +21,7 @@ export default {
 
 
 
-    <section  class="  w-full h-[100vh] bg-white fixed  z-40 ">
+    <section  class="  w-full h-[100vh] -mt-[80px] bg-white fixed  z-40 ">
         <header class="w-full p-3 mb-[15px] inline-flex border-b-[1.5px] border-b-[#DFDFDF]">
             <img @click="close_detalle_ventas" class="w-[35px] mr-[25px]  order-1 cursor-pointer" src="/src/assets/iconos/interfaz/regresar.png" >
             <h2 class="text-[1.7rem] ml-[5%] order-2">Detalles de venta</h2>

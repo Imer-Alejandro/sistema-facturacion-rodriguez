@@ -39,13 +39,13 @@ export default {
                     
                 </li> -->
 
-                <li @click="abrir_ventana_eliminar_abono_cliente"  class=" p-2 cursor-pointer border-b-[#DFDFDF]  border-b-[2px] ">
+                <!-- <li @click="abrir_ventana_eliminar_abono_cliente"  class=" p-2 cursor-pointer border-b-[#DFDFDF]  border-b-[2px] ">
                     <button class="outline-none" >
                         <span class="text-[1rem]">Anular</span>
                         <img class="w-[20px] absolute ml-[70%] -mt-[23px]" src="/src/assets/iconos/interfaz/anular_venta.png" >
                     </button>
                     
-                </li>
+                </li> -->
 
                 
             </ul>

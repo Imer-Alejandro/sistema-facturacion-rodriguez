@@ -52,7 +52,7 @@ export default {
 </script>
  
 
-<template> 
+<template>  
 
     <div class="inline-block mb-[20px] mr-[20px]">
         <div class="flex-col flex text-center justify-center items-center   bg-white p-2  w-[160px] h-[190px]
@@ -60,7 +60,7 @@ export default {
                  <img @click="abrir_optiones_clientes" class="w-[35px] absolute ml-[33%] cursor-pointer -mt-[130px] h-[35px]" src="/src/assets/iconos/interfaz/navegacion.png" alt="" srcset="">
                 <img class="w-[60px] h-[60px] mb-[5px]" src="/src/assets/iconos/interfaz/tienda.png" alt="" srcset="">
                    <h3 class="mb-[10px] text-[0.9rem]">{{cliente.nombre_cliente}}</h3>
-                   <h3 class="text-[0.9rem]">total deuda: <span class="text-[#E55226]">{{ cliente.deuda.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 }) }}</span></h3>
+                   <h3 class="text-[0.9rem]">total deuda: <span class="text-[#E55226]">{{ cliente.deuda.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</span></h3>
            
                 <optiones-clients v-show="estado_visibilidad_optiones" :cliente="cliente" ref="menu"/>
         </div>

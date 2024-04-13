@@ -266,15 +266,15 @@ export default {
          
 
         <div class=" flex">
-            <div class=" p-2 w-[45%] enline-flex ml-[2.5%] h-[80px] rounded shadow-md shadow-[#0000002a] mb-[20px] bg-[#FF7850]">
+            <div class=" p-2 w-[45%] overflow-hidden enline-flex ml-[2.5%] h-[80px] rounded shadow-md shadow-[#0000002a] mb-[20px] bg-[#FF7850]">
                 <span class="text-[#F9F9F9]">costo del inventario</span>
-                <h3 class="text-[1.6rem] text-white font-bold">{{ suma_precio_costo_producto.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 }) }}</h3>
+                <h3 class="text-[1.4rem] text-white font-bold">{{ suma_precio_costo_producto.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 }) }}</h3>
                 <img src="" >
             </div>
 
             <div class=" p-2 w-[45%] enline-flex ml-[2.5%] h-[80px] rounded shadow-md shadow-[#00000031] bg-[#FFB984]">
                 <span class="text-[#F9F9F9]">Articulos en inventario</span>
-                <h3 class="text-[1.6rem] text-white font-bold">{{ total_producto_inventario }}</h3>
+                <h3 class="text-[1.4rem] text-white font-bold">{{ DatosProductos.length }}</h3>
                 <img src="" >
             </div>
         </div>

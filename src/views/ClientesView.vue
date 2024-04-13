@@ -229,24 +229,25 @@ export default {
                     this.estado_activacion_loader_Carga=false;
 
                     //renderizar la deuda total por cobrar
-                    this.sumarDeuda(this.dataCliente)
+                    this.deudasPorCobrar = this.sumarDeuda(this.dataCliente)
 
                     });
             },
          sumarDeuda(objetoJSON) {
-                let sumaDeuda = 0; 
+            let sumaDeuda = 0;
 
                 for (let key in objetoJSON) {
-                        if (objetoJSON.hasOwnProperty(key)) {
+                    if (objetoJSON.hasOwnProperty(key)) {
                         let elemento = objetoJSON[key];
 
                         if (elemento.hasOwnProperty('deuda')) {
-                            sumaDeuda += elemento.deuda;
+                            sumaDeuda += parseFloat(elemento.deuda); // Convertir la deuda a un número decimal antes de sumar
                         }
                     }
                 }
-                this.deudasPorCobrar = sumaDeuda;
-                }
+
+                return sumaDeuda;
+        }
  
     } 
 
@@ -278,7 +279,7 @@ export default {
         <menu-header :nameSession="title"/>
        
 
-        <div class=" p-3 w-[95%] ml-[2.5%] h-[80px] rounded shadow-md shadow-[#00000031] mb-[20px] bg-[#FF7850]">
+        <div class=" p-3 w-[95%] ml-[2.5%] overflow-hidden h-[80px] rounded shadow-md shadow-[#00000031] mb-[20px] bg-[#FF7850]">
             <span class="text-[#F9F9F9]">Total por cobrar</span>
             <h3 class="text-[1.6rem] text-white font-bold">{{deudasPorCobrar.toLocaleString('en-US', { style: 'decimal', useGrouping: true, maximumFractionDigits: 2 })}}</h3>
             <img src="" >

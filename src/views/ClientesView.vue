@@ -231,7 +231,7 @@ export default {
                     //renderizar la deuda total por cobrar
                     this.deudasPorCobrar = this.sumarDeuda(this.dataCliente)
 
-                    });
+                    }); 
             },
          sumarDeuda(objetoJSON) {
             let sumaDeuda = 0;

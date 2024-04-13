@@ -273,11 +273,11 @@ export default {
                     let sumaDeuda = 0;
 
                     for (let key in objetoJSON) {
-                            if (objetoJSON.hasOwnProperty(key)) {
+                        if (objetoJSON.hasOwnProperty(key)) {
                             let elemento = objetoJSON[key];
 
                             if (elemento.hasOwnProperty('deuda')) {
-                                sumaDeuda += elemento.deuda;
+                                sumaDeuda += parseFloat(elemento.deuda); // Convertir la deuda a un número decimal antes de sumar
                             }
                         }
                     }

@@ -76,7 +76,8 @@ export const useGlobalCarritoVenta = defineStore('carrito', {
           carrito.forEach(producto => {
             total += producto.total_producto;
           });
-          this.carrito_compras.total_venta=total
+          //convertirlo a decimal y redondearlo a 2 decimas para evitar desvolde de decimas
+          this.carrito_compras.total_venta=parseFloat((total).toFixed(2))
       },
 
       //editar la cantidad a vender del producto
@@ -86,6 +87,7 @@ export const useGlobalCarritoVenta = defineStore('carrito', {
             if (item.id_producto === id) { 
                 //actualizar cantidad y el total 
                 item.cantidad_venta=nueva_cantidad
+                //convertirlo a decimal y redondearlo a 2 decimas para evitar desvolde de decimas
                 item.total_producto= item.cantidad_venta * item.precio_venta
              
             }
